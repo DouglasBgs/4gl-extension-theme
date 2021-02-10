@@ -3,6 +3,10 @@
     "displayName": "4gl",
     "description": "4gl code themes and syntaxes",
     "version": "0.0.1",
+    "publisher": "DouglasVscode",
+    "repository": {
+        "url": "https://github.com/DouglasBgs/4gl-extension-theme"
+    },
     "engines": {
         "vscode": "^1.53.0"
     },

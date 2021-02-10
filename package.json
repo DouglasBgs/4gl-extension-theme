@@ -1,0 +1,39 @@
+{
+    "name": "4gl",
+    "displayName": "4gl",
+    "description": "4gl code themes and syntaxes",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "4gl theme color",
+                "uiTheme": "vs-dark",
+                "path": "./themes/4gl-color-theme.json"
+            }
+        ], "languages": [
+            {
+                "id": "4gl",
+                "aliases": [
+                    "4GL"
+                    
+                ],"extensions": [
+                    ".4gl",
+                    ".per"
+                ],
+                "configuration": "./config/4gl-language-configuration.json"
+            }
+        ],"grammars": [
+            {
+                "language": "4gl",
+                "scopeName": "source.4gl",
+                "path": "./syntaxes/4gl_language.tmLanguage.json"
+            }
+        ]
+    }
+}

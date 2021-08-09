@@ -38,6 +38,11 @@
                 "scopeName": "source.4gl",
                 "path": "./syntaxes/4gl_language.tmLanguage.json"
             }
-        ]
+        ],"snippets": [
+			{
+				"language": "4gl",
+				"path": "./snippets/snippets.json"
+			}
+		]
     }
 }

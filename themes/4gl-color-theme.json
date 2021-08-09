@@ -1,13 +1,17 @@
 {
 	"name": "4gl",
 	"type": "dark",
-	"colors": {"editor.foreground": "#fce4a1"},
+	"colors": {
+		"editor.foreground": "#fce4a1"
+	},
 	"tokenColors": [
 		{
 			"name": "Comment",
 			"scope": [
 				"comment",
-				"punctuation.definition.comment"
+				"punctuation.definition.comment",
+				"comment.block"
+				
 			],
 			"settings": {
 				"fontStyle": "italic",
@@ -21,13 +25,14 @@
 				"string constant.other.placeholder"
 			],
 			"settings": {
-				"foreground": "#f07178"
+				"foreground": "#fffdfd"
 			}
 		},
 		{
 			"name": "Colors",
 			"scope": [
-				"constant.other.color"
+				"constant.other.color",
+				"constant.language"
 			],
 			"settings": {
 				"foreground": "#fff1f1"
@@ -47,11 +52,9 @@
 			"name": "functions",
 			"scope": [
 				"define.functions",
-				"storage.type.function"
 			],
 			"settings": {
 				"foreground": "#c792ea",
-	
 			}
 		},
 		{
@@ -60,13 +63,11 @@
 				"keyword",
 				"storage.type",
 				"storage.modifier",
-				
 			],
 			"settings": {
 				"foreground": "#b6fcf8"
 			}
 		},
-		
 		{
 			"name": "Tag",
 			"scope": [
@@ -75,21 +76,21 @@
 				"markup.deleted.git_gutter",
 			],
 			"settings": {
-				"foreground": "#f07178"
+				"foreground": "#25da61be"
 			}
 		},
 		{
 			"name": "Function, Special Method",
 			"scope": [
-				"entity.name.function",
+				
 				"meta.function-call",
 				"variable.function",
 				"support.function",
 				"keyword.other.special-method",
-				"support.function"
+				"function.name",
 			],
 			"settings": {
-				"foreground": "#fff382"
+				"foreground": "#fce940"
 			}
 		},
 		{
@@ -104,7 +105,8 @@
 		{
 			"name": "foreach",
 			"scope": [
-				"foreach"
+				"foreach",
+				"define.for"
 			],
 			"settings": {
 				"foreground": "#7b8fc2"
@@ -117,7 +119,7 @@
 				"string.other.link"
 			],
 			"settings": {
-				"foreground": "#f07178"
+				"foreground": "#29080a"
 			}
 		},
 		{
@@ -144,15 +146,20 @@
 		{
 			"name": "Database Variables",
 			"scope": "define.globals",
-			
 			"settings": {
 				"foreground": "#dd7e6b"
 			}
 		},
 		{
+			"name": "Initialize",
+			"scope": "define.initialize",
+			"settings": {
+				"foreground": "#f0f0f0"
+			}
+		},
+		{
 			"name": "define Variables",
 			"scope": "define.variables",
-			
 			"settings": {
 				"foreground": "#e07918"
 			}
@@ -160,65 +167,54 @@
 		{
 			"name": "then",
 			"scope": "define.then",
-			
 			"settings": {
 				"foreground": "#6aa84f"
 			}
 		},
 		{
+			"name": "inputs",
+			"scope": "sintaxe.input",
+			"settings": {
+				"foreground": "#3aa87a"
+			}
+		},
+		{
 			"name": "constant numeric",
 			"scope": "constant.numeric",
-			
 			"settings": {
 				"foreground": "#80c8e4"
 			}
-		},
-		{
-			"name": "funções",
-			"scope": "meta.function.call",
-			
-			"settings": {
-				"foreground": "#ffffff"
-			}
-		},
-		{
-			"name": "funções",
-			"scope": "meta.definition.function",
-			
-			"settings": {
-				"foreground": "#1000f7"
-			}
-		},
-		{
+		},{
 			"name": "variable.name",
 			"scope": "variable.name",
-			
 			"settings": {
 				"foreground": "#f5f5f5"
 			}
 		},
-		
 		{
 			"name": "seletores ",
 			"scope": "end.if",
-			
 			"settings": {
 				"foreground": "#b3588d"
 			}
 		},
 		{
 			"name": "while ",
+			"scope": "window.display",
+			"settings": {
+				"foreground": "#485abe"
+			}
+		},
+		{
+			"name": "display ",
 			"scope": "define.while",
-			
 			"settings": {
 				"foreground": "#39943d"
 			}
 		},
-		
 		{
 			"name": "chamadas de funções",
 			"scope": "call.return",
-			
 			"settings": {
 				"foreground": "#82dcff"
 			}
@@ -226,25 +222,26 @@
 		{
 			"name": "definir variavle let",
 			"scope": "define.let",
-			
 			"settings": {
 				"foreground": "#c792ea"
 			}
 		},
-
 		{
 			"name": "Number, Constant, Function Argument, Tag Attribute, Embedded",
 			"scope": [
-				"constant.language",
-				"support.constant",
-				"constant.character",
-				"constant.escape",
-				"variable.parameter",
-				"keyword.other.unit",
-				
+				"meta.function",
+				"sintaxe.bolean"
 			],
 			"settings": {
-				"foreground": "#f07178"
+				"foreground": "#c4584a"
+			}
+		},
+		{
+			"name": "variable.parameter.function",
+			"scope": "variable.parameter",
+			"settings": {
+				"foreground": "#FF0000",
+				"fontStyle": "bold"
 			}
 		},
 		{
@@ -259,7 +256,6 @@
 				"markup.inserted.git_gutter",
 				"meta.group.braces.curly constant.other.object.key.js string.unquoted.label.js",
 				"variable.parameter.function"
-				
 			],
 			"settings": {
 				"foreground": "#c3e88d"
@@ -305,47 +301,6 @@
 			}
 		},
 		{
-			"name": "Sub-methods",
-			"scope": [
-				"entity.name.module.js",
-				"variable.import.parameter.js",
-				"variable.other.class.js"
-			],
-			"settings": {
-				"foreground": "#FF5370"
-			}
-		},
-		{
-			"name": "Language methods",
-			"scope": [
-				"variable.language"
-			],
-			"settings": {
-				"fontStyle": "italic",
-				"foreground": "#FF5370"
-			}
-		},
-		{
-			"name": "entity.name.method.js",
-			"scope": [
-				"entity.name.method.js"
-			],
-			"settings": {
-				"fontStyle": "italic",
-				"foreground": "#82AAFF"
-			}
-		},
-		{
-			"name": "meta.method.js",
-			"scope": [
-				"meta.class-method.js entity.name.function.js",
-				"variable.function.constructor"
-			],
-			"settings": {
-				"foreground": "#82AAFF"
-			}
-		},
-		{
 			"name": "Attributes",
 			"scope": [
 				"entity.other.attribute-name"
@@ -382,6 +337,13 @@
 			],
 			"settings": {
 				"foreground": "#82AAFF"
+			}
+		},
+		{
+			"name": "Case",
+			"scope": "define.case",
+			"settings": {
+				"foreground": "#9d48a8"
 			}
 		},
 		{
@@ -530,7 +492,7 @@
 				"source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
 			],
 			"settings": {
-				"foreground": "#f07178"
+				"foreground": "#272020"
 			}
 		},
 		{
@@ -597,7 +559,7 @@
 			],
 			"settings": {
 				"fontStyle": "italic",
-				"foreground": "#f07178"
+				"foreground": "#f5000c"
 			}
 		},
 		{
@@ -608,7 +570,7 @@
 			],
 			"settings": {
 				"fontStyle": "bold",
-				"foreground": "#f07178"
+				"foreground": "#8ff071"
 			}
 		},
 		{
@@ -623,7 +585,7 @@
 			],
 			"settings": {
 				"fontStyle": "bold",
-				"foreground": "#f07178"
+				"foreground": "#fafafa"
 			}
 		},
 		{

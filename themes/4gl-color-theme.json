@@ -65,7 +65,7 @@
 				"storage.modifier",
 			],
 			"settings": {
-				"foreground": "#b6fcf8"
+				"foreground": "#569cd6"
 			}
 		},
 		{
@@ -237,8 +237,8 @@
 			}
 		},
 		{
-			"name": "variable.parameter.function",
-			"scope": "variable.parameter",
+			"name": "define.substring",
+			"scope": "define.substring",
 			"settings": {
 				"foreground": "#FF0000",
 				"fontStyle": "bold"
@@ -258,7 +258,7 @@
 				"variable.parameter.function"
 			],
 			"settings": {
-				"foreground": "#c3e88d"
+				"foreground": "#ce9178"
 			}
 		},
 		{

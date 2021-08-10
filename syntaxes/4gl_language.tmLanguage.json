@@ -192,6 +192,11 @@
     {
       "name": "define.initialize.4gl",
       "match": "\\b(?i)(initialize)\\b"
+    },
+    {
+      "name": "define.substring.4gl",
+      "match": "((?<=\\.)).+(?=\\[)"
+
     }
   ]
 }

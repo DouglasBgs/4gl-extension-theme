@@ -9,7 +9,9 @@
     },
     "activationEvents": [
         "onView:menuLogix",
-        "onCommand:extension.create.issue"
+        "onCommand:extension.create.issue",
+        "onCommand:extension.create.issue_tu",
+        "onCommand:extension.create.issue_ti"
     ],
     "main": "./src/extension.js",
     "scripts": {
@@ -47,13 +49,16 @@
         "viewsWelcome": [
             {
                 "view": "facilidadesLogix",
-                "contents": "\n[Criar Nova Issue](command:extension.create.issue \"Opens the GitLens Welcome (Quick Setup)\")"
-                
+                "contents": "\n[Criar Nova Issue](command:extension.create.issue \"configurar texto\")"
             },
             {
-				"view": "facilidadesLogix",
-                "contents": "\n[Criar Issue de TU](command:extension.create.issue \"Opens the GitLens Welcome (Quick Setup)\")"
-			}
+                "view": "facilidadesLogix",
+                "contents": "\n[Criar Issue de TU](command:extension.create.issue_tu \"configurar texto\")"
+            },
+            {
+                "view": "facilidadesLogix",
+                "contents": "\n[Criar Issue de TI](command:extension.create.issue_ti \"configurar texto\")"
+            }
         ],
         "views": {
             "menuLogix": [
@@ -69,22 +74,6 @@
                     "id": "jsonOutline",
                     "name": "Json Outline",
                     "when": "jsonOutlineEnabled"
-                }
-            ]
-        },
-        "commands": [
-            {
-                "command": "extension.create.issue",
-                "title": "Hello World Douglas",
-                "icon": "media/refresh.svg"
-            }
-        ],
-        "menus": {
-            "view/title": [
-                {
-                    "command": "extension.create.issue",
-                    "when": "view == facilidadesLogix",
-                    "group": "navigation"
                 }
             ]
         },
@@ -123,6 +112,9 @@
         ]
     },
     "dependencies": {
-        "env": "0.0.2"
+        "env": "0.0.2",
+        "fs-extra": "^10.0.0",
+        "iz": "^3.0.0",
+        "validator": "^13.6.0"
     }
 }

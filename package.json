@@ -11,7 +11,12 @@
         "onView:menuLogix",
         "onCommand:extension.create.issue",
         "onCommand:extension.create.issue_tu",
-        "onCommand:extension.create.issue_ti"
+        "onCommand:extension.create.issue_ti",
+        "onCommand:extension.create.issue_associada",
+        "onCommand:extension.open.arquivo_log",
+        "onCommand:extension.download.rpo",
+        "onCommand:extension.open.appserver",
+        "onCommand:extension.open.tss"
     ],
     "main": "./src/extension.js",
     "scripts": {
@@ -58,7 +63,28 @@
             {
                 "view": "facilidadesLogix",
                 "contents": "\n[Criar Issue de TI](command:extension.create.issue_ti \"configurar texto\")"
+            },
+            {
+                "view": "facilidadesLogix",
+                "contents": "\n[Criar pasta Issue Associada](command:extension.create.issue_associada \"configurar texto\")"
+            },
+            {
+                "view": "facilidadesLogix",
+                "contents": "\n[Abrir Arquivo de Log](command:extension.open.arquivo_log \"configurar texto\")"
+            },
+            {
+                "view": "facilidadesLogix",
+                "contents": "\n[Atualiza RPO](command:extension.download.rpo \"configurar texto\")"
+            },
+            {
+                "view": "facilidadesLogix",
+                "contents": "\n[Abrir Appserver](command:extension.open.appserver \"configurar texto\")"
+            },
+            {
+                "view": "facilidadesLogix",
+                "contents": "\n[Abrir Tss](command:extension.open.tss \"configurar texto\")"
             }
+            
         ],
         "views": {
             "menuLogix": [
@@ -115,6 +141,7 @@
         "env": "0.0.2",
         "fs-extra": "^10.0.0",
         "iz": "^3.0.0",
+        "shelljs": "^0.8.4",
         "validator": "^13.6.0"
     }
 }

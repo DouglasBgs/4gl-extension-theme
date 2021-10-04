@@ -1,0 +1,63 @@
+<body>
+    <div class="container mt-4" id="center">
+        <div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Issue de codificação</label>
+                    <input class="form-control  form-control-sm" type="file" id="fileUpload" name="fileUpload" directory  webkitdirectory value="olá reposi">
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Issue de Teste Unitário</label>
+                    <input class="form-control  form-control-sm" type="file" id="formFile">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Issue de Teste Integrado</label>
+                    <input class="form-control form-control-sm" type="file" id="formFile">
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Pasta com evidência de teste</label>
+                    <input class="form-control form-control-sm" type="file" id="formFile">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Pasta com os arquivos da issues para teste</label>
+                    <input class="form-control form-control-sm" type="file" id="formFile">
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Arquivo de log do AppServer</label>
+                    <input class="form-control form-control-sm" type="file" accept=".log" id="formFile">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">Arquivo AppServer</label>
+                    <input class="form-control form-control-sm" type="file" accept=".bat,.lnk" id="formFile" >
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="formFile" class="form-label">TSS</label>
+                    <input class="form-control form-control-sm" type="file" accept=".exe,.lnk" id="formFile">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-5 col-6">
+                    <label for="formFile" class="form-label">DB access TSS</label>
+                    <input class="form-control form-control-sm" type="file" accept=".exe,.lnk" id="formFile">
+                </div>
+                <div class="mb-5 col-6">
+                    <label for="formFile" class="form-label">Adicionar Rpo Rede</label>
+                    <input class="form-control form-control-sm" type="file" accept=".rpo" id="formFile">
+                </div>
+            </div>
+            <div class="row">
+                <div id="center">
+                    <button type="button" onclick="getFilePath()" class="button btn-primary" >Salvar</button>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</body>
+</html>

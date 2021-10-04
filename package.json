@@ -1,147 +1,136 @@
 {
-    "name": "4gl",
-    "displayName": "4gl",
-    "description": "4gl code themes and syntaxes",
-    "version": "0.0.1",
-    "publisher": "DouglasVscode",
-    "repository": {
-        "url": "https://github.com/DouglasBgs/4gl-extension-theme"
-    },
-    "activationEvents": [
-        "onView:menuLogix",
-        "onCommand:extension.create.issue",
-        "onCommand:extension.create.issue_tu",
-        "onCommand:extension.create.issue_ti",
-        "onCommand:extension.create.issue_associada",
-        "onCommand:extension.open.arquivo_log",
-        "onCommand:extension.download.rpo",
-        "onCommand:extension.open.appserver",
-        "onCommand:extension.open.tss"
-    ],
-    "main": "./src/extension.js",
-    "scripts": {
-        "lint": "eslint .",
-        "pretest": "npm run lint",
-        "test": "node ./test/runTest.js"
-    },
-    "devDependencies": {
-        "@types/vscode": "^1.58.0",
-        "@types/glob": "^7.1.3",
-        "@types/mocha": "^8.2.2",
-        "@types/node": "14.x",
-        "eslint": "^7.27.0",
-        "glob": "^7.1.7",
-        "mocha": "^8.4.0",
-        "typescript": "^4.3.2",
-        "vscode-test": "^1.5.2"
-    },
-    "engines": {
-        "vscode": "^1.53.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "contributes": {
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "menuLogix",
-                    "title": "Menu Logix",
-                    "icon": "media/accusoft-brands.svg"
-                }
-            ]
-        },
-        "viewsWelcome": [
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Criar Nova Issue](command:extension.create.issue \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Criar Issue de TU](command:extension.create.issue_tu \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Criar Issue de TI](command:extension.create.issue_ti \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Criar pasta Issue Associada](command:extension.create.issue_associada \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Abrir Arquivo de Log](command:extension.open.arquivo_log \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Atualiza RPO](command:extension.download.rpo \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Abrir Appserver](command:extension.open.appserver \"configurar texto\")"
-            },
-            {
-                "view": "facilidadesLogix",
-                "contents": "\n[Abrir Tss](command:extension.open.tss \"configurar texto\")"
-            }
-            
-        ],
-        "views": {
-            "menuLogix": [
-                {
-                    "id": "facilidadesLogix",
-                    "name": "Facilidades Logix",
-                    "icon": "media/dep.svg",
-                    "contextualTitle": "Menu Logix"
-                }
-            ],
-            "explorer": [
-                {
-                    "id": "jsonOutline",
-                    "name": "Json Outline",
-                    "when": "jsonOutlineEnabled"
-                }
-            ]
-        },
-        "themes": [
-            {
-                "label": "4gl theme color",
-                "uiTheme": "vs-dark",
-                "path": "./themes/4gl-color-theme.json"
-            }
-        ],
-        "languages": [
-            {
-                "id": "4gl",
-                "aliases": [
-                    "4GL"
-                ],
-                "extensions": [
-                    ".4gl",
-                    ".per"
-                ],
-                "configuration": "./config/4gl-language-configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "4gl",
-                "scopeName": "source.4gl",
-                "path": "./syntaxes/4gl_language.tmLanguage.json"
-            }
-        ],
-        "snippets": [
-            {
-                "language": "4gl",
-                "path": "./snippets/snippets.json"
-            }
-        ]
-    },
-    "dependencies": {
-        "env": "0.0.2",
-        "fs-extra": "^10.0.0",
-        "iz": "^3.0.0",
-        "shelljs": "^0.8.4",
-        "validator": "^13.6.0"
-    }
+	"name": "4gl",
+	"displayName": "4gl",
+	"description": "4gl code themes and syntaxes",
+	"version": "0.0.1",
+	"publisher": "DouglasVscode",
+	"repository": {
+		"url": "https://github.com/DouglasBgs/4gl-extension-theme"
+	},
+	"activationEvents": [
+		"onView:menuLogix",
+		"onCommand:extension.create.issue",
+		"onCommand:extension.create.issue_associada",
+		"onCommand:extension.open.arquivo_log",
+		"onCommand:extension.download.rpo",
+		"onCommand:extension.open.appserver",
+		"onCommand:extension.open.tss",
+		"onCommand:extension.open.Webview"
+	],
+	"main": "./src/extension.js",
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.53.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "14.x",
+		"eslint": "^7.27.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"typescript": "^4.3.2",
+		"vscode-test": "^1.5.2"
+	},
+	"engines": {
+		"vscode": "^1.53.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "menuLogix",
+					"title": "Menu Logix",
+					"icon": "media/dep.svg"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[$(file-directory-create) Criar Nova Issue](command:extension.create.issue \"configurar texto\")"
+			},
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[$(file-submodule) Criar pasta Issue Associada](command:extension.create.issue_associada \"configurar texto\")"
+			},
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[ $(debug-console) Abrir Arquivo de Log](command:extension.open.arquivo_log \"configurar texto\")"
+			},
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[$(cloud-download) Atualiza RPO](command:extension.download.rpo \"configurar texto\")"
+			},
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[$(server) Abrir Appserver](command:extension.open.appserver \"configurar texto\")"
+			},
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[$(debug-disconnect) Abrir Tss](command:extension.open.tss \"configurar texto\")"
+			},
+			{
+				"view": "facilidadesLogix",
+				"contents": "\n[$(root-folder-opened) Configurar diretórios](command:extension.open.Webview \"configurar texto\")"
+			}
+		],
+		"views": {
+			"menuLogix": [
+				{
+					"id": "facilidadesLogix",
+					"name": "Facilidades Logix",
+					"icon": "media/dep.svg",
+					"contextualTitle": "Menu Logix"
+				}
+			]
+		},
+		"themes": [
+			{
+				"label": "4gl theme color",
+				"uiTheme": "vs-dark",
+				"path": "./themes/4gl-color-theme.json"
+			}
+		],
+		"languages": [
+			{
+				"id": "4gl",
+				"aliases": [
+					"4GL"
+				],
+				"extensions": [
+					".4gl",
+					".per"
+				],
+				"configuration": "./config/4gl-language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "4gl",
+				"scopeName": "source.4gl",
+				"path": "./syntaxes/4gl_language.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "4gl",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	},
+	"dependencies": {
+		"env": "0.0.2",
+		"fs-extra": "^10.0.0",
+		"shelljs": "^0.8.4",
+		"validator": "^13.6.0"
+	},
+	"__metadata": {
+		"installedTimestamp": 1629383807874
+	}
 }

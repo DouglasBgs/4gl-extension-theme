@@ -1,0 +1,26 @@
+#center{
+    max-width: 60%;
+}
+body{
+    background-color: #1e1e1e;
+}
+
+label {
+    color: #cccccc;
+    font-size: 0.75rem!important;
+}
+
+input {
+    font-size: 0.75rem!important;
+    background-color: rgb(14, 99, 156)!important;
+    background-clip: padding-box!important;
+    color: #ffffff!important;
+    border-radius: 0!important;
+    border: none!important;
+}
+
+button {
+    background-color: rgb(14, 99, 156)!important;
+    color: #ffffff!important;
+    border: none!important;
+}

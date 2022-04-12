@@ -1,0 +1,137 @@
+<body>
+    <div class="container mt-4" id="center">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row md-12">
+                    <label for="formFile" class="form-label">Issue de codificação</label>
+                </div>
+                <div class="row md-11" >
+                        <div class="col-md-4 ButtonClass">
+                            <button type="button" class="button btn-primary inputButton col-md-12" onclick="active('btn-FileInclude')">
+                                Selecione
+                                <input class="inputText" type="file" hidden id="btn-FileInclude" onchange='checkDir(event)' webkitdirectory directory readonly />
+                            </button>
+                        </div>
+                        <div class="col-md-8 inputClass">
+                            <input class="inputText inputPath col-md-12" id="douglas" placeholder="Nenhum Arquivo selecionado"/>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="formFile" class="form-label">Issue de Teste Unitário</label>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="button btn-primary inputButton" onclick="active('teste212')">
+                        Escolher Arquivo
+                        <input class="inputText" type="file" hidden id="teste212" name=""
+                            onchange='checkDir(event);' webkitdirectory directory />
+                    </button>
+                    <input class="inputText inputPath" id="teste2112" placeholder="Nenhum Arquivo selecionado"
+                        readonly aria-disabled="true" disabled></input>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">Issue de Teste Integrado</label>
+                <input class="form-control form-control-sm" type="file" id="formFile">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">Pasta com evidência de teste</label>
+                <input class="form-control form-control-sm" type="file" id="formFile">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">Pasta com os arquivos da issues para teste</label>
+                <input class="form-control form-control-sm" type="file" id="formFile">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">Arquivo de log do AppServer</label>
+                <input class="form-control form-control-sm" type="file" accept=".log" id="formFile">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">Arquivo AppServer</label>
+                <input class="form-control form-control-sm" type="file" accept=".bat,.lnk" id="formFile">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">TSS</label>
+                <input class="form-control form-control-sm" type="file" accept=".exe,.lnk" id="formFile">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">DB access TSS</label>
+                <input class="form-control form-control-sm" type="file" accept=".exe,.lnk" id="formFile">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="formFile" class="form-label">Adicionar Rpo Rede</label>
+                <input class="form-control form-control-sm" type="file" accept=".rpo" id="formFile">
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <label for="formFile" class="form-label">Teste</label>
+            </div>
+            <div class=" mb-3 col-6">
+                <button type="button" class="button btn-primary inputButton" onclick="active('brasil')">
+                    Escolher Arquivo
+                    <input class="inputText" type="file" hidden id="brasil" name=""
+                        onchange='checkDir(event);' webkitdirectory directory />
+                </button>
+                <input class="inputText inputPath" id="teste2" placeholder="Nenhum Arquivo selecionado" readonly
+                    aria-disabled="true" disabled></input>
+
+            </div>
+        </div>
+        <div class="row  mb-5 col-6">
+            <div id="center">
+                <button type="button" class="button btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+const vscode = acquireVsCodeApi();
+
+
+const includePath = document.getElementById('douglas').value.split(";");
+
+function checkDir(event) {
+    console.log('checkDir')
+    var input = event.target;
+    if (input.files.length > 0) {
+        var selectedDir = input.files[0].path;
+        vscode.postMessage({
+            command: 'checkDir',
+            selectedDir: selectedDir
+        });
+    }
+}
+
+window.addEventListener('message', event => {
+    const message = event.data; // The JSON data our extension sent
+
+    switch (message.command) {
+        case 'checkedDir':
+            console.log('checkDir switch')
+            let checkedDir = message.checkedDir;
+            if (includePath.value == "")
+                includePath.value = checkedDir;
+            else
+                includePath.value = includePath.value + ";" + checkedDir;
+            break;
+    }
+});
+
+
+function active(id) {
+    document.getElementById(id).click()
+}
+
+</script>
+
+</html>

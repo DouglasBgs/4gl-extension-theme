@@ -1,8 +1,8 @@
 {
-	"name": "4gl",
+	"name": "4gl_tools",
 	"displayName": "4gl",
-	"description": "4gl code themes and syntaxes",
-	"version": "0.0.1",
+	"description": "4gl auxiling themes, syntaxes and tools",
+	"version": "2.0.0",
 	"publisher": "DouglasVscode",
 	"repository": {
 		"url": "https://github.com/DouglasBgs/4gl-extension-theme"
@@ -17,7 +17,7 @@
 		"onCommand:extension.open.tss",
 		"onCommand:extension.open.Webview"
 	],
-	"main": "./src/extension.js",
+	"main": "./src/index.js",
 	"scripts": {
 		"lint": "eslint .",
 		"pretest": "npm run lint",
@@ -38,7 +38,9 @@
 		"vscode": "^1.53.0"
 	},
 	"categories": [
-		"Themes"
+		"Themes",
+		"Language Packs",
+		"Snippets"
 	],
 	"contributes": {
 		"viewsContainers": {
@@ -52,39 +54,51 @@
 		},
 		"viewsWelcome": [
 			{
-				"view": "facilidadesLogix",
+				"view": "geral",
 				"contents": "\n[$(file-directory-create) Criar Nova Issue](command:extension.create.issue \"configurar texto\")"
 			},
 			{
-				"view": "facilidadesLogix",
+				"view": "geral",
 				"contents": "\n[$(file-submodule) Criar pasta Issue Associada](command:extension.create.issue_associada \"configurar texto\")"
 			},
 			{
-				"view": "facilidadesLogix",
+				"view": "build32",
 				"contents": "\n[ $(debug-console) Abrir Arquivo de Log](command:extension.open.arquivo_log \"configurar texto\")"
 			},
 			{
-				"view": "facilidadesLogix",
+				"view": "build32",
 				"contents": "\n[$(cloud-download) Atualiza RPO](command:extension.download.rpo \"configurar texto\")"
 			},
 			{
-				"view": "facilidadesLogix",
+				"view": "build32",
 				"contents": "\n[$(server) Abrir Appserver](command:extension.open.appserver \"configurar texto\")"
 			},
 			{
-				"view": "facilidadesLogix",
+				"view": "build32",
 				"contents": "\n[$(debug-disconnect) Abrir Tss](command:extension.open.tss \"configurar texto\")"
 			},
 			{
-				"view": "facilidadesLogix",
+				"view": "build32",
 				"contents": "\n[$(root-folder-opened) Configurar diretórios](command:extension.open.Webview \"configurar texto\")"
 			}
 		],
 		"views": {
 			"menuLogix": [
 				{
-					"id": "facilidadesLogix",
-					"name": "Facilidades Logix",
+					"id": "geral",
+					"name": "Geral",
+					"icon": "media/dep.svg",
+					"contextualTitle": "Menu Logix"
+				},
+				{
+					"id": "build32",
+					"name": "Build 32 Bits",
+					"icon": "media/dep.svg",
+					"contextualTitle": "Menu Logix"
+				},
+				{
+					"id": "build64",
+					"name": "Build 64 Bits",
 					"icon": "media/dep.svg",
 					"contextualTitle": "Menu Logix"
 				}
@@ -128,7 +142,7 @@
 		"env": "0.0.2",
 		"fs-extra": "^10.0.0",
 		"shelljs": "^0.8.4",
-		"validator": "^13.7.0"
+		"validator": "^13.6.0"
 	},
 	"__metadata": {
 		"installedTimestamp": 1629383807874

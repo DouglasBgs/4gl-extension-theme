@@ -347,6 +347,13 @@
 			}
 		},
 		{
+			"name": "substring",
+			"scope": "define.substring.4gl",
+			"settings": {
+				"foreground": "#f60000"
+			}
+		},
+		{
 			"name": "Inserted",
 			"scope": [
 				"markup.inserted"

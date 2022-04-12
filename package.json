@@ -128,7 +128,7 @@
 		"env": "0.0.2",
 		"fs-extra": "^10.0.0",
 		"shelljs": "^0.8.4",
-		"validator": "^13.6.0"
+		"validator": "^13.7.0"
 	},
 	"__metadata": {
 		"installedTimestamp": 1629383807874

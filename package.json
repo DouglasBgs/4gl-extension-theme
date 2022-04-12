@@ -141,7 +141,7 @@
 	"dependencies": {
 		"env": "0.0.2",
 		"fs-extra": "^10.0.0",
-		"shelljs": "^0.8.4",
+		"shelljs": "^0.8.5",
 		"validator": "^13.6.0"
 	},
 	"__metadata": {

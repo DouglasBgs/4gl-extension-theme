@@ -1,5 +1,9 @@
 {
-    "workbench.startupEditor": "none",
-    "workbench.sideBar.location": "right",
-    "totvsLanguageServer.welcomePage": false,
+  "workbench.startupEditor": "none",
+  "workbench.sideBar.location": "right",
+  "totvsLanguageServer.welcomePage": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "material-icon-theme"
+
 }

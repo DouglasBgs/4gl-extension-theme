@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "dist/js",
+    "target": "ES2016",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
+    "lib": ["es2016", "dom"],
+    "jsx": "react"
+  },
+  "include": ["app/**/*"],
+  "exclude": ["node_modules", ".vscode-test"]
+}

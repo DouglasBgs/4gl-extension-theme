@@ -1,19 +1,39 @@
 /*!
-  * Bootstrap tab.js v5.1.0 (https://getbootstrap.com/)
-  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
+ * Bootstrap tab.js v5.1.0 (https://getbootstrap.com/)
+ * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./dom/event-handler.js'), require('./dom/selector-engine.js'), require('./base-component.js')) :
-  typeof define === 'function' && define.amd ? define(['./dom/event-handler', './dom/selector-engine', './base-component'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Tab = factory(global.EventHandler, global.SelectorEngine, global.Base));
-}(this, (function (EventHandler, SelectorEngine, BaseComponent) { 'use strict';
+  typeof exports === "object" && typeof module !== "undefined"
+    ? (module.exports = factory(
+        require("./dom/event-handler.js"),
+        require("./dom/selector-engine.js"),
+        require("./base-component.js")
+      ))
+    : typeof define === "function" && define.amd
+    ? define(
+        ["./dom/event-handler", "./dom/selector-engine", "./base-component"],
+        factory
+      )
+    : ((global =
+        typeof globalThis !== "undefined" ? globalThis : global || self),
+      (global.Tab = factory(
+        global.EventHandler,
+        global.SelectorEngine,
+        global.Base
+      )));
+})(this, function (EventHandler, SelectorEngine, BaseComponent) {
+  "use strict";
 
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+  function _interopDefaultLegacy(e) {
+    return e && typeof e === "object" && "default" in e ? e : { default: e };
+  }
 
-  var EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
-  var SelectorEngine__default = /*#__PURE__*/_interopDefaultLegacy(SelectorEngine);
-  var BaseComponent__default = /*#__PURE__*/_interopDefaultLegacy(BaseComponent);
+  var EventHandler__default = /*#__PURE__*/ _interopDefaultLegacy(EventHandler);
+  var SelectorEngine__default =
+    /*#__PURE__*/ _interopDefaultLegacy(SelectorEngine);
+  var BaseComponent__default =
+    /*#__PURE__*/ _interopDefaultLegacy(BaseComponent);
 
   /**
    * --------------------------------------------------------------------------
@@ -22,49 +42,51 @@
    * --------------------------------------------------------------------------
    */
 
-  const getSelector = element => {
-    let selector = element.getAttribute('data-bs-target');
+  const getSelector = (element) => {
+    let selector = element.getAttribute("data-bs-target");
 
-    if (!selector || selector === '#') {
-      let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
+    if (!selector || selector === "#") {
+      let hrefAttr = element.getAttribute("href"); // The only valid content that could double as a selector are IDs or classes,
       // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
       // `document.querySelector` will rightfully complain it is invalid.
       // See https://github.com/twbs/bootstrap/issues/32273
 
-      if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
+      if (!hrefAttr || (!hrefAttr.includes("#") && !hrefAttr.startsWith("."))) {
         return null;
       } // Just in case some CMS puts out a full URL with the anchor appended
 
-
-      if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-        hrefAttr = `#${hrefAttr.split('#')[1]}`;
+      if (hrefAttr.includes("#") && !hrefAttr.startsWith("#")) {
+        hrefAttr = `#${hrefAttr.split("#")[1]}`;
       }
 
-      selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
+      selector = hrefAttr && hrefAttr !== "#" ? hrefAttr.trim() : null;
     }
 
     return selector;
   };
 
-  const getElementFromSelector = element => {
+  const getElementFromSelector = (element) => {
     const selector = getSelector(element);
     return selector ? document.querySelector(selector) : null;
   };
 
-  const isDisabled = element => {
+  const isDisabled = (element) => {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       return true;
     }
 
-    if (element.classList.contains('disabled')) {
+    if (element.classList.contains("disabled")) {
       return true;
     }
 
-    if (typeof element.disabled !== 'undefined') {
+    if (typeof element.disabled !== "undefined") {
       return element.disabled;
     }
 
-    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+    return (
+      element.hasAttribute("disabled") &&
+      element.getAttribute("disabled") !== "false"
+    );
   };
   /**
    * Trick to restart an element's animation
@@ -75,18 +97,15 @@
    * @see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
    */
 
-
-  const reflow = element => {
+  const reflow = (element) => {
     // eslint-disable-next-line no-unused-expressions
     element.offsetHeight;
   };
 
   const getjQuery = () => {
-    const {
-      jQuery
-    } = window;
+    const { jQuery } = window;
 
-    if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+    if (jQuery && !document.body.hasAttribute("data-bs-no-jquery")) {
       return jQuery;
     }
 
@@ -95,12 +114,12 @@
 
   const DOMContentLoadedCallbacks = [];
 
-  const onDOMContentLoaded = callback => {
-    if (document.readyState === 'loading') {
+  const onDOMContentLoaded = (callback) => {
+    if (document.readyState === "loading") {
       // add listener on the first call when the document is in loading state
       if (!DOMContentLoadedCallbacks.length) {
-        document.addEventListener('DOMContentLoaded', () => {
-          DOMContentLoadedCallbacks.forEach(callback => callback());
+        document.addEventListener("DOMContentLoaded", () => {
+          DOMContentLoadedCallbacks.forEach((callback) => callback());
         });
       }
 
@@ -110,7 +129,7 @@
     }
   };
 
-  const defineJQueryPlugin = plugin => {
+  const defineJQueryPlugin = (plugin) => {
     onDOMContentLoaded(() => {
       const $ = getjQuery();
       /* istanbul ignore if */
@@ -141,41 +160,45 @@
    * ------------------------------------------------------------------------
    */
 
-  const NAME = 'tab';
-  const DATA_KEY = 'bs.tab';
+  const NAME = "tab";
+  const DATA_KEY = "bs.tab";
   const EVENT_KEY = `.${DATA_KEY}`;
-  const DATA_API_KEY = '.data-api';
+  const DATA_API_KEY = ".data-api";
   const EVENT_HIDE = `hide${EVENT_KEY}`;
   const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
   const EVENT_SHOW = `show${EVENT_KEY}`;
   const EVENT_SHOWN = `shown${EVENT_KEY}`;
   const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
-  const CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
-  const CLASS_NAME_ACTIVE = 'active';
-  const CLASS_NAME_FADE = 'fade';
-  const CLASS_NAME_SHOW = 'show';
-  const SELECTOR_DROPDOWN = '.dropdown';
-  const SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-  const SELECTOR_ACTIVE = '.active';
-  const SELECTOR_ACTIVE_UL = ':scope > li > .active';
-  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
-  const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-  const SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
+  const CLASS_NAME_DROPDOWN_MENU = "dropdown-menu";
+  const CLASS_NAME_ACTIVE = "active";
+  const CLASS_NAME_FADE = "fade";
+  const CLASS_NAME_SHOW = "show";
+  const SELECTOR_DROPDOWN = ".dropdown";
+  const SELECTOR_NAV_LIST_GROUP = ".nav, .list-group";
+  const SELECTOR_ACTIVE = ".active";
+  const SELECTOR_ACTIVE_UL = ":scope > li > .active";
+  const SELECTOR_DATA_TOGGLE =
+    '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
+  const SELECTOR_DROPDOWN_TOGGLE = ".dropdown-toggle";
+  const SELECTOR_DROPDOWN_ACTIVE_CHILD = ":scope > .dropdown-menu .active";
   /**
    * ------------------------------------------------------------------------
    * Class Definition
    * ------------------------------------------------------------------------
    */
 
-  class Tab extends BaseComponent__default['default'] {
+  class Tab extends BaseComponent__default["default"] {
     // Getters
     static get NAME() {
       return NAME;
     } // Public
 
-
     show() {
-      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && this._element.classList.contains(CLASS_NAME_ACTIVE)) {
+      if (
+        this._element.parentNode &&
+        this._element.parentNode.nodeType === Node.ELEMENT_NODE &&
+        this._element.classList.contains(CLASS_NAME_ACTIVE)
+      ) {
         return;
       }
 
@@ -185,30 +208,45 @@
       const listElement = this._element.closest(SELECTOR_NAV_LIST_GROUP);
 
       if (listElement) {
-        const itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
-        previous = SelectorEngine__default['default'].find(itemSelector, listElement);
+        const itemSelector =
+          listElement.nodeName === "UL" || listElement.nodeName === "OL"
+            ? SELECTOR_ACTIVE_UL
+            : SELECTOR_ACTIVE;
+        previous = SelectorEngine__default["default"].find(
+          itemSelector,
+          listElement
+        );
         previous = previous[previous.length - 1];
       }
 
-      const hideEvent = previous ? EventHandler__default['default'].trigger(previous, EVENT_HIDE, {
-        relatedTarget: this._element
-      }) : null;
-      const showEvent = EventHandler__default['default'].trigger(this._element, EVENT_SHOW, {
-        relatedTarget: previous
-      });
+      const hideEvent = previous
+        ? EventHandler__default["default"].trigger(previous, EVENT_HIDE, {
+            relatedTarget: this._element,
+          })
+        : null;
+      const showEvent = EventHandler__default["default"].trigger(
+        this._element,
+        EVENT_SHOW,
+        {
+          relatedTarget: previous,
+        }
+      );
 
-      if (showEvent.defaultPrevented || hideEvent !== null && hideEvent.defaultPrevented) {
+      if (
+        showEvent.defaultPrevented ||
+        (hideEvent !== null && hideEvent.defaultPrevented)
+      ) {
         return;
       }
 
       this._activate(this._element, listElement);
 
       const complete = () => {
-        EventHandler__default['default'].trigger(previous, EVENT_HIDDEN, {
-          relatedTarget: this._element
+        EventHandler__default["default"].trigger(previous, EVENT_HIDDEN, {
+          relatedTarget: this._element,
         });
-        EventHandler__default['default'].trigger(this._element, EVENT_SHOWN, {
-          relatedTarget: previous
+        EventHandler__default["default"].trigger(this._element, EVENT_SHOWN, {
+          relatedTarget: previous,
         });
       };
 
@@ -219,13 +257,24 @@
       }
     } // Private
 
-
     _activate(element, container, callback) {
-      const activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? SelectorEngine__default['default'].find(SELECTOR_ACTIVE_UL, container) : SelectorEngine__default['default'].children(container, SELECTOR_ACTIVE);
+      const activeElements =
+        container &&
+        (container.nodeName === "UL" || container.nodeName === "OL")
+          ? SelectorEngine__default["default"].find(
+              SELECTOR_ACTIVE_UL,
+              container
+            )
+          : SelectorEngine__default["default"].children(
+              container,
+              SELECTOR_ACTIVE
+            );
       const active = activeElements[0];
-      const isTransitioning = callback && active && active.classList.contains(CLASS_NAME_FADE);
+      const isTransitioning =
+        callback && active && active.classList.contains(CLASS_NAME_FADE);
 
-      const complete = () => this._transitionComplete(element, active, callback);
+      const complete = () =>
+        this._transitionComplete(element, active, callback);
 
       if (active && isTransitioning) {
         active.classList.remove(CLASS_NAME_SHOW);
@@ -239,21 +288,24 @@
     _transitionComplete(element, active, callback) {
       if (active) {
         active.classList.remove(CLASS_NAME_ACTIVE);
-        const dropdownChild = SelectorEngine__default['default'].findOne(SELECTOR_DROPDOWN_ACTIVE_CHILD, active.parentNode);
+        const dropdownChild = SelectorEngine__default["default"].findOne(
+          SELECTOR_DROPDOWN_ACTIVE_CHILD,
+          active.parentNode
+        );
 
         if (dropdownChild) {
           dropdownChild.classList.remove(CLASS_NAME_ACTIVE);
         }
 
-        if (active.getAttribute('role') === 'tab') {
-          active.setAttribute('aria-selected', false);
+        if (active.getAttribute("role") === "tab") {
+          active.setAttribute("aria-selected", false);
         }
       }
 
       element.classList.add(CLASS_NAME_ACTIVE);
 
-      if (element.getAttribute('role') === 'tab') {
-        element.setAttribute('aria-selected', true);
+      if (element.getAttribute("role") === "tab") {
+        element.setAttribute("aria-selected", true);
       }
 
       reflow(element);
@@ -264,7 +316,7 @@
 
       let parent = element.parentNode;
 
-      if (parent && parent.nodeName === 'LI') {
+      if (parent && parent.nodeName === "LI") {
         parent = parent.parentNode;
       }
 
@@ -272,10 +324,12 @@
         const dropdownElement = element.closest(SELECTOR_DROPDOWN);
 
         if (dropdownElement) {
-          SelectorEngine__default['default'].find(SELECTOR_DROPDOWN_TOGGLE, dropdownElement).forEach(dropdown => dropdown.classList.add(CLASS_NAME_ACTIVE));
+          SelectorEngine__default["default"]
+            .find(SELECTOR_DROPDOWN_TOGGLE, dropdownElement)
+            .forEach((dropdown) => dropdown.classList.add(CLASS_NAME_ACTIVE));
         }
 
-        element.setAttribute('aria-expanded', true);
+        element.setAttribute("aria-expanded", true);
       }
 
       if (callback) {
@@ -283,13 +337,12 @@
       }
     } // Static
 
-
     static jQueryInterface(config) {
       return this.each(function () {
         const data = Tab.getOrCreateInstance(this);
 
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+        if (typeof config === "string") {
+          if (typeof data[config] === "undefined") {
             throw new TypeError(`No method named "${config}"`);
           }
 
@@ -297,7 +350,6 @@
         }
       });
     }
-
   }
   /**
    * ------------------------------------------------------------------------
@@ -305,19 +357,23 @@
    * ------------------------------------------------------------------------
    */
 
+  EventHandler__default["default"].on(
+    document,
+    EVENT_CLICK_DATA_API,
+    SELECTOR_DATA_TOGGLE,
+    function (event) {
+      if (["A", "AREA"].includes(this.tagName)) {
+        event.preventDefault();
+      }
 
-  EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
-    if (['A', 'AREA'].includes(this.tagName)) {
-      event.preventDefault();
+      if (isDisabled(this)) {
+        return;
+      }
+
+      const data = Tab.getOrCreateInstance(this);
+      data.show();
     }
-
-    if (isDisabled(this)) {
-      return;
-    }
-
-    const data = Tab.getOrCreateInstance(this);
-    data.show();
-  });
+  );
   /**
    * ------------------------------------------------------------------------
    * jQuery
@@ -328,6 +384,5 @@
   defineJQueryPlugin(Tab);
 
   return Tab;
-
-})));
+});
 //# sourceMappingURL=tab.js.map

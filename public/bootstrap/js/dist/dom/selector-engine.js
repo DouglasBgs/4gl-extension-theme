@@ -1,13 +1,18 @@
 /*!
-  * Bootstrap selector-engine.js v5.1.0 (https://getbootstrap.com/)
-  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
+ * Bootstrap selector-engine.js v5.1.0 (https://getbootstrap.com/)
+ * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.SelectorEngine = factory());
-}(this, (function () { 'use strict';
+  typeof exports === "object" && typeof module !== "undefined"
+    ? (module.exports = factory())
+    : typeof define === "function" && define.amd
+    ? define(factory)
+    : ((global =
+        typeof globalThis !== "undefined" ? globalThis : global || self),
+      (global.SelectorEngine = factory()));
+})(this, function () {
+  "use strict";
 
   /**
    * --------------------------------------------------------------------------
@@ -16,40 +21,45 @@
    * --------------------------------------------------------------------------
    */
 
-  const isElement = obj => {
-    if (!obj || typeof obj !== 'object') {
+  const isElement = (obj) => {
+    if (!obj || typeof obj !== "object") {
       return false;
     }
 
-    if (typeof obj.jquery !== 'undefined') {
+    if (typeof obj.jquery !== "undefined") {
       obj = obj[0];
     }
 
-    return typeof obj.nodeType !== 'undefined';
+    return typeof obj.nodeType !== "undefined";
   };
 
-  const isVisible = element => {
+  const isVisible = (element) => {
     if (!isElement(element) || element.getClientRects().length === 0) {
       return false;
     }
 
-    return getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+    return (
+      getComputedStyle(element).getPropertyValue("visibility") === "visible"
+    );
   };
 
-  const isDisabled = element => {
+  const isDisabled = (element) => {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       return true;
     }
 
-    if (element.classList.contains('disabled')) {
+    if (element.classList.contains("disabled")) {
       return true;
     }
 
-    if (typeof element.disabled !== 'undefined') {
+    if (typeof element.disabled !== "undefined") {
       return element.disabled;
     }
 
-    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+    return (
+      element.hasAttribute("disabled") &&
+      element.getAttribute("disabled") !== "false"
+    );
   };
 
   /**
@@ -61,7 +71,9 @@
   const NODE_TEXT = 3;
   const SelectorEngine = {
     find(selector, element = document.documentElement) {
-      return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
+      return [].concat(
+        ...Element.prototype.querySelectorAll.call(element, selector)
+      );
     },
 
     findOne(selector, element = document.documentElement) {
@@ -69,14 +81,20 @@
     },
 
     children(element, selector) {
-      return [].concat(...element.children).filter(child => child.matches(selector));
+      return []
+        .concat(...element.children)
+        .filter((child) => child.matches(selector));
     },
 
     parents(element, selector) {
       const parents = [];
       let ancestor = element.parentNode;
 
-      while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE && ancestor.nodeType !== NODE_TEXT) {
+      while (
+        ancestor &&
+        ancestor.nodeType === Node.ELEMENT_NODE &&
+        ancestor.nodeType !== NODE_TEXT
+      ) {
         if (ancestor.matches(selector)) {
           parents.push(ancestor);
         }
@@ -116,13 +134,24 @@
     },
 
     focusableChildren(element) {
-      const focusables = ['a', 'button', 'input', 'textarea', 'select', 'details', '[tabindex]', '[contenteditable="true"]'].map(selector => `${selector}:not([tabindex^="-"])`).join(', ');
-      return this.find(focusables, element).filter(el => !isDisabled(el) && isVisible(el));
-    }
-
+      const focusables = [
+        "a",
+        "button",
+        "input",
+        "textarea",
+        "select",
+        "details",
+        "[tabindex]",
+        '[contenteditable="true"]',
+      ]
+        .map((selector) => `${selector}:not([tabindex^="-"])`)
+        .join(", ");
+      return this.find(focusables, element).filter(
+        (el) => !isDisabled(el) && isVisible(el)
+      );
+    },
   };
 
   return SelectorEngine;
-
-})));
+});
 //# sourceMappingURL=selector-engine.js.map

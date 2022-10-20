@@ -1,65 +1,62 @@
-#center{
-    max-width: 60%;
+#center {
+  max-width: 60%;
 }
-body{
-    background-color: #1e1e1e;
+body {
+  background-color: #1e1e1e;
 }
 
 label {
-    color: #cccccc;
-    font-size: 0.75rem!important;
+  color: #cccccc;
+  font-size: 0.75rem !important;
 }
 
 input {
-    font-size: 0.75rem!important;
-    background-color: rgb(14, 99, 156)!important;
-    background-clip: padding-box!important;
-    color: #ffffff!important;
-    border-radius: 0!important;
-    border: none!important;
+  font-size: 0.75rem !important;
+  background-color: rgb(14, 99, 156) !important;
+  background-clip: padding-box !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 select {
-    background-color: rgb(14, 99, 156)!important;
-    background-clip: padding-box!important;
-    color: #ffffff!important;
-    border-radius: 0!important;
-    border: none!important;
+  background-color: rgb(14, 99, 156) !important;
+  background-clip: padding-box !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 button {
-    background-color: rgb(14, 99, 156)!important;
-    color: #ffffff!important;
-    border: none!important;
-    font-size: small!important;
+  background-color: rgb(14, 99, 156) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-size: small !important;
 }
 
-
-.inputPath{
-    height: 1.7rem;
-    padding-left: 0.5rem!important;
-    color: white!important;
+.inputPath {
+  height: 1.7rem;
+  padding-left: 0.5rem !important;
+  color: white !important;
 }
-
 
 input::placeholder {
-    color: rgba(228, 228, 228, 0.794)!important;
+  color: rgba(228, 228, 228, 0.794) !important;
 }
 
-#deletar { 
-    background-color: #dc3545!important;
-    width: 100%!important;
-    height: 100%!important;
+#deletar {
+  background-color: #dc3545 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 #adicionar {
-    width: 100%!important;
-    height: 100%!important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .save {
-    height: 2rem;
-    background: #198754!important;
-    width: 10rem;
+  height: 2rem;
+  background: #198754 !important;
+  width: 10rem;
 }
-

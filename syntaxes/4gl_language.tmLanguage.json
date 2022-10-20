@@ -1,12 +1,9 @@
 {
   "name": "4gl",
   "scopeName": "source.4gl",
-  "fileTypes": [
-    "4gl",
-    "per"
-  ],
-  "foldingStartMarker": "(\\{\\s*(\/\/.*)?$|^\\s*\/\/ \\{\\{\\{)",
-  "foldingStopMarker": "^\\s*(\\}|\/\/ \\}\\}\\}$)",
+  "fileTypes": ["4gl", "per"],
+  "foldingStartMarker": "(\\{\\s*(//.*)?$|^\\s*// \\{\\{\\{)",
+  "foldingStopMarker": "^\\s*(\\}|// \\}\\}\\}$)",
   "repository": {
     "4gl": {
       "patterns": [
@@ -167,7 +164,7 @@
       "name": "define.functions.4gl"
     },
     {
-      "name": "function.name", 
+      "name": "function.name",
       "match": "\\b(?i)((?<=function|call |if|if not|\\= )).([[:upper:]][_$[:digit:][:upper:]]*).+(?=\\()"
     },
     {
@@ -196,7 +193,6 @@
     {
       "name": "define.substring.4gl",
       "match": "((?<=\\.*)).+(?=\\[)"
-
     }
   ]
 }

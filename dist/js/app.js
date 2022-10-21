@@ -5,6 +5,7 @@ const path_1 = require("path");
 const servers_1 = require("./controllers/servers");
 const issues_1 = require("./controllers/issues");
 const rpo_1 = require("./controllers/rpo");
+const webview_1 = require("./controllers/webview");
 function activate(context) {
     let pathToDist = (0, path_1.join)(context.extensionPath);
     let pathToConfig = (0, path_1.join)(pathToDist, "config.json");
@@ -24,7 +25,7 @@ function activate(context) {
         rpo_1.RpoController.download(pathToConfig);
     });
     vscode_1.commands.registerCommand("extension.open.Webview", function () {
-        rpo_1.RpoController.download(pathToConfig);
+        webview_1.WebviewFile.open(pathToConfig, context);
     });
 }
 function deactivate() { }

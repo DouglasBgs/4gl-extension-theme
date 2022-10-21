@@ -5,6 +5,7 @@ import { join } from "path";
 import { Servers } from "./controllers/servers";
 import { Issues } from "./controllers/issues";
 import { RpoController } from "./controllers/rpo";
+import { WebviewFile } from "./controllers/webview";
 
 function activate(context: any) {
   let pathToDist = join(context.extensionPath);
@@ -26,7 +27,7 @@ function activate(context: any) {
     RpoController.download(pathToConfig);
   });
   commands.registerCommand("extension.open.Webview", function () {
-    RpoController.download(pathToConfig);
+    WebviewFile.open(pathToConfig, context);
   });
 }
 

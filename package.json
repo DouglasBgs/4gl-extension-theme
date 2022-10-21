@@ -17,7 +17,8 @@
     "onCommand:extension.open.tss",
     "onCommand:extension.open.arquivo_log",
     "onCommand:extension.create.issue",
-    "onCommand:extension.download.rpo"
+    "onCommand:extension.download.rpo",
+    "onCommand:extension.open.Webview"
   ],
   "main": "./dist/js/app.js",
   "scripts": {
@@ -133,6 +134,7 @@
     ]
   },
   "dependencies": {
+    "@vscode/webview-ui-toolkit": "^1.1.0",
     "env": "0.0.2",
     "fs-extra": "^10.1.0",
     "fsprogress": "^1.0.0",

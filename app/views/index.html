@@ -1,0 +1,49 @@
+<container id="form-data-example" class="container">
+
+
+    <vscode-form-group>
+        <vscode-text-field isReadOnly placeholder="clique no campo para alterar" id="ddsa" readonly="true"
+            onclick="mensagem(this.id)">
+            Text Field
+            Label</vscode-text-field>
+    </vscode-form-group>
+
+    <vscode-button onclick="submit()">Salvar</vscode-button>
+</container>
+<script>
+    const vscode = acquireVsCodeApi();
+    window.addEventListener("load", main);
+
+    function main() {
+        vscode.postMessage({
+            command: 'onload',
+        })
+    }
+    function submit() {
+        let text = document.querySelector('#form-data-example').data;
+        console.log(text)
+    }
+
+    async function mensagem(elementName) {
+        console.log(elementName)
+        await vscode.postMessage({
+            command: 'selectFolder',
+            elementName: elementName
+        })
+    }
+    window.addEventListener('message', event => {
+        const command = event.data.command; // The JSON data our extension sent
+        // console.log(event.data)
+        switch (command) {
+            case 'SelectedFolder':
+                document.querySelector(`#${event.data.elementId}`).value = event.data.folder
+                break;
+
+            default:
+                break;
+        }
+        // document.getElementById('save-button').textContent = config.tss;
+
+    });
+
+</script>

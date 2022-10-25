@@ -13,6 +13,9 @@ class ConfigModel {
     _readFile() {
         return (0, fs_1.readFileSync)(this.file, "utf-8");
     }
+    _saveFile(data) {
+        return (0, fs_1.writeFileSync)(this.file, JSON.stringify(data), "utf-8");
+    }
     loadValues() {
         let file;
         file = JSON.parse(this._readFile());
@@ -22,6 +25,11 @@ class ConfigModel {
         else {
             throw new Error("Não foi possível ler o arquivo");
         }
+    }
+    save(data) {
+        this._saveFile(data);
+        this.reloadValues();
+        return this.data;
     }
 }
 exports.ConfigModel = ConfigModel;

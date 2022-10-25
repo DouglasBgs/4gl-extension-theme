@@ -13,6 +13,8 @@ exports.WebviewFile = void 0;
 const fs_1 = require("fs");
 const vscode_1 = require("vscode");
 const config_1 = require("../models/config");
+const rpo_1 = require("../models/rpo");
+const utils_1 = require("../utils/utils");
 class WebviewFile {
     static open(pathToConfig, context) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -36,6 +38,7 @@ class WebviewFile {
         return __awaiter(this, void 0, void 0, function* () {
             const toolkitUri = this.webviewPanel.webview.asWebviewUri(vscode_1.Uri.file(`${extensionUri}\\node_modules\\@vscode\\webview-ui-toolkit\\dist\\toolkit.js`));
             const scripts = this.webviewPanel.webview.asWebviewUri(vscode_1.Uri.file(`${extensionUri}\\public\\index.js`));
+            const styles = this.webviewPanel.webview.asWebviewUri(vscode_1.Uri.file(`${extensionUri}\\public\\index.css`));
             const body = (0, fs_1.readFileSync)(`${extensionUri}\\app\\views\\index.html`).toString();
             return `
         <!DOCTYPE html>
@@ -43,12 +46,13 @@ class WebviewFile {
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <script type="module" src="${scripts}"></script>
+            <link href="${styles}" rel="stylesheet">
             <script type="module" src="${toolkitUri}"></script>
             <title>Hello World!</title>
           </head>
           <body>
             ${body}
+            <script src="${scripts}"></script>
           </body>
         </html>
       `;
@@ -60,9 +64,33 @@ class WebviewFile {
             case 'selectFolder':
                 this.selecionarPasta(message.elementName);
                 break;
+            case 'selectFile':
+                this.selecionarArquivo(message);
+                break;
             case 'onload':
                 this.Onload(config);
+                break;
+            case 'addRpo':
+                rpo_1.RpoModel.AdicionaRpo(config.data, message.rpoVersion, pathToConfig);
+                break;
+            case 'removeRpo':
+                rpo_1.RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig);
+                break;
+            case 'save':
+                let dados = config.save(message.data);
+                this.Reload(dados);
+                utils_1.Utils.MostraMensagemInfo(' Salvo com sucesso!');
+                if (message.close) {
+                    this.webviewPanel.dispose();
+                }
+                break;
         }
+    }
+    static Reload(config) {
+        this.webviewPanel.webview.postMessage({
+            command: "SelectedPath",
+            config: config,
+        });
     }
     static Onload(config) {
         this.webviewPanel.webview.postMessage({
@@ -82,6 +110,25 @@ class WebviewFile {
                     command: "SelectedFolder",
                     folder: fileUri[0].fsPath,
                     elementId: elementId
+                });
+            }
+        });
+    }
+    static selecionarArquivo(message) {
+        const options = {
+            canSelectMany: false,
+            canSelectFiles: true,
+            openLabel: 'Selecionar',
+            filters: {
+                Arquivos: message.type,
+            },
+        };
+        vscode_1.window.showOpenDialog(options).then(fileUri => {
+            if (fileUri && fileUri[0]) {
+                this.webviewPanel.webview.postMessage({
+                    command: "SelectedFile",
+                    file: fileUri[0].fsPath,
+                    elementId: message.elementName
                 });
             }
         });

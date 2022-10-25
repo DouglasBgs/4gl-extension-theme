@@ -1,6 +1,8 @@
 export interface rpo {
+
     folder: string,
     name: string
+
 }
 
 export interface IConfig {
@@ -14,13 +16,20 @@ export interface IConfig {
     tss: string;
     dbacess_tss: string;
     rpo_local: string;
-    rpo_rede: Array<rpo>;
+    rpo_rede: Array<any>;
     arquivo_log_appserver_64: string;
     appserver_64: string;
     tss_64: string;
     dbacess_tss_64: string;
     rpo_local_64: string;
-    rpo_rede_64: Array<rpo>;
+    rpo_rede_64: Array<any>;
 
 }
+
+export interface SelectFile {
+    command: string,
+    elementName: string,
+    type: Array<string>
+}
+
 

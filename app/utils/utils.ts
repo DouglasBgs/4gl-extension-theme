@@ -25,6 +25,8 @@ export class Utils {
       prompt: prompt,
       placeHolder: placeHolder,
       ignoreFocusOut: ignoreFocusOut,
+      title: prompt
+
     });
     return nome;
   }

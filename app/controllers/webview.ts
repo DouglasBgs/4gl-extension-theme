@@ -2,7 +2,10 @@
 import { readFileSync } from "fs";
 
 import { WebviewPanel, window, ViewColumn, Uri, Webview, OpenDialogOptions } from "vscode";
+import { IConfig, SelectFile } from "../interfaces/config";
 import { ConfigModel } from "../models/config";
+import { RpoModel } from "../models/rpo";
+import { Utils } from "../utils/utils";
 
 
 
@@ -35,6 +38,7 @@ export class WebviewFile {
     public static async getWebviewContent(extensionUri: Uri) {
         const toolkitUri = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\node_modules\\@vscode\\webview-ui-toolkit\\dist\\toolkit.js`))
         const scripts = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.js`))
+        const styles = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.css`))
         const body = readFileSync(`${extensionUri}\\app\\views\\index.html`).toString()
 
         return /*html*/ `
@@ -43,12 +47,13 @@ export class WebviewFile {
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <script type="module" src="${scripts}"></script>
+            <link href="${styles}" rel="stylesheet">
             <script type="module" src="${toolkitUri}"></script>
             <title>Hello World!</title>
           </head>
           <body>
             ${body}
+            <script src="${scripts}"></script>
           </body>
         </html>
       `;
@@ -60,13 +65,38 @@ export class WebviewFile {
             case 'selectFolder':
                 this.selecionarPasta(message.elementName);
                 break
+            case 'selectFile':
+                this.selecionarArquivo(message);
+                break
             case 'onload':
                 this.Onload(config);
-
+                break
+            case 'addRpo':
+                RpoModel.AdicionaRpo(config.data, message.rpoVersion, pathToConfig);
+                break
+            case 'removeRpo':
+                RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig);
+                break
+            case 'save':
+                let dados = config.save(message.data);
+                this.Reload(dados);
+                Utils.MostraMensagemInfo(' Salvo com sucesso!')
+                if (message.close) {
+                    this.webviewPanel.dispose()
+                }
+                break
         }
 
-
     }
+
+
+    public static Reload(config: IConfig) {
+        this.webviewPanel.webview.postMessage({
+            command: "SelectedPath",
+            config: config,
+        });
+    }
+
 
     public static Onload(config: ConfigModel) {
         this.webviewPanel.webview.postMessage({
@@ -89,6 +119,28 @@ export class WebviewFile {
                     command: "SelectedFolder",
                     folder: fileUri[0].fsPath,
                     elementId: elementId
+                });
+            }
+        });
+    }
+
+    public static selecionarArquivo(message: SelectFile) {
+        const options: OpenDialogOptions = {
+            canSelectMany: false,
+            canSelectFiles: true,
+            openLabel: 'Selecionar',
+            filters: {
+                Arquivos: message.type,
+            },
+
+        };
+
+        window.showOpenDialog(options).then(fileUri => {
+            if (fileUri && fileUri[0]) {
+                this.webviewPanel.webview.postMessage({
+                    command: "SelectedFile",
+                    file: fileUri[0].fsPath,
+                    elementId: message.elementName
                 });
             }
         });

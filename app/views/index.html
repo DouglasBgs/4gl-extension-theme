@@ -1,49 +1,94 @@
 <container id="form-data-example" class="container">
-
-
-    <vscode-form-group>
-        <vscode-text-field isReadOnly placeholder="clique no campo para alterar" id="ddsa" readonly="true"
-            onclick="mensagem(this.id)">
-            Text Field
-            Label</vscode-text-field>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="codificacao" readonly="true"
+            onclick="selectFolder(this.id)">
+            Caminho para criar issues de codificação
+        </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_tu" readonly="true"
+            onclick="selectFolder(this.id)">
+            Caminho para criar issues de Teste Unitário</vscode-text-field>
     </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_ti" readonly="true"
+            onclick="selectFolder(this.id)">
+            Caminho para criar issues de Teste Integrado
+        </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="evidencia" readonly="true"
+            onclick="selectFolder(this.id)">
+            Caminho para criar pasta de evidencia de testes </vscode-text-field>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivos_romana" readonly="true"
+            onclick="selectFolder(this.id)">
+            Servidor com fontes atualizados
+        </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver"
+            readonly="true" onclick="selectFile(this.id, ['log','txt'])">
+            Arquivo de Log do servidor 32 bits </vscode-text-field>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver_64"
+            readonly="true" onclick="selectFile(this.id, ['log','txt'])">
+            Arquivo de Log do servidor 64 bits </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver" readonly="true"
+            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+            Appserver 32 bits
+        </vscode-text-field>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver_64" readonly="true"
+            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+            Appserver 64 bits
+        </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss" readonly="true"
+            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+            Arquivo de execução do tss 32 bits </vscode-text-field>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss_64" readonly="true"
+            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+            Arquivo de execução do tss 64 bits </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss" readonly="true"
+            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+            dbacess_tss 32 bits
+        </vscode-text-field>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss_64" readonly="true"
+            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+            dbacess_tss 64 bits
+        </vscode-text-field>
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local" readonly="true"
+            onclick="selectFile(this.id, ['rpo'])">
+            Arquivo rpo servidor 32 bits </vscode-text-field>
 
-    <vscode-button onclick="submit()">Salvar</vscode-button>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local_64" readonly="true"
+            onclick="selectFile(this.id, ['rpo'])">
+            Arquivo rpo servidor 64 bits </vscode-text-field>
+    </vscode-form-group>
+    <vscode-form-group class="field-group">
+        <div>
+            <label for="rpo32List">
+                Arquivo RPO servidor da rede 32 bits
+            </label>
+            <vscode-dropdown class="field" id="rpo32List" name="rpo32List">
+            </vscode-dropdown>
+            <vscode-button onclick="adicionaRpo('32')">Adicionar</vscode-button>
+            <vscode-button onclick="removeRpo('32')">Remover</vscode-button>
+        </div>
+        <div>
+            <label for="rpo64List">
+                Arquivo RPO servidor da rede 64 bits
+            </label>
+            <vscode-dropdown id="rpo64List" name="rpo64List">
+            </vscode-dropdown>
+            <vscode-button onclick="adicionaRpo('64')">Adicionar</vscode-button>
+            <vscode-button onclick="removeRpo('64')">Remover</vscode-button>
+        </div>
+    </vscode-form-group>
+    <vscode-divider></vscode-divider>
+    <vscode-button onclick="submit(false)">Salvar</vscode-button>
+    <vscode-button onclick="submit(true)">Salvar e fechar</vscode-button>
 </container>
-<script>
-    const vscode = acquireVsCodeApi();
-    window.addEventListener("load", main);
-
-    function main() {
-        vscode.postMessage({
-            command: 'onload',
-        })
-    }
-    function submit() {
-        let text = document.querySelector('#form-data-example').data;
-        console.log(text)
-    }
-
-    async function mensagem(elementName) {
-        console.log(elementName)
-        await vscode.postMessage({
-            command: 'selectFolder',
-            elementName: elementName
-        })
-    }
-    window.addEventListener('message', event => {
-        const command = event.data.command; // The JSON data our extension sent
-        // console.log(event.data)
-        switch (command) {
-            case 'SelectedFolder':
-                document.querySelector(`#${event.data.elementId}`).value = event.data.folder
-                break;
-
-            default:
-                break;
-        }
-        // document.getElementById('save-button').textContent = config.tss;
-
-    });
-
-</script>

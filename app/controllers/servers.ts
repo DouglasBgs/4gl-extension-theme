@@ -8,6 +8,7 @@ export class Servers {
   public static async openAppServer(pathToAppServer: string) {
     let config = new ConfigModel(pathToAppServer);
     let build: string = await this.selectBuild();
+    if (!build) { return }
     let appserver: string;
 
     if (build == Build.b64) {
@@ -20,6 +21,7 @@ export class Servers {
   public static async openTss(pathToTss: string) {
     let config = new ConfigModel(pathToTss);
     let build: string = await this.selectBuild();
+    if (!build) { return }
     let tss: string;
     let dbAcessTss: string;
     if (build == Build.b64) {
@@ -57,6 +59,7 @@ export class Servers {
   public static async openLogFile(pathToLogFile: string) {
     let repositorio = new ConfigModel(pathToLogFile);
     let build: string = await this.selectBuild();
+    if (!build) { return }
     let uri: Uri;
     if (build == Build.b64) {
       uri = Uri.file(repositorio.data.arquivo_log_appserver_64);

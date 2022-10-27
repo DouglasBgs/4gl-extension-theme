@@ -21,6 +21,9 @@ class RpoController {
         return __awaiter(this, void 0, void 0, function* () {
             let config = new config_1.ConfigModel(pathToRpo);
             let build = yield servers_1.Servers.selectBuild();
+            if (!build) {
+                return;
+            }
             let rpoRede;
             let rpoLocal;
             let options = [];

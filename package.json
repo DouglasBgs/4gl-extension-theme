@@ -80,7 +80,7 @@
         "contents": "\n[$(debug-disconnect) Abrir Tss](command:extension.open.tss \"configurar texto\")"
       },
       {
-        "view": "logix",
+        "view": "config",
         "contents": "\n[$(root-folder-opened) Configurar diretórios](command:extension.open.Webview \"configurar texto\")"
       }
     ],
@@ -89,13 +89,16 @@
         {
           "name": "Logix",
           "id": "logix",
-          "icon": "media/dep.svg",
           "contextualTitle": "Menu Totvs"
         },
         {
           "name": "Datasul",
-          "id": "datasul",
-          "icon": "media/dep.svg"
+          "id": "datasul"
+        },
+        {
+          "name": "Configurações",
+          "id": "config",
+          "initialSize": 1
         }
       ]
     },

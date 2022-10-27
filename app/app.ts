@@ -29,6 +29,7 @@ function activate(context: any) {
   commands.registerCommand("extension.open.Webview", function () {
     WebviewFile.open(pathToConfig, context);
   });
+
 }
 
 function deactivate() { }

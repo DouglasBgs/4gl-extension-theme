@@ -20,6 +20,9 @@ class Servers {
         return __awaiter(this, void 0, void 0, function* () {
             let config = new config_1.ConfigModel(pathToAppServer);
             let build = yield this.selectBuild();
+            if (!build) {
+                return;
+            }
             let appserver;
             if (build == build_enum_1.Build.b64) {
                 appserver = config.data.appserver_64;
@@ -34,6 +37,9 @@ class Servers {
         return __awaiter(this, void 0, void 0, function* () {
             let config = new config_1.ConfigModel(pathToTss);
             let build = yield this.selectBuild();
+            if (!build) {
+                return;
+            }
             let tss;
             let dbAcessTss;
             if (build == build_enum_1.Build.b64) {
@@ -71,6 +77,9 @@ class Servers {
         return __awaiter(this, void 0, void 0, function* () {
             let repositorio = new config_1.ConfigModel(pathToLogFile);
             let build = yield this.selectBuild();
+            if (!build) {
+                return;
+            }
             let uri;
             if (build == build_enum_1.Build.b64) {
                 uri = vscode_1.Uri.file(repositorio.data.arquivo_log_appserver_64);

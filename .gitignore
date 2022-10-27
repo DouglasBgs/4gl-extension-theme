@@ -5,12 +5,11 @@ node_modules/
 
 
 # Compiled output
-dist/
 /dist
 /tmp
 /out-tsc
 /bazel-out
-/dist/*
+
 
 # Node
 /node_modules

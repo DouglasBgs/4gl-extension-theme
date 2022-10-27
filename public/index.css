@@ -24,6 +24,15 @@
     margin: 0.25rem 0;
 }
 
+.title {
+    text-align: center;
+    color: #cccccc;
+}
+
+.title-left {
+    text-align: left;
+    color: #cccccc;
+}
 .field-group {
     width: 100%;
     display: grid;
@@ -35,8 +44,6 @@
 .field {
     width: 100%;
     padding: 0.3rem;
-    
-
 }
 
 .button {
@@ -50,3 +57,13 @@
     padding: 0.75rem;
     
 }
+
+vscode-text-field:hover input, 
+label:hover,
+vscode-dropdown:hover,
+input:hover {
+    background-color: #333333;
+    cursor: pointer;
+}
+
+

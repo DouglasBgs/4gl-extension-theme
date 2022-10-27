@@ -1,98 +1,117 @@
 <container id="form-data-example" class="container">
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="codificacao" readonly="true"
-            onclick="selectFolder(this.id)">
-            Caminho para criar issues de codificação
-        </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_tu" readonly="true"
-            onclick="selectFolder(this.id)">
-            Caminho para criar issues de Teste Unitário</vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_ti" readonly="true"
-            onclick="selectFolder(this.id)">
-            Caminho para criar issues de Teste Integrado
-        </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="evidencia" readonly="true"
-            onclick="selectFolder(this.id)">
-            Caminho para criar pasta de evidencia de testes </vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivos_romana" readonly="true"
-            onclick="selectFolder(this.id)">
-            Servidor com fontes atualizados
-        </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver"
-            readonly="true" onclick="selectFile(this.id, ['log','txt'])">
-            Arquivo de Log do servidor 32 bits </vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver_64"
-            readonly="true" onclick="selectFile(this.id, ['log','txt'])">
-            Arquivo de Log do servidor 64 bits </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver" readonly="true"
-            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
-            Appserver 32 bits
-        </vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver_64" readonly="true"
-            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
-            Appserver 64 bits
-        </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss" readonly="true"
-            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
-            Arquivo de execução do tss 32 bits </vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss_64" readonly="true"
-            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
-            Arquivo de execução do tss 64 bits </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss" readonly="true"
-            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
-            dbacess_tss 32 bits
-        </vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss_64" readonly="true"
-            onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
-            dbacess_tss 64 bits
-        </vscode-text-field>
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local" readonly="true"
-            onclick="selectFile(this.id, ['rpo'])">
-            Arquivo rpo servidor 32 bits </vscode-text-field>
+    <div class="title">
+        <h1>Página para controle dos diretórios</h1>
+    </div>
+    <section class="logix">
+        <div class="title-left">
+            <h2>Configurações Gerais</h2>
+        </div>
+        <vscode-form-group class="field-group">
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="codificacao" readonly
+                onclick="selectFolder(this.id)">
+                Caminho para criar issues de codificação
+            </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_tu" readonly
+                onclick="selectFolder(this.id)">
+                Caminho para criar issues de Teste Unitário</vscode-text-field>
+        </vscode-form-group>
+        <vscode-form-group class="field-group">
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_ti" readonly
+                onclick="selectFolder(this.id)">
+                Caminho para criar issues de Teste Integrado
+            </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="evidencia" readonly
+                onclick="selectFolder(this.id)">
+                Caminho para criar pasta de evidencia de testes </vscode-text-field>
+        </vscode-form-group>
+    </section>
+    <vscode-divider></vscode-divider>
+    <section class="logix">
+        <div class="title-left">
+            <h2>Configurações Tss</h2>
+        </div>
+        <vscode-form-group class="field-group">
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss" readonly
+                onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+                Arquivo de execução do tss 32 bits </vscode-text-field>
 
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local_64" readonly="true"
-            onclick="selectFile(this.id, ['rpo'])">
-            Arquivo rpo servidor 64 bits </vscode-text-field>
-    </vscode-form-group>
-    <vscode-form-group class="field-group">
-        <div class="field">
-            <label for="rpo32List">
-                Arquivo RPO servidor da rede 32 bits
-            </label>
-            <vscode-dropdown class="field" id="rpo32List" name="rpo32List">
-            </vscode-dropdown>
-            <vscode-button class="button" onclick="adicionaRpo('32')">Adicionar</vscode-button>
-            <vscode-button onclick="removeRpo('32')" appearance="secondary">Remover</vscode-button>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss_64" readonly
+                onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+                Arquivo de execução do tss 64 bits </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss" readonly
+                onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+                Arquivo de execução do dbacess_tss 32 bits
+            </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss_64" readonly
+                onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+                Arquivo de execução do dbacess_tss 64 bits
+            </vscode-text-field>
+        </vscode-form-group>
+    </section>
+    <vscode-divider></vscode-divider>
+    <section class="logix">
+        <div class="title-left">
+            <h2>Configurações Logix</h2>
         </div>
-        <div class="field">
-            <label for="rpo64List">
-                Arquivo RPO servidor da rede 64 bits
-            </label>
-            <vscode-dropdown class="field" id="rpo64List" name="rpo64List">
-            </vscode-dropdown>
-            <vscode-button class="button" onclick="adicionaRpo('64')">Adicionar</vscode-button>
-            <vscode-button onclick="removeRpo('64')" appearance="secondary">Remover</vscode-button>
+
+        <vscode-form-group class="field-group">
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivos_romana" readonly
+                onclick="selectFolder(this.id)">
+                Servidor com fontes atualizados
+            </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver"
+                readonly onclick="selectFile(this.id, ['log','txt'])">
+                Arquivo de Log do servidor 32 bits </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver_64"
+                readonly onclick="selectFile(this.id, ['log','txt'])">
+                Arquivo de Log do servidor 64 bits </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver" readonly
+                onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+                Arquivo execução Appserver 32 bits
+            </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver_64" readonly
+                onclick="selectFile(this.id, ['lnk','exe', 'bat'])">
+                Arquivo execução Appserver 64 bits
+            </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local" readonly
+                onclick="selectFile(this.id, ['rpo'])">
+                Arquivo rpo servidor 32 bits </vscode-text-field>
+            <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local_64" readonly
+                onclick="selectFile(this.id, ['rpo'])">
+                Arquivo rpo servidor 64 bits </vscode-text-field>
+            <div class="field">
+                <label for="rpo32List">
+                    RPO's disponíveis servidor da rede 32 bits
+                </label>
+                <vscode-dropdown class="field" id="rpo32List" name="rpo32List">
+                </vscode-dropdown>
+                <vscode-button class="button" onclick="adicionaRpo('32')">Adicionar</vscode-button>
+                <vscode-button onclick="removeRpo('32')" appearance="secondary">Remover</vscode-button>
+            </div>
+            <div class="field">
+                <label for="rpo64List">
+                    RPO's disponíveis servidor da rede 64 bits
+                </label>
+                <vscode-dropdown class="field" id="rpo64List" name="rpo64List">
+                </vscode-dropdown>
+                <vscode-button class="button" onclick="adicionaRpo('64')">Adicionar</vscode-button>
+                <vscode-button onclick="removeRpo('64')" appearance="secondary">Remover</vscode-button>
+            </div>
+        </vscode-form-group>
+    </section>
+    <vscode-divider></vscode-divider>
+    <section class="datasul">
+        <div class="title-left">
+            <h2>Configurações Datasul</h2>
         </div>
-    </vscode-form-group>
+    </section>
+    <vscode-divider></vscode-divider>
     <div class="field">
-        <vscode-divider></vscode-divider>
         <div class="buttonsSave">
             <vscode-button class="button" onclick="submit(false)">Salvar</vscode-button>
-            <vscode-button class="button" onclick="submit(true)" appearance="secondary">Salvar e fechar</vscode-button>
+            <vscode-button class="button" onclick="submit(true)" appearance="secondary">Salvar e fechar
+            </vscode-button>
         </div>
     </div>
+
 </container>

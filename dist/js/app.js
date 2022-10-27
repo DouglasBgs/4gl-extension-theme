@@ -8,7 +8,7 @@ const rpo_1 = require("./controllers/rpo");
 const webview_1 = require("./controllers/webview");
 function activate(context) {
     let pathToDist = (0, path_1.join)(context.extensionPath);
-    let pathToConfig = (0, path_1.join)(pathToDist, "config.json");
+    let pathToConfig = (0, path_1.join)(pathToDist, ".config.json");
     vscode_1.commands.registerCommand("extension.open.appserver", function () {
         servers_1.Servers.openAppServer(pathToConfig);
     });

@@ -69,26 +69,30 @@
             Arquivo rpo servidor 64 bits </vscode-text-field>
     </vscode-form-group>
     <vscode-form-group class="field-group">
-        <div>
+        <div class="field">
             <label for="rpo32List">
                 Arquivo RPO servidor da rede 32 bits
             </label>
             <vscode-dropdown class="field" id="rpo32List" name="rpo32List">
             </vscode-dropdown>
-            <vscode-button onclick="adicionaRpo('32')">Adicionar</vscode-button>
-            <vscode-button onclick="removeRpo('32')">Remover</vscode-button>
+            <vscode-button class="button" onclick="adicionaRpo('32')">Adicionar</vscode-button>
+            <vscode-button onclick="removeRpo('32')" appearance="secondary">Remover</vscode-button>
         </div>
-        <div>
+        <div class="field">
             <label for="rpo64List">
                 Arquivo RPO servidor da rede 64 bits
             </label>
-            <vscode-dropdown id="rpo64List" name="rpo64List">
+            <vscode-dropdown class="field" id="rpo64List" name="rpo64List">
             </vscode-dropdown>
-            <vscode-button onclick="adicionaRpo('64')">Adicionar</vscode-button>
-            <vscode-button onclick="removeRpo('64')">Remover</vscode-button>
+            <vscode-button class="button" onclick="adicionaRpo('64')">Adicionar</vscode-button>
+            <vscode-button onclick="removeRpo('64')" appearance="secondary">Remover</vscode-button>
         </div>
     </vscode-form-group>
-    <vscode-divider></vscode-divider>
-    <vscode-button onclick="submit(false)">Salvar</vscode-button>
-    <vscode-button onclick="submit(true)">Salvar e fechar</vscode-button>
+    <div class="field">
+        <vscode-divider></vscode-divider>
+        <div class="buttonsSave">
+            <vscode-button class="button" onclick="submit(false)">Salvar</vscode-button>
+            <vscode-button class="button" onclick="submit(true)" appearance="secondary">Salvar e fechar</vscode-button>
+        </div>
+    </div>
 </container>

@@ -9,7 +9,7 @@ import { WebviewFile } from "./controllers/webview";
 
 function activate(context: any) {
   let pathToDist = join(context.extensionPath);
-  let pathToConfig = join(pathToDist, "config.json");
+  let pathToConfig = join(pathToDist, ".config.json");
 
   commands.registerCommand("extension.open.appserver", function () {
     Servers.openAppServer(pathToConfig);

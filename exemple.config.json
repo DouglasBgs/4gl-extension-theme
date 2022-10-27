@@ -9,7 +9,18 @@
   "tss": "",
   "dbacess_tss": "",
   "rpo_local": "",
+  "arquivo_log_appserver_64": "",
+  "appserver_64": "",
+  "tss_64": "",
+  "dbacess_tss_64": "",
+  "rpo_local_64": "",
   "rpo_rede": [
+    {
+      "folder": "",
+      "name": ""
+    }
+  ],
+  "rpo_rede_64": [
     {
       "folder": "",
       "name": ""

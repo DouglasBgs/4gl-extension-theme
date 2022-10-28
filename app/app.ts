@@ -6,6 +6,7 @@ import { Servers } from "./controllers/servers";
 import { Issues } from "./controllers/issues";
 import { RpoController } from "./controllers/rpo";
 import { WebviewFile } from "./controllers/webview";
+import { Utils } from "./utils/utils";
 
 function activate(context: any) {
   let pathToDist = join(context.extensionPath);
@@ -29,6 +30,10 @@ function activate(context: any) {
   commands.registerCommand("extension.open.Webview", function () {
     WebviewFile.open(pathToConfig, context);
   });
+  commands.registerCommand("extension.messagedev", function () {
+    Utils.MostraMensagemInfo("Infelizmente essa opção ainda não está disponível");
+  });
+
 
 }
 

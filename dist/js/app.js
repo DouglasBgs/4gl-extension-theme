@@ -6,6 +6,7 @@ const servers_1 = require("./controllers/servers");
 const issues_1 = require("./controllers/issues");
 const rpo_1 = require("./controllers/rpo");
 const webview_1 = require("./controllers/webview");
+const utils_1 = require("./utils/utils");
 function activate(context) {
     let pathToDist = (0, path_1.join)(context.extensionPath);
     let pathToConfig = (0, path_1.join)(pathToDist, ".config.json");
@@ -26,6 +27,9 @@ function activate(context) {
     });
     vscode_1.commands.registerCommand("extension.open.Webview", function () {
         webview_1.WebviewFile.open(pathToConfig, context);
+    });
+    vscode_1.commands.registerCommand("extension.messagedev", function () {
+        utils_1.Utils.MostraMensagemInfo("Infelizmente essa opção ainda não está disponível");
     });
 }
 function deactivate() { }

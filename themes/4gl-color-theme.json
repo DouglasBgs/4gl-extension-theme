@@ -1,9 +1,6 @@
 {
   "name": "4gl",
   "type": "dark",
-  "colors": {
-    "editor.foreground": "#fce4a1"
-  },
   "tokenColors": [
     {
       "name": "Comment",
@@ -627,3 +624,4 @@
     }
   ]
 }
+

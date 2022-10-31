@@ -114,7 +114,8 @@
       {
         "label": "4gl theme color",
         "uiTheme": "vs-dark",
-        "path": "./themes/4gl-color-theme.json"
+        "path": "./themes/4gl-color-theme.json",
+        "languages": "4gl"
       }
     ],
     "languages": [

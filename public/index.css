@@ -43,7 +43,7 @@
 
 .field {
     width: 100%;
-    padding: 0.3rem;
+    padding: 0.3rem 0rem;
 }
 
 .button {
@@ -66,4 +66,7 @@ input:hover {
     cursor: pointer;
 }
 
+section {
+    width: 100%;
+}
 

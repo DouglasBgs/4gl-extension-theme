@@ -18,8 +18,8 @@ const build_enum_1 = require("../enums/build.enum");
 class Servers {
     static openAppServer(pathToAppServer) {
         return __awaiter(this, void 0, void 0, function* () {
-            let config = new config_1.ConfigModel(pathToAppServer);
-            let build = yield this.selectBuild();
+            const config = new config_1.ConfigModel(pathToAppServer);
+            const build = yield this.selectBuild();
             if (!build) {
                 return;
             }
@@ -30,13 +30,13 @@ class Servers {
             else {
                 appserver = config.data.appserver;
             }
-            this.startCommand(appserver, "AppServer");
+            this.startCommand(appserver, 'AppServer');
         });
     }
     static openTss(pathToTss) {
         return __awaiter(this, void 0, void 0, function* () {
-            let config = new config_1.ConfigModel(pathToTss);
-            let build = yield this.selectBuild();
+            const config = new config_1.ConfigModel(pathToTss);
+            const build = yield this.selectBuild();
             if (!build) {
                 return;
             }
@@ -50,14 +50,14 @@ class Servers {
                 tss = config.data.tss_64;
                 dbAcessTss = config.data.dbacess_tss_64;
             }
-            this.startCommand(tss, "TSS");
-            this.startCommand(dbAcessTss, "DBAcess TSS");
+            this.startCommand(tss, 'TSS');
+            this.startCommand(dbAcessTss, 'DBAcess TSS');
         });
     }
     static selectBuild() {
         return __awaiter(this, void 0, void 0, function* () {
-            let options = [build_enum_1.Build.b32, build_enum_1.Build.b64];
-            let build = yield utils_js_1.Utils.selecionaDados(options, "Selecione o Build para executar o comando");
+            const options = [build_enum_1.Build.b32, build_enum_1.Build.b64];
+            const build = yield utils_js_1.Utils.selecionaDados(options, 'Selecione o Build para executar o comando');
             return build;
         });
     }
@@ -75,8 +75,8 @@ class Servers {
     }
     static openLogFile(pathToLogFile) {
         return __awaiter(this, void 0, void 0, function* () {
-            let repositorio = new config_1.ConfigModel(pathToLogFile);
-            let build = yield this.selectBuild();
+            const repositorio = new config_1.ConfigModel(pathToLogFile);
+            const build = yield this.selectBuild();
             if (!build) {
                 return;
             }
@@ -87,7 +87,7 @@ class Servers {
             else {
                 uri = vscode_1.Uri.file(repositorio.data.arquivo_log_appserver);
             }
-            yield vscode_1.commands.executeCommand("vscode.open", uri);
+            yield vscode_1.commands.executeCommand('vscode.open', uri);
         });
     }
 }

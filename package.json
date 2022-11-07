@@ -19,7 +19,21 @@
     "onCommand:extension.create.issue",
     "onCommand:extension.download.rpo",
     "onCommand:extension.open.Webview",
-    "onCommand:extension.messagedev"
+    "onCommand:extension.messagedev",
+    "workspaceContains:**/*.prw",
+    "workspaceContains:**/*.ppo",
+    "workspaceContains:**/*.prx",
+    "workspaceContains:**/*.aph",
+    "workspaceContains:**/*.ppx",
+    "workspaceContains:**/*.ppp",
+    "workspaceContains:**/*.tlpp",
+    "workspaceContains:**/*.ch",
+    "workspaceContains:**/*.th",
+    "workspaceContains:**/*.4gl",
+    "workspaceContains:**/*.per",
+    "workspaceContains:**/*.ptm",
+    "workspaceContains:**/*.upd",
+    "workspaceContains:**/*.pak"
   ],
   "main": "./dist/js/app.js",
   "scripts": {
@@ -131,6 +145,17 @@
         "configuration": "./config/4gl-language-configuration.json"
       }
     ],
+    "configurationDefaults": {
+      "[4gl]": {
+        "files.encoding": "windows1252",
+        "files.insertFinalNewline": true,
+        "files.eol": "\r\n",
+        "editor.formatOnType": false,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": false,
+        "editor.formatOnSaveMode": "file"
+      }
+    },
     "grammars": [
       {
         "language": "4gl",
@@ -143,11 +168,11 @@
         "language": "4gl",
         "path": "./snippets/snippets.json"
       }
-    ]
-  },
-  "dependencies": {
-    "@vscode/webview-ui-toolkit": "^1.1.0",
-    "fs-extra": "^10.1.0",
-    "react": "^16.9.0"
+    ],
+    "dependencies": {
+      "@vscode/webview-ui-toolkit": "^1.1.0",
+      "fs-extra": "^10.1.0",
+      "react": "^16.9.0"
+    }
   }
 }

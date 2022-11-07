@@ -14,7 +14,7 @@ class RepositorioController {
         return this._readFile();
     }
     reloadImports() {
-        const repositorio = JSON.parse((0, fs_1.readFileSync)(this.file, "utf8"));
+        const repositorio = JSON.parse((0, fs_1.readFileSync)(this.file, 'utf8'));
         return repositorio;
     }
 }

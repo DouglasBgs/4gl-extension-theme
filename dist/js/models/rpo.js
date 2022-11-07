@@ -26,11 +26,11 @@ class RpoModel {
     static AdicionaRpo(dados, versao, pathToConfig) {
         return __awaiter(this, void 0, void 0, function* () {
             const config = new config_1.ConfigModel(pathToConfig);
-            let nome = yield utils_1.Utils.selecionaNomes('Nome do RPO ', 'Ex: 12.1.2209');
-            let pasta = yield this.selecionarArquivo(`Caminho onde se encontra o rpo ${versao} no servidor`);
-            let rpovalues = {
-                "folder": pasta,
-                "name": nome
+            const nome = yield utils_1.Utils.selecionaNomes('Nome do RPO ', 'Ex: 12.1.2209');
+            const pasta = yield this.selecionarArquivo(`Caminho onde se encontra o rpo ${versao} no servidor`);
+            const rpovalues = {
+                folder: pasta,
+                name: nome
             };
             if (this.validacaminhoRpo(pasta)) {
                 if (versao == '32') {
@@ -48,9 +48,9 @@ class RpoModel {
     static remove32(dados, pathToConfig) {
         return __awaiter(this, void 0, void 0, function* () {
             const config = new config_1.ConfigModel(pathToConfig);
-            let options = [];
+            const options = [];
             let selecionado;
-            let placeHolder = 'Selecione o RPO 32 bits para remover';
+            const placeHolder = 'Selecione o RPO 32 bits para remover';
             dados.rpo_rede.map((element) => {
                 options.push(element.name);
             });
@@ -63,9 +63,9 @@ class RpoModel {
     static remove64(dados, pathToConfig) {
         return __awaiter(this, void 0, void 0, function* () {
             const config = new config_1.ConfigModel(pathToConfig);
-            let options = [];
+            const options = [];
             let selecionado;
-            let placeHolder = 'Selecione o RPO 64 bits para remover';
+            const placeHolder = 'Selecione o RPO 64 bits para remover';
             dados.rpo_rede_64.map((element) => {
                 options.push(element.name);
             });
@@ -90,8 +90,8 @@ class RpoModel {
                 canSelectFiles: true,
                 openLabel: message,
                 filters: {
-                    rpo: ['rpo'],
-                },
+                    rpo: ['rpo']
+                }
             };
             yield vscode_1.window.showOpenDialog(options).then(fileUri => {
                 if (fileUri && fileUri[0]) {

@@ -11,10 +11,10 @@ class ConfigModel {
         this.loadValues();
     }
     _readFile() {
-        return (0, fs_1.readFileSync)(this.file, "utf-8");
+        return (0, fs_1.readFileSync)(this.file, 'utf-8');
     }
     _saveFile(data) {
-        return (0, fs_1.writeFileSync)(this.file, JSON.stringify(data), "utf-8");
+        return (0, fs_1.writeFileSync)(this.file, JSON.stringify(data), 'utf-8');
     }
     loadValues() {
         let file;
@@ -23,7 +23,7 @@ class ConfigModel {
             this.data = file;
         }
         else {
-            throw new Error("Não foi possível ler o arquivo");
+            throw new Error('Não foi possível ler o arquivo');
         }
     }
     save(data) {

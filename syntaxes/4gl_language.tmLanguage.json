@@ -1,9 +1,12 @@
 {
   "name": "4gl",
   "scopeName": "source.4gl",
-  "fileTypes": ["4gl", "per"],
-  "foldingStartMarker": "(\\{\\s*(//.*)?$|^\\s*// \\{\\{\\{)",
-  "foldingStopMarker": "^\\s*(\\}|// \\}\\}\\}$)",
+  "fileTypes": [
+    "4gl",
+    "per"
+  ],
+  "foldingStartMarker": "(\\{\\s*(\/\/.*)?$|^\\s*\/\/ \\{\\{\\{)",
+  "foldingStopMarker": "^\\s*(\\}|\/\/ \\}\\}\\}$)",
   "repository": {
     "4gl": {
       "patterns": [
@@ -31,7 +34,6 @@
       "name": "meta.definition.function.4gl",
       "begin": "(?:(?<=\\.\\.\\.)|(?<!\\.))?(function\\b)(?:\\s*(\\*))?(?:(?:\\s+|(?<=\\*))([_$[:alpha:]][_$[:alnum:]]*))?\\s*",
       "end": "(?=;|^\\s*$|(end function))",
-
       "patterns": [
         {
           "include": "#4gl"
@@ -71,8 +73,13 @@
     },
     {
       "comment": "Operadores",
-      "match": "(?i)(=|!=|\\+|-|/|<|>|,|\\*|\\(|\\)|\\.|\\[|\\]|(\\s(is|mod|not|null)(?=(\\s|$))))",
+      "match": "(?i)(=|!=|\\+|-|/|<|>|,|\\.|(\\s(is|mod|not|null)(?=(\\s|$))))",
       "name": "keyword.operator.4gl"
+    },
+    {
+      "comment": "Atribuição de funcões",
+      "match": "(?<=\\=).*(?=\\s*\\(.*?\\))",
+      "name": "function.atribuition.4gl"
     },
     {
       "comment": "Constantes",
@@ -96,7 +103,7 @@
     },
     {
       "comment": "Database",
-      "match": "\\b(?i)(database|like|select|where|into|from|and|or|set|insert|update|delete|between|whenever|error|stop|count|values|continue|sqlca|sqlcode|distinct)\\b",
+      "match": "\\b(?i)(database|like|select|where|into|from|and|or|set|insert|update|delete|between|whenever|error|stop|count|values|continue|sqlca|sqlcode|distinct|image)\\b",
       "name": "sintaxe.database.4gl"
     },
     {
@@ -145,6 +152,11 @@
       "name": "call.return.4gl"
     },
     {
+      "comment": "substrings",
+      "match": "((?<=\\.)([^\\s][a-zA-Z_{1}][a-zA-Z0-9_]+))",
+      "name": "variable.substrings"
+    },
+    {
       "comment": "display",
       "match": "\\b(?i)(display|end display|display array|display form|exit display|to|current window)\\b",
       "name": "window.display.4gl"
@@ -165,7 +177,7 @@
     },
     {
       "name": "function.name",
-      "match": "\\b(?i)((?<=function|call |if|if not|\\= )).([[:upper:]][_$[:digit:][:upper:]]*).+(?=\\()"
+      "match": "\\b(?i)((?<=function|call|if|and|or|not)).([a-zA-Z_{1}][a-zA-Z0-9_]+).(?=\\s*\\(.*?\\))"
     },
     {
       "comment": "Globals",
@@ -183,16 +195,8 @@
       "name": "keyword.other"
     },
     {
-      "name": "variable.name.4gl",
-      "match": "\\$[a-z][a-z.0-9A-Z]*|\\$\\([a-z.0-9,A-Z-]*\\)(\\([.0-9-]+\\))?"
-    },
-    {
       "name": "define.initialize.4gl",
       "match": "\\b(?i)(initialize)\\b"
-    },
-    {
-      "name": "define.substring.4gl",
-      "match": "((?<=\\.*)).+(?=\\[)"
     }
   ]
 }

@@ -10,7 +10,7 @@ import { Utils } from '../utils/utils'
 export class WebviewFile {
   public static webviewPanel: WebviewPanel
 
-  static async open (pathToConfig: string, context: any) {
+  static async open(pathToConfig: string, context: any) {
     if (this.webviewPanel) {
       this.webviewPanel.reveal()
     } else {
@@ -18,9 +18,9 @@ export class WebviewFile {
         'configDiretorios',
         'Configurar diretórios',
         ViewColumn.One, {
-          enableScripts: true,
-          enableForms: true
-        })
+        enableScripts: true,
+        enableForms: true
+      })
       this.webviewPanel.webview.html = await this.getWebviewContent(context.extensionPath)
       this.webviewPanel.webview.onDidReceiveMessage((message) => { this.verifyMessage(message, pathToConfig) })
     }
@@ -33,7 +33,7 @@ export class WebviewFile {
     )
   }
 
-  public static async getWebviewContent (extensionUri: Uri) {
+  public static async getWebviewContent(extensionUri: Uri) {
     const toolkitUri = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\node_modules\\@vscode\\webview-ui-toolkit\\dist\\toolkit.js`))
     const scripts = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.js`))
     const styles = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.css`))
@@ -57,7 +57,7 @@ export class WebviewFile {
       `
   }
 
-  public static verifyMessage (message: any, pathToConfig: string) {
+  public static verifyMessage(message: any, pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     switch (message.command) {
       case 'selectFolder':
@@ -86,21 +86,21 @@ export class WebviewFile {
     }
   }
 
-  public static Reload (config: IConfig) {
+  public static Reload(config: IConfig) {
     this.webviewPanel.webview.postMessage({
       command: 'SelectedPath',
       config
     })
   }
 
-  public static Onload (config: ConfigModel) {
+  public static Onload(config: ConfigModel) {
     this.webviewPanel.webview.postMessage({
       command: 'SelectedPath',
       config: config.data
     })
   }
 
-  public static selecionarPasta (elementId: string) {
+  public static selecionarPasta(elementId: string) {
     const options: OpenDialogOptions = {
       canSelectMany: false,
       canSelectFolders: true,
@@ -112,14 +112,14 @@ export class WebviewFile {
       if (fileUri && fileUri[0]) {
         this.webviewPanel.webview.postMessage({
           command: 'SelectedFolder',
-          folder: fileUri[0].fsPath,
+          folder: `${fileUri[0].fsPath}\\`,
           elementId
         })
       }
     })
   }
 
-  public static selecionarArquivo (message: SelectFile) {
+  public static selecionarArquivo(message: SelectFile) {
     const options: OpenDialogOptions = {
       canSelectMany: false,
       canSelectFiles: true,

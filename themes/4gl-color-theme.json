@@ -1,6 +1,9 @@
 {
   "name": "4gl",
   "type": "dark",
+  "colors": {
+    "editor.foreground": "#9cdcfe"
+  },
   "tokenColors": [
     {
       "name": "Comment",
@@ -10,11 +13,12 @@
         "foreground": "#546e7a"
       }
     },
+
     {
-      "name": "Variables",
+      "name": "variable.substrings",
       "scope": ["variable", "string constant.other.placeholder"],
       "settings": {
-        "foreground": "#fffdfd"
+        "foreground": "#dcdcaa"
       }
     },
     {
@@ -63,7 +67,8 @@
         "variable.function",
         "support.function",
         "keyword.other.special-method",
-        "function.name"
+        "function.name",
+        "function.atribuition"
       ],
       "settings": {
         "foreground": "#fce940"
@@ -94,7 +99,7 @@
       "name": "support.type.source.function",
       "scope": ["support.type.source.function"],
       "settings": {
-        "foreground": "#71d7f0",
+        "foreground": "#e4d65f",
         "fontStyle": "bold underline"
       }
     },
@@ -145,7 +150,7 @@
       "name": "constant numeric",
       "scope": "constant.numeric",
       "settings": {
-        "foreground": "#80c8e4"
+        "foreground": "#b5cea8"
       }
     },
     {

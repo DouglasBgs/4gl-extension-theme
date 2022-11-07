@@ -22,9 +22,9 @@ class WebviewFile {
                 this.webviewPanel.reveal();
             }
             else {
-                this.webviewPanel = vscode_1.window.createWebviewPanel("configDiretorios", "Configurar diretórios", vscode_1.ViewColumn.One, {
+                this.webviewPanel = vscode_1.window.createWebviewPanel('configDiretorios', 'Configurar diretórios', vscode_1.ViewColumn.One, {
                     enableScripts: true,
-                    enableForms: true,
+                    enableForms: true
                 });
                 this.webviewPanel.webview.html = yield this.getWebviewContent(context.extensionPath);
                 this.webviewPanel.webview.onDidReceiveMessage((message) => { this.verifyMessage(message, pathToConfig); });
@@ -59,7 +59,7 @@ class WebviewFile {
         });
     }
     static verifyMessage(message, pathToConfig) {
-        let config = new config_1.ConfigModel(pathToConfig);
+        const config = new config_1.ConfigModel(pathToConfig);
         switch (message.command) {
             case 'selectFolder':
                 this.selecionarPasta(message.elementName);
@@ -77,7 +77,7 @@ class WebviewFile {
                 rpo_1.RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig);
                 break;
             case 'save':
-                let dados = config.save(message.data);
+                const dados = config.save(message.data);
                 this.Reload(dados);
                 utils_1.Utils.MostraMensagemInfo(' Salvo com sucesso!');
                 if (message.close) {
@@ -88,28 +88,28 @@ class WebviewFile {
     }
     static Reload(config) {
         this.webviewPanel.webview.postMessage({
-            command: "SelectedPath",
-            config: config,
+            command: 'SelectedPath',
+            config
         });
     }
     static Onload(config) {
         this.webviewPanel.webview.postMessage({
-            command: "SelectedPath",
-            config: config.data,
+            command: 'SelectedPath',
+            config: config.data
         });
     }
     static selecionarPasta(elementId) {
         const options = {
             canSelectMany: false,
             canSelectFolders: true,
-            openLabel: 'Selecionar',
+            openLabel: 'Selecionar'
         };
         vscode_1.window.showOpenDialog(options).then(fileUri => {
             if (fileUri && fileUri[0]) {
                 this.webviewPanel.webview.postMessage({
-                    command: "SelectedFolder",
-                    folder: fileUri[0].fsPath,
-                    elementId: elementId
+                    command: 'SelectedFolder',
+                    folder: `${fileUri[0].fsPath}\\`,
+                    elementId
                 });
             }
         });
@@ -120,13 +120,13 @@ class WebviewFile {
             canSelectFiles: true,
             openLabel: 'Selecionar',
             filters: {
-                Arquivos: message.type,
-            },
+                Arquivos: message.type
+            }
         };
         vscode_1.window.showOpenDialog(options).then(fileUri => {
             if (fileUri && fileUri[0]) {
                 this.webviewPanel.webview.postMessage({
-                    command: "SelectedFile",
+                    command: 'SelectedFile',
                     file: fileUri[0].fsPath,
                     elementId: message.elementName
                 });

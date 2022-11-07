@@ -17,13 +17,13 @@ const config_js_1 = require("../models/config.js");
 class Issues {
     static create(pathToConfig) {
         return __awaiter(this, void 0, void 0, function* () {
-            let config = new config_js_1.ConfigModel(pathToConfig);
-            let nome_issue = yield utils_js_1.Utils.selecionaNomes("Insira o nome da issue ", "Nome issue (exemplo: TSS-1234)");
+            const config = new config_js_1.ConfigModel(pathToConfig);
+            const nome_issue = yield utils_js_1.Utils.selecionaNomes('Insira o nome da issue ', 'Nome issue (exemplo: TSS-1234)');
             if (!nome_issue || !(yield utils_js_1.Utils.validaDadosInformados(nome_issue))) {
                 utils_js_1.Utils.MostraMensagemErro(` ${nome_issue}, Não é um nome válido`);
             }
             else {
-                let selecionado = yield this.selectStatus(nome_issue);
+                const selecionado = yield this.selectStatus(nome_issue);
                 switch (selecionado) {
                     case etapa_enum_js_1.Etapa.Codificacao:
                         diretorios_js_1.Diretorios.criar(nome_issue, config.data.issue_codificacao, etapa_enum_js_1.Etapa.Codificacao);
@@ -44,9 +44,9 @@ class Issues {
     }
     static selectStatus(nome_issue) {
         return __awaiter(this, void 0, void 0, function* () {
-            let options = [etapa_enum_js_1.Etapa.Codificacao, etapa_enum_js_1.Etapa.TesteUnitario, etapa_enum_js_1.Etapa.TesteIntegrado];
-            let placeHolder = `selecione a etapa atual do desenvolvimento da issue ${nome_issue}`;
-            let selecionado = yield utils_js_1.Utils.selecionaDados(options, placeHolder);
+            const options = [etapa_enum_js_1.Etapa.Codificacao, etapa_enum_js_1.Etapa.TesteUnitario, etapa_enum_js_1.Etapa.TesteIntegrado];
+            const placeHolder = `selecione a etapa atual do desenvolvimento da issue ${nome_issue}`;
+            const selecionado = yield utils_js_1.Utils.selecionaDados(options, placeHolder);
             return selecionado;
         });
     }

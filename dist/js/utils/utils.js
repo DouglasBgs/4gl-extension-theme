@@ -13,29 +13,29 @@ exports.Utils = void 0;
 const vscode_1 = require("vscode");
 class Utils {
     static MostraMensagemErro(error) {
-        vscode_1.window.showErrorMessage("erro:" + error);
+        vscode_1.window.showErrorMessage('erro:' + error);
     }
     static MostraMensagemInfo(message, modal = false) {
-        vscode_1.window.showInformationMessage(message, { modal: modal });
+        vscode_1.window.showInformationMessage(message, { modal });
     }
     static MostraMensagemStatusBar(message, time = 10000) {
         vscode_1.window.setStatusBarMessage(message, time);
     }
     static selecionaDados(options, placeholder) {
         return __awaiter(this, void 0, void 0, function* () {
-            let dadoSelecionado = yield vscode_1.window.showQuickPick(options, {
+            const dadoSelecionado = yield vscode_1.window.showQuickPick(options, {
                 placeHolder: placeholder,
-                ignoreFocusOut: true,
+                ignoreFocusOut: true
             });
             return dadoSelecionado;
         });
     }
     static selecionaNomes(prompt, placeHolder, ignoreFocusOut = true) {
         return __awaiter(this, void 0, void 0, function* () {
-            let nome = yield vscode_1.window.showInputBox({
-                prompt: prompt,
-                placeHolder: placeHolder,
-                ignoreFocusOut: ignoreFocusOut,
+            const nome = yield vscode_1.window.showInputBox({
+                prompt,
+                placeHolder,
+                ignoreFocusOut,
                 title: prompt
             });
             return nome;

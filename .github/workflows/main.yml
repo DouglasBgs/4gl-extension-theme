@@ -11,6 +11,7 @@ on:
 name: Create Release
 env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   cicd:
     name: cicd
@@ -78,16 +79,13 @@ jobs:
           name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
           path: ${{github.workspace}}/4gltools-${{steps.gitversion.outputs.semVer}}.vsix
       - name: create a release
+        id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: v${{ steps.gitversion.outputs.semVer }}
           release_name: v${{ steps.gitversion.outputs.semVer }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./4gltools-${{steps.gitversion.outputs.semVer}}.vsix

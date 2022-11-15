@@ -15,9 +15,11 @@ jobs:
     name: cicd
     runs-on: windows-latest
     steps:
+      
       - name: checkout repo
         uses: actions/checkout@v2
-
+        env: 
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       - name: fetch all history and tags from all branches for gitversion
         run: git fetch --prune --unshallow
 

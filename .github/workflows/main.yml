@@ -43,7 +43,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: '14.x'
         
       - name: clean install dependencies
         run: npm ci
@@ -65,7 +65,9 @@ jobs:
           VERSION: "${{ steps.gitversion.outputs.semVer }}"
 
       - name: compile and create vsix
-        run: npm run build
+        run: |
+          npm install 
+          npm run build
         
       - name: print vsix path
         run: |

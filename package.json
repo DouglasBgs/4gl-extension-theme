@@ -45,6 +45,8 @@
     "esbuild": "^0.15.14",
     "fs-extra": "^10.1.0",
     "glob": "^7.1.7",
+    "vsce": "~1.74.0",
+    "vscode": "~1.1.36",
     "lite-server": "^2.6.1",
     "mocha": "^10.1.0",
     "prettier": "2.7.1",
@@ -157,16 +159,12 @@
         "language": "4gl",
         "path": "./snippets/snippets.json"
       }
-    ],
-    "dependencies": {
-      "@vscode/webview-ui-toolkit": "^1.1.0",
-      "react": "^16.9.0",
-      "@types/fs-extra": "^9.0.13"
-    }
+    ]
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.13",
     "@vscode/webview-ui-toolkit": "^1.1.0",
+    "vscode-extension-telemetry": "~0.1.2",
     "react": "^16.9.0"
   }
 }

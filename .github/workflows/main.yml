@@ -15,6 +15,12 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
+      - name: nodejs project information
+        id: projectinfo
+        uses: gregoranders/nodejs-project-info@v0.0.18
+      - name: create release action
+        id: createrelease
+        uses: gregoranders/nodejs-create-release@v0.0.18
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Create Release
@@ -22,6 +28,7 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          PACKAGE_JSON: ${{ steps.projectinfo.outputs.context }}
         with:
           tag_name: v${{ steps.projectinfo.outputs.version }}
           release_name: ${{ steps.projectinfo.outputs.name }} - ${{ steps.projectinfo.outputs.version }} Release

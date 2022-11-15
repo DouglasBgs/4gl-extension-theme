@@ -18,13 +18,13 @@ jobs:
       
       - name: checkout repo
         uses: actions/checkout@v2
-        env: 
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       - name: fetch all history and tags from all branches for gitversion
         run: git fetch --prune --unshallow
 
       - name: install gitversion tool
         uses: gittools/actions/gitversion/setup@v0.9
+        env: 
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
             versionSpec: '5.1.x'
       

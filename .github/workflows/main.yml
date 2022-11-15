@@ -14,7 +14,7 @@ env:
 jobs:
   cicd:
     name: cicd
-    runs-on: ubunto-latest
+    runs-on: ubuntu-latest
     steps:
      
       - name: checkout repo

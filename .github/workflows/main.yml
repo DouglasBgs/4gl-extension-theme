@@ -65,7 +65,9 @@ jobs:
           VERSION: "${{ steps.gitversion.outputs.semVer }}"
 
       - name: compile and create vsix
-        run: npm run package
+        run: | 
+          npm run esbuild-base
+          npm run build
 
       - name: print vsix path
         run: |

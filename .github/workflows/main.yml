@@ -78,3 +78,11 @@ jobs:
         with:
           name: Package installer Version {{steps.gitversion.outputs.semVer}} 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
           path: ${{github.workspace}}/4gltools-${{steps.gitversion.outputs.semVer}}.vsix
+      - name: create a release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: v${{ steps.gitversion.outputs.semVer }}
+          release_name: Release Version v${{ steps.gitversion.outputs.semVer }}
+    

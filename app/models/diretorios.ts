@@ -3,7 +3,7 @@ import { Utils } from '../utils/utils'
 import { ConfigModel } from './config'
 
 export class Diretorios {
-  public static criar (nome: string, path: string, type: string) {
+  public static criar(nome: string, path: string, type: string) {
     const novoNome = `${path}${nome}`
     if (this.verificaExistencia(novoNome)) {
       Utils.MostraMensagemInfo('Diretório já existe')
@@ -18,7 +18,7 @@ export class Diretorios {
     }
   }
 
-  public static async copiaPasta (copiar: string, destino: string) {
+  public static async copiaPasta(copiar: string, destino: string) {
     Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
     copy(copiar, destino, async (err) => {
       if (err) {
@@ -29,7 +29,7 @@ export class Diretorios {
     })
   }
 
-  public static copiaArquivo (copiar: string, destino: string) {
+  public static copiaArquivo(copiar: string, destino: string) {
     const fileSize = statSync(copiar).size
     const write = createWriteStream(destino)
     const read = createReadStream(copiar)
@@ -59,7 +59,7 @@ export class Diretorios {
     }
   }
 
-  private static verificaExistencia (nomeDiretorio: string) {
+  private static verificaExistencia(nomeDiretorio: string) {
     if (existsSync(nomeDiretorio)) {
       return true
     } else {
@@ -67,7 +67,7 @@ export class Diretorios {
     }
   }
 
-  public salvarArquivo (rpo: any, values: ConfigModel) {
+  public salvarArquivo(rpo: any, values: ConfigModel) {
     // writeFile('myjsonfile.json', json, 'utf8');
 
   }

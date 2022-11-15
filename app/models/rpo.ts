@@ -1,11 +1,11 @@
 import { OpenDialogOptions, Uri, window } from 'vscode'
 import { WebviewFile } from '../controllers/webview'
-import { IConfig, rpo } from '../interfaces/config'
+import { IConfig } from '../interfaces/config'
 import { Utils } from '../utils/utils'
 import { ConfigModel } from './config'
 
 export class RpoModel {
-  public static removeRpo (dados: IConfig, versao: string, pathToConfig: string) {
+  public static removeRpo(dados: IConfig, versao: string, pathToConfig: string) {
     if (versao == '32') {
       this.remove32(dados, pathToConfig)
     } else {
@@ -13,7 +13,7 @@ export class RpoModel {
     }
   }
 
-  public static async AdicionaRpo (dados: IConfig, versao: string, pathToConfig: string) {
+  public static async AdicionaRpo(dados: IConfig, versao: string, pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     const nome = await Utils.selecionaNomes('Nome do RPO ', 'Ex: 12.1.2209')
     const pasta = await this.selecionarArquivo(`Caminho onde se encontra o rpo ${versao} no servidor`)
@@ -32,7 +32,7 @@ export class RpoModel {
     };
   }
 
-  public static async remove32 (dados: IConfig, pathToConfig: string) {
+  public static async remove32(dados: IConfig, pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     const options: string[] = []
     let selecionado: string
@@ -49,7 +49,7 @@ export class RpoModel {
     WebviewFile.Reload(dados)
   }
 
-  public static async remove64 (dados: IConfig, pathToConfig: string) {
+  public static async remove64(dados: IConfig, pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     const options: string[] = []
     let selecionado: string
@@ -66,7 +66,7 @@ export class RpoModel {
     WebviewFile.Reload(dados)
   }
 
-  public static validacaminhoRpo (pasta: string) {
+  public static validacaminhoRpo(pasta: string) {
     if (!pasta.match('.rpo')) {
       Utils.MostraMensagemErro(' Caminho precisa conter o arquivo .RPO')
       return false
@@ -74,7 +74,7 @@ export class RpoModel {
     return true
   }
 
-  public static async selecionarArquivo (message: string): Promise<string> {
+  public static async selecionarArquivo(message: string): Promise<string> {
     let file: string
     const options: OpenDialogOptions = {
       canSelectMany: false,

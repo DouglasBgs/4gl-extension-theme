@@ -32,12 +32,16 @@ export class WebviewFile {
       context.subscriptions
     )
   }
+  public static getUri(webview: Webview, extensionUri: Uri, pathList: string[]) {
+    return webview.asWebviewUri(Uri.joinPath(extensionUri, ...pathList));
+  }
+
 
   public static async getWebviewContent(extensionUri: Uri) {
     const toolkitUri = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\node_modules\\@vscode\\webview-ui-toolkit\\dist\\toolkit.js`))
     const scripts = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.js`))
     const styles = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.css`))
-    const body = readFileSync(`${extensionUri}\\app\\views\\index.html`).toString()
+    const body = readFileSync(`${extensionUri}\\public\\views\\index.html`).toString()
 
     return /* html */ `
         <!DOCTYPE html>

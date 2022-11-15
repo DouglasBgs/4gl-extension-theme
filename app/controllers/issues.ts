@@ -4,7 +4,7 @@ import { Diretorios } from '../models/diretorios.js'
 import { ConfigModel } from '../models/config.js'
 
 export class Issues {
-  public static async create (pathToConfig: string) {
+  public static async create(pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     const nome_issue: string = await Utils.selecionaNomes(
       'Insira o nome da issue ',
@@ -32,7 +32,7 @@ export class Issues {
     }
   }
 
-  private static async selectStatus (nome_issue: string) {
+  private static async selectStatus(nome_issue: string) {
     const options = [Etapa.Codificacao, Etapa.TesteUnitario, Etapa.TesteIntegrado]
     const placeHolder = `selecione a etapa atual do desenvolvimento da issue ${nome_issue}`
     const selecionado = await Utils.selecionaDados(options, placeHolder)

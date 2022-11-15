@@ -1,5 +1,3 @@
-'use strict'
-
 import { commands } from 'vscode'
 import { join } from 'path'
 import { Servers } from './controllers/servers'
@@ -8,7 +6,7 @@ import { RpoController } from './controllers/rpo'
 import { WebviewFile } from './controllers/webview'
 import { Utils } from './utils/utils'
 
-function activate (context: any) {
+function activate(context: any) {
   const pathToDist = join(context.extensionPath)
   const pathToConfig = join(pathToDist, '.config.json')
 
@@ -35,7 +33,7 @@ function activate (context: any) {
   })
 }
 
-function deactivate () { }
+function deactivate() { }
 
 module.exports = {
   activate,

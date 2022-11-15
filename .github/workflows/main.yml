@@ -65,7 +65,6 @@ jobs:
 
       - name: compile and create vsix
         run: |
-          npm install -g vsce
           npm run esbuild
           npm run build
 

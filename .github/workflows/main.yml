@@ -97,8 +97,8 @@ jobs:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             upload_url: $
-            asset_path: vscode-github-actions-1.0.$.vsix
-            asset_name: vscode-github-actions-1.0.$.vsix
+            asset_path: ${{github.workspace}}
+            asset_name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
             asset_content_type: application/vsix
       
       

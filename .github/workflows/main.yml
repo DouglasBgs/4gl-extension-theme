@@ -14,7 +14,7 @@ env:
 jobs:
   cicd:
     name: cicd
-    runs-on: windows-latest
+    runs-on: ubunto-latest
     steps:
      
       - name: checkout repo
@@ -38,6 +38,7 @@ jobs:
           echo "Patch: ${{ steps.gitversion.outputs.patch }}"
           echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
           echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+          echo "Workspace: ${{github.workspace}}"
 
       - name: setup node
         uses: actions/setup-node@v1

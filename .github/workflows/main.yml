@@ -54,8 +54,6 @@ jobs:
           files: "${{github.workspace}}/package.json"
           patch-syntax: |
             = /version => "${{ steps.gitversion.outputs.semVer }}"
-            = /displayName => "4gl"
-            = /description => "4gl auxiling themes, syntaxes and tools"
             
       - name: add version in CHANGELOG.md
         uses: cschleiden/replace-tokens@v1.0

@@ -23,7 +23,7 @@
   ],
   "main": "./dist/js/app.js",
   "scripts": {
-    "build": "vsce package --pre-release",
+    "build": "vsce package",
     "compile": "tsc -p ./",
     "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -w -p ./",

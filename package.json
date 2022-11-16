@@ -5,12 +5,13 @@
   "version": "1.0.0",
   "private": true,
   "publisher": "DouglasBgs",
+  "icon": "media/icon.png",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/DouglasBgs/4gl-extension-theme"
   },
   "engines": {
-    "vscode": "^1.63.0"
+    "vscode": "^1.73.1"
   },
   "activationEvents": [
     "onCommand:extension.open.appserver",

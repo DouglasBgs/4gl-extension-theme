@@ -14,8 +14,6 @@ export class ConfigModel {
     this.loadValues()
   }
 
-
-
   private _readFile(): string {
     if (existsSync(this.file)) {
       return readFileSync(this.file, { encoding: 'utf-8' })

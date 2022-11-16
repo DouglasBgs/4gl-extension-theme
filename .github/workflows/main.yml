@@ -108,4 +108,5 @@ jobs:
           asset_name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_content_type: application/vsix
           
+          
 

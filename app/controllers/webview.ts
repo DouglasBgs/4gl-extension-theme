@@ -1,7 +1,7 @@
 
 import { readFileSync } from 'fs'
 
-import { WebviewPanel, window, ViewColumn, Uri, Webview, OpenDialogOptions } from 'vscode'
+import { WebviewPanel, window, ViewColumn, Uri, OpenDialogOptions } from 'vscode'
 import { IConfig, SelectFile } from '../interfaces/config'
 import { ConfigModel } from '../models/config'
 import { RpoModel } from '../models/rpo'
@@ -32,10 +32,6 @@ export class WebviewFile {
       context.subscriptions
     )
   }
-  public static getUri(webview: Webview, extensionUri: Uri, pathList: string[]) {
-    return webview.asWebviewUri(Uri.joinPath(extensionUri, ...pathList));
-  }
-
 
   public static async getWebviewContent(extensionUri: Uri) {
     const toolkitUri = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\node_modules\\@vscode\\webview-ui-toolkit\\dist\\toolkit.js`))

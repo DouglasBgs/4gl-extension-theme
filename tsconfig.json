@@ -13,8 +13,14 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": false,
-    "jsx": "react"
+    "jsx": "react",
+    "skipLibCheck": true
   },
   "include": ["app/**/*"],
-  "exclude": ["node_modules",".vscode-test"]
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts",
+  ]
 }

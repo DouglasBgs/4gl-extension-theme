@@ -2,4 +2,12 @@
 .vscode-test/**
 .gitignore
 app/**
+node_modules/**
 vsc-extension-quickstart.md
+.config.json
+.editorconfig
+.eslintrc.json
+.gitattributes
+.prettierrc.json
+.prettierignore
+.github

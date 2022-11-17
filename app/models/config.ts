@@ -1,5 +1,5 @@
 
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { IConfig } from '../interfaces/config'
 
 
@@ -14,12 +14,19 @@ export class ConfigModel {
     this.loadValues()
   }
 
-  private _readFile() {
-    return readFileSync(this.file, 'utf-8')
+  private _readFile(): string {
+    if (existsSync(this.file)) {
+      return readFileSync(this.file, { encoding: 'utf-8' })
+    }
+    else {
+      this.data = null
+      this._saveFile(this.data)
+      return readFileSync(this.file, { encoding: 'utf-8', flag: 'r+' })
+    }
   }
 
   private _saveFile(data: IConfig) {
-    return writeFileSync(this.file, JSON.stringify(data), 'utf-8')
+    return writeFileSync(this.file, JSON.stringify(data), { encoding: 'utf-8' })
   }
 
   public loadValues() {
@@ -27,8 +34,6 @@ export class ConfigModel {
     file = JSON.parse(this._readFile())
     if (file) {
       this.data = file
-    } else {
-      throw new Error('Não foi possível ler o arquivo')
     }
   }
 

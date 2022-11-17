@@ -54,9 +54,6 @@ jobs:
           files: "${{github.workspace}}/package.json"
           patch-syntax: |
             = /version => "${{ steps.gitversion.outputs.semVer }}"
-            = /displayName => "4gl"
-            = /description => "4gl auxiling themes, syntaxes and tools"
-
       - name: add version in CHANGELOG.md
         uses: cschleiden/replace-tokens@v1.0
         with:
@@ -71,9 +68,8 @@ jobs:
 
       - name: compile and create vsix
         run: |
-          npm install -g vsce
           npm run esbuild
-          npm run build
+          npm run vscode:prepublish
 
       - name: print vsix path
         run: |
@@ -82,8 +78,8 @@ jobs:
       - name: upload vsix as artifact
         uses: actions/upload-artifact@v1
         with:
-          name: Package installer Version {{steps.gitversion.outputs.semVer}} 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
-          path: ${{github.workspace}}/4gltools-${{steps.gitversion.outputs.semVer}}.vsix
+          name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          path: ${{github.workspace}}/mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
       - name: create a release
         id: create_release
         uses: actions/create-release@v1
@@ -94,8 +90,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./4gltools-${{steps.gitversion.outputs.semVer}}.vsix
-          asset_name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_path: ./mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_content_type: application/vsix
       - name: Upload Release Asset
         id: upload-release-asset

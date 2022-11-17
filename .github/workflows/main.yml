@@ -64,7 +64,7 @@ jobs:
 
       - name: compile and create vsix
         run: |
-          npm run esbuild
+          npm run vscode:prepublish
           npm run build
 
       - name: print vsix path

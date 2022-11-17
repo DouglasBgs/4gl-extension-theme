@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ${{github.workspace}}\4gltools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_path: .\4gltools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_content_type: application/vsix
           

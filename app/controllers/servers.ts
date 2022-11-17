@@ -30,13 +30,14 @@ export class Servers {
     let nameDbAccess: string
     if (build == Build.b64) {
       tss = config.data.tss
-      nameTss = 'TSS'
-      nameDbAccess = 'DBAcess TSS'
+      nameTss = 'TSS 64'
+      nameDbAccess = 'DBAcess TSS 64'
+
       dbAcessTss = config.data.dbacess_tss
     } else {
       tss = config.data.tss_64
-      nameTss = 'TSS 64'
-      nameDbAccess = 'DBAcess TSS 64'
+      nameTss = 'TSS'
+      nameDbAccess = 'DBAcess TSS'
       dbAcessTss = config.data.dbacess_tss_64
     }
     this.startCommand(tss, nameTss)

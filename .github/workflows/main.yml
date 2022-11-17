@@ -74,8 +74,8 @@ jobs:
       - name: upload vsix as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
-          path: ${{github.workspace}}\4gltools-${{steps.gitversion.outputs.semVer}}.vsix
+          name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          path: ${{github.workspace}}\mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
       - name: create a release
         id: create_release
         uses: actions/create-release@v1
@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: .\4gltools-${{steps.gitversion.outputs.semVer}}.vsix
-          asset_name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_path: .\mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_content_type: application/vsix
           

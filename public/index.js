@@ -97,7 +97,7 @@ function LoadFieldsValue(data) {
         appserver.value = data.appserver;
         appserver_64.value = data.appserver_64;
         tss.value = data.tss;
-        tss_64.value = data.tss;
+        tss_64.value = data.tss_64;
         dbacess_tss.value = data.dbacess_tss;
         dbacess_tss_64.value = data.dbacess_tss_64;
         rpo_local.value = data.rpo_local;

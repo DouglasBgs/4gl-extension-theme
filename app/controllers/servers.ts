@@ -1,42 +1,49 @@
-import { Uri, commands } from 'vscode'
-import { exec } from 'child_process'
+import { Uri, commands, window } from 'vscode'
 import { ConfigModel } from '../models/config'
 import { Utils } from '../utils/utils.js'
 import { Build } from '../enums/build.enum'
 
 export class Servers {
-  public static async openAppServer (pathToAppServer: string) {
+  public static async openAppServer(pathToAppServer: string) {
     const config = new ConfigModel(pathToAppServer)
     const build: string = await this.selectBuild()
     if (!build) { return }
     let appserver: string
-
+    let nameAppServer: string
     if (build == Build.b64) {
       appserver = config.data.appserver_64
+      nameAppServer = 'AppServer 64'
     } else {
       appserver = config.data.appserver
+      nameAppServer = 'AppServer'
     }
-    this.startCommand(appserver, 'AppServer')
+    this.startCommand(appserver, nameAppServer)
   }
 
-  public static async openTss (pathToTss: string) {
+  public static async openTss(pathToTss: string) {
     const config = new ConfigModel(pathToTss)
     const build: string = await this.selectBuild()
     if (!build) { return }
     let tss: string
     let dbAcessTss: string
+    let nameTss: string
+    let nameDbAccess: string
     if (build == Build.b64) {
       tss = config.data.tss
+      nameTss = 'TSS'
+      nameDbAccess = 'DBAcess TSS'
       dbAcessTss = config.data.dbacess_tss
     } else {
       tss = config.data.tss_64
+      nameTss = 'TSS 64'
+      nameDbAccess = 'DBAcess TSS 64'
       dbAcessTss = config.data.dbacess_tss_64
     }
-    this.startCommand(tss, 'TSS')
-    this.startCommand(dbAcessTss, 'DBAcess TSS')
+    this.startCommand(tss, nameTss)
+    this.startCommand(dbAcessTss, nameDbAccess)
   }
 
-  public static async selectBuild () {
+  public static async selectBuild() {
     const options = [Build.b32, Build.b64]
     const build: any = await Utils.selecionaDados(
       options,
@@ -46,17 +53,24 @@ export class Servers {
     return build
   }
 
-  private static async startCommand (command: string, name: string) {
-    exec(`start ${command}`, function (error: any) {
-      if (error) {
-        Utils.MostraMensagemErro(error)
-      } else {
-        Utils.MostraMensagemInfo(`${name} aberto com sucesso`)
-      }
-    })
+  private static async startCommand(command: string, name: string) {
+    let terminals = window.terminals
+    let terminal = terminals.findIndex((terminal) => terminal.name == name)
+    if (terminal < 0) {
+      window.createTerminal(name, 'C:\\Windows\\system32\\cmd.exe')
+      window.terminals.findIndex((terminal) => {
+        if (terminal.name == name) {
+          terminal.sendText(`${command} -console`)
+        }
+      })
+      Utils.MostraMensagemInfo(`${name} aberto com sucesso`)
+    } else {
+      terminals.findIndex((terminal) => terminal.show())
+      Utils.MostraMensagemInfo(`${name} Já está aberto no terminal`)
+    }
   }
 
-  public static async openLogFile (pathToLogFile: string) {
+  public static async openLogFile(pathToLogFile: string) {
     const repositorio = new ConfigModel(pathToLogFile)
     const build: string = await this.selectBuild()
     if (!build) { return }

@@ -3,7 +3,7 @@
   "workbench.sideBar.location": "right",
   "totvsLanguageServer.welcomePage": false,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "workbench.colorTheme": "4gl theme color",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "material-icon-theme",
   "abl.checkProgressBinary": false,
   "abl.warnConfigFile": false

@@ -93,16 +93,6 @@ jobs:
           asset_path: ./mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
           asset_content_type: application/vsix
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: $
-          asset_path: ${{github.workspace}}
-          asset_name: 4gltools-${{steps.gitversion.outputs.semVer}}.vsix
-          asset_content_type: application/vsix
           
           
 

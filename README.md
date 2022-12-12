@@ -19,4 +19,3 @@ A extensão MT Aux Tools disponibiliza uma série de funcionalidades para facili
  - Visualização de Logs
 
 ## Guia de Inicio rápido
-

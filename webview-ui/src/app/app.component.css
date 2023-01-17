@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  margin: 5rem 18rem;
+  padding: 1rem;
+
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+  margin: 3rem 6rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .container {
+  margin: 3rem 1rem;
+  }
+}
+
+.container>* {
+  margin: 0.25rem 0;
+}
+
+.title {
+  text-align: center;
+  color: #cccccc;
+}
+
+.title-left {
+  text-align: left;
+  color: #cccccc;
+}
+.field-group {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: row;
+  grid-column-gap: 2%;
+  color: #cccccc;
+}
+
+.field {
+  width: 100%;
+  padding: 0.3rem 0rem;
+}
+
+.button {
+margin-top: 0.3rem;
+margin-right: 2rem;
+}
+
+.buttonsSave {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem;
+
+}
+
+vscode-text-field:hover input,
+label:hover,
+vscode-dropdown:hover,
+input:hover {
+  background-color: #333333;
+  cursor: pointer;
+}
+
+section {
+  width: 100%;
+}
+

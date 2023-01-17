@@ -1,5 +1,5 @@
 import { OpenDialogOptions, Uri, window } from 'vscode'
-import { WebviewFile } from '../controllers/webview'
+import { WebviewFilePanel } from '../controllers/webview'
 import { IConfig } from '../interfaces/config'
 import { Utils } from '../utils/utils'
 import { ConfigModel } from './config'
@@ -28,7 +28,7 @@ export class RpoModel {
         dados.rpo_rede_64.push(rpovalues)
       }
       dados = config.save(dados)
-      WebviewFile.Reload(dados)
+      WebviewFilePanel.currentPanel.Reload(dados)
     };
   }
 
@@ -46,7 +46,7 @@ export class RpoModel {
     dados.rpo_rede.splice(dados.rpo_rede.indexOf(selecionado, 0))
 
     dados = config.save(dados)
-    WebviewFile.Reload(dados)
+    WebviewFilePanel.currentPanel.Reload(dados)
   }
 
   public static async remove64(dados: IConfig, pathToConfig: string) {
@@ -63,7 +63,7 @@ export class RpoModel {
     dados.rpo_rede_64.splice(dados.rpo_rede_64.indexOf(selecionado, 0))
 
     dados = config.save(dados)
-    WebviewFile.Reload(dados)
+    WebviewFilePanel.currentPanel.Reload(dados)
   }
 
   public static validacaminhoRpo(pasta: string) {

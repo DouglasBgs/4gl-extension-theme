@@ -1,7 +1,7 @@
 # MT Aux tools Estension for Vscode
 
 
-[![Node.js CI](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/node.js.yml) [![Create Release](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/main.yml) [![License](https://img.shields.io/badge/license-MIT-red)](https://opensource.org/licenses/MIT) [![Release](https://img.shields.io/github/v/release/DouglasBgs/MT-Aux-Tools)](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/main.yml) 
+[![Node.js CI](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/node.js.yml) [![Create Release](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/DouglasBgs/MT-Aux-Tools/actions/workflows/main.yml) [![License](https://img.shields.io/badge/license-MIT-red)](https://opensource.org/licenses/MIT) [![Release](https://img.shields.io/github/v/release/DouglasBgs/MT-Aux-Tools)](https://github.com/DouglasBgs/MT-Aux-Tools/releases) 
 
   
 ## Descrição

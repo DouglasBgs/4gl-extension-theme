@@ -4,6 +4,8 @@
   "totvsLanguageServer.welcomePage": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "workbench.colorTheme": "Default Dark+",
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.iconTheme": "material-icon-theme",
+  "abl.checkProgressBinary": false,
+  "abl.warnConfigFile": false
 
 }

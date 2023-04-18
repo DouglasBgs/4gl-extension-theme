@@ -86,24 +86,26 @@ window.addEventListener('message', event => {
 });
 
 function LoadFieldsValue(data) {
-    codificacao.value = data.issue_codificacao;
-    issue_tu.value = data.issue_tu;
-    issue_ti.value = data.issue_ti;
-    evidencia.value = data.evidencia;
-    arquivos_romana.value = data.arquivos_romana;
-    arquivo_log_appserver.value = data.arquivo_log_appserver;
-    arquivo_log_appserver_64.value = data.arquivo_log_appserver_64;
-    appserver.value = data.appserver;
-    appserver_64.value = data.appserver_64;
-    tss.value = data.tss;
-    tss_64.value = data.tss;
-    dbacess_tss.value = data.dbacess_tss;
-    dbacess_tss_64.value = data.dbacess_tss_64;
-    rpo_local.value = data.rpo_local;
-    rpo_local_64.value = data.rpo_local_64;
-    rpo_rede = data.rpo_rede
-    rpo_rede_64 = data.rpo_rede_64
-    loadDropDown(data.rpo_rede, data.rpo_rede_64);
+    if (data) {
+        codificacao.value = data.issue_codificacao;
+        issue_tu.value = data.issue_tu;
+        issue_ti.value = data.issue_ti;
+        evidencia.value = data.evidencia;
+        arquivos_romana.value = data.arquivos_romana;
+        arquivo_log_appserver.value = data.arquivo_log_appserver;
+        arquivo_log_appserver_64.value = data.arquivo_log_appserver_64;
+        appserver.value = data.appserver;
+        appserver_64.value = data.appserver_64;
+        tss.value = data.tss;
+        tss_64.value = data.tss_64;
+        dbacess_tss.value = data.dbacess_tss;
+        dbacess_tss_64.value = data.dbacess_tss_64;
+        rpo_local.value = data.rpo_local;
+        rpo_local_64.value = data.rpo_local_64;
+        rpo_rede = data.rpo_rede
+        rpo_rede_64 = data.rpo_rede_64
+        loadDropDown(data.rpo_rede, data.rpo_rede_64);
+    }
 }
 
 

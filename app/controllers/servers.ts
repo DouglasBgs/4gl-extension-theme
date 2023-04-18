@@ -1,5 +1,4 @@
 import { Uri, commands, window } from 'vscode'
-
 import { ConfigModel } from '../models/config'
 import { Utils } from '../utils/utils.js'
 import { Build } from '../enums/build.enum'
@@ -32,8 +31,8 @@ export class Servers {
       tss = config.data.tss_64
       dbAcessTss = config.data.dbacess_tss_64
     }
-    this.startCommand(tss, 'TSS')
-    this.startCommand(dbAcessTss, 'DBAcess TSS')
+    this.startCommand(tss, nameTss)
+    this.startCommand(dbAcessTss, nameDbAccess)
   }
 
   public static async openTomcatDatasul(pathToTomcat: string) {
@@ -59,10 +58,10 @@ export class Servers {
 
   private static async startCommand(command: string, name: string) {
     let terminals = window.terminals
-    let terminal = terminals.findIndex((terminal: any) => terminal.name == name)
+    let terminal = terminals.findIndex((terminal) => terminal.name == name)
     if (terminal < 0) {
       window.createTerminal(name, 'C:\\Windows\\system32\\cmd.exe')
-      window.terminals.findIndex((terminal: any) => {
+      window.terminals.findIndex((terminal) => {
         if (terminal.name == name) {
           terminal.sendText(`${command} -console`)
         }

@@ -3,3 +3,10 @@
 .gitignore
 app/**
 vsc-extension-quickstart.md
+.config.json
+.editorconfig
+.eslintrc.json
+.gitattributes
+.prettierrc.json
+.prettierignore
+.github

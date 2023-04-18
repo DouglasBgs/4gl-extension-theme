@@ -1,16 +1,17 @@
 {
-  "name": "4gltools",
-  "displayName": "4gl",
-  "description": "4gl auxiling themes, syntaxes and tools",
-  "version": "2.0.0",
+  "name": "mtauxtools",
+  "displayName": "MT Aux Tools",
+  "description": "4gl languages themes auxiling, syntaxes and tools",
+  "version": "1.0.0",
   "private": true,
-  "publisher": "DouglasVscode",
+  "publisher": "DouglasBgs",
+  "icon": "media/icon.png",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/DouglasBgs/4gl-extension-theme"
   },
   "engines": {
-    "vscode": "^1.63.0"
+    "vscode": "^1.73.1"
   },
   "activationEvents": [
     "onCommand:extension.open.appserver",
@@ -52,15 +53,16 @@
   "categories": [
     "Themes",
     "Language Packs",
-    "Snippets"
+    "Snippets",
+    "Other"
   ],
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "menuTotvs",
-          "title": "Menu Totvs",
-          "icon": "media/dep.svg"
+          "id": "MTAux",
+          "title": "MT Aux Tools",
+          "icon": "./media/dep.svg"
         }
       ]
     },
@@ -95,11 +97,11 @@
       }
     ],
     "views": {
-      "menuTotvs": [
+      "MTAux": [
         {
           "name": "Logix",
           "id": "logix",
-          "contextualTitle": "Menu Totvs"
+          "icon": "media/dep.svg"
         },
         {
           "name": "Datasul",
@@ -156,17 +158,11 @@
         "language": "4gl",
         "path": "./snippets/snippets.json"
       }
-    ],
-    "dependencies": {
-      "@vscode/webview-ui-toolkit": "^1.2.2",
-      "react": "^16.9.0",
-      "@types/fs-extra": "^11.0.1"
-    }
+    ]
   },
   "dependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@vscode/webview-ui-toolkit": "^1.2.2",
-    "react": "^18.2.0",
-    "@vscode/extension-telemetry": "^0.7.7"
+    "@types/fs-extra": "^9.0.13",
+    "@vscode/webview-ui-toolkit": "^1.1.0",
+    "react": "^16.9.0"
   }
 }

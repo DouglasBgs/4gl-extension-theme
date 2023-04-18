@@ -1,32 +1,85 @@
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 name: Create Release
-
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
-  build:
-    name: Create Release
-    runs-on: ubuntu-latest
+  cicd:
+    name: cicd
+    runs-on: windows-latest
     steps:
-      - name: Checkout code
+      - name: checkout repo
         uses: actions/checkout@v2
-      - name: Create Release
+
+      - name: fetch all history and tags from all branches for gitversion
+        run: git fetch --prune --unshallow
+
+      - name: install gitversion tool
+        uses: gittools/actions/gitversion/setup@v0.9
+        with:
+          versionSpec: "5.1.x"
+
+      - name: execute gitversion
+        id: gitversion # step id used as reference for output values
+        uses: gittools/actions/gitversion/execute@v0.9
+        
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - name: clean install dependencies
+        run: npm ci
+
+      - name: update metadata in package.json
+        uses: onlyutkarsh/patch-files-action@v1.0.1
+        with:
+          files: "${{github.workspace}}/package.json"
+          patch-syntax: |
+            = /version => "${{ steps.gitversion.outputs.semVer }}"
+            
+      - name: add version in CHANGELOG.md
+        uses: cschleiden/replace-tokens@v1.0
+        with:
+          files: "${{github.workspace}}/CHANGELOG.md"
+        env:
+          VERSION: "${{ steps.gitversion.outputs.semVer }}"
+
+      - name: compile and create vsix
+        run: |
+          npm run esbuild
+          npm run build
+
+      - name: print vsix path
+        run: |
+          echo "VSIX Path: ${{ env.vsix_path }}"
+
+      - name: upload vsix as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          path: ${{github.workspace}}\mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          
+      - name: create a release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - All changes described from the release in this readme
-          draft: false
-          prerelease: false
+          tag_name: v${{ steps.gitversion.outputs.semVer }}
+          release_name: v${{ steps.gitversion.outputs.semVer }}
+          
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: .\mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_name: mtauxtools-${{steps.gitversion.outputs.semVer}}.vsix
+          asset_content_type: application/vsix
+          

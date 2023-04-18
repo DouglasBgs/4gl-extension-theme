@@ -1,4 +1,4 @@
-import { mkdir, existsSync, createReadStream, createWriteStream, statSync, copy } from 'fs-extra'
+import { mkdir, existsSync, createReadStream, createWriteStream, statSync, copy, readdirSync } from 'fs-extra'
 import { Utils } from '../utils/utils'
 import { ConfigModel } from './config'
 
@@ -27,6 +27,26 @@ export class Diretorios {
         Utils.MostraMensagemInfo('arquivos copiados com sucesso')
       }
     })
+  }
+  public static async BuscaArquivosWar(folder: string) {
+    let war: string[];
+    let exists = await this.verificaExistencia(folder).then(value => {
+      return value
+    })
+
+    if (!exists) {
+      Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${folder}`)
+      return false;
+    } else {
+    let war  = readdirSync(folder)
+      if (!war) {
+        Utils.MostraMensagemInfo('Não foi encontrado nenhum arquivo .war no diretório informado')
+        return false;
+      } else{
+        return war;
+      }
+      
+    }
   }
 
   public static copiaArquivo(copiar: string, destino: string) {
@@ -59,8 +79,9 @@ export class Diretorios {
     }
   }
 
-  private static verificaExistencia(nomeDiretorio: string) {
-    if (existsSync(nomeDiretorio)) {
+  private static async verificaExistencia(nomeDiretorio: string) {
+    let exists = await existsSync(nomeDiretorio);
+    if (exists) {
       return true
     } else {
       return false

@@ -23,9 +23,8 @@
   ],
   "main": "./dist/js/app.js",
   "scripts": {
-    "build": "vsce package --pre-release",
+    "build": "npm run esbuild-base -- --minify && vsce package",
     "compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -w -p ./",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild ./app/app.ts --bundle --outfile=dist/js/app.js --external:vscode --format=cjs --platform=node",
@@ -34,21 +33,21 @@
     "test-compile": "tsc -p ./"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.2.2",
-    "@types/node": "14.x",
-    "@types/vscode": "^1.47.0",
-    "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "@vscode/test-electron": "^1.5.2",
-    "bootstrap": "^5.2.2",
-    "esbuild": "^0.15.14",
-    "fs-extra": "^10.1.0",
-    "glob": "^7.1.7",
+    "@types/fs-extra": "^11.0.1",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.77.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@vscode/test-electron": "^2.3.0",
+    "bootstrap": "^5.2.3",
+    "esbuild": "^0.17.17",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.2.1",
     "lite-server": "^2.6.1",
-    "mocha": "^10.1.0",
-    "prettier": "2.7.1",
-    "typescript": "^4.8.4"
+    "mocha": "^10.2.0",
+    "prettier": "2.8.7",
+    "typescript": "^5.0.4"
   },
   "categories": [
     "Themes",
@@ -92,7 +91,7 @@
       },
       {
         "view": "datasul",
-        "contents": "\n[$(markers-view-icon) Em desenvolvimento](command:extension.messagedev \"Não implementado\")"
+        "contents": "\n[$(file-directory-create) Criar Nova issue](command:extension.messagedev \"Não implementado\")"
       }
     ],
     "views": {
@@ -159,14 +158,15 @@
       }
     ],
     "dependencies": {
-      "@vscode/webview-ui-toolkit": "^1.1.0",
+      "@vscode/webview-ui-toolkit": "^1.2.2",
       "react": "^16.9.0",
-      "@types/fs-extra": "^9.0.13"
+      "@types/fs-extra": "^11.0.1"
     }
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@vscode/webview-ui-toolkit": "^1.1.0",
-    "react": "^16.9.0"
+    "@types/fs-extra": "^11.0.1",
+    "@vscode/webview-ui-toolkit": "^1.2.2",
+    "react": "^18.2.0",
+    "@vscode/extension-telemetry": "^0.7.7"
   }
 }

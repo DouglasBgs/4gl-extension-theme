@@ -1,5 +1,5 @@
-import { Uri, commands } from 'vscode'
-import { exec } from 'child_process'
+import { Uri, commands, window } from 'vscode'
+
 import { ConfigModel } from '../models/config'
 import { Utils } from '../utils/utils.js'
 import { Build } from '../enums/build.enum'
@@ -36,6 +36,17 @@ export class Servers {
     this.startCommand(dbAcessTss, 'DBAcess TSS')
   }
 
+  public static async openTomcatDatasul(pathToTomcat: string) {
+
+    
+    let tomcat: string =`
+     ${pathToTomcat}scripts\\inicia.lnk
+     exit`
+    let nameTomcat: string = 'TOMCAT'
+    this.startCommand(tomcat, nameTomcat)
+    
+  }
+
   public static async selectBuild () {
     const options = [Build.b32, Build.b64]
     const build: any = await Utils.selecionaDados(
@@ -46,14 +57,21 @@ export class Servers {
     return build
   }
 
-  private static async startCommand (command: string, name: string) {
-    exec(`start ${command}`, function (error: any) {
-      if (error) {
-        Utils.MostraMensagemErro(error)
-      } else {
-        Utils.MostraMensagemInfo(`${name} aberto com sucesso`)
-      }
-    })
+  private static async startCommand(command: string, name: string) {
+    let terminals = window.terminals
+    let terminal = terminals.findIndex((terminal: any) => terminal.name == name)
+    if (terminal < 0) {
+      window.createTerminal(name, 'C:\\Windows\\system32\\cmd.exe')
+      window.terminals.findIndex((terminal: any) => {
+        if (terminal.name == name) {
+          terminal.sendText(`${command} -console`)
+        }
+      })
+      Utils.MostraMensagemInfo(`${name} aberto com sucesso`)
+    } else {
+      terminals.findIndex((terminal) => terminal.show())
+      Utils.MostraMensagemInfo(`${name} Já está aberto no terminal`)
+    }
   }
 
   public static async openLogFile (pathToLogFile: string) {

@@ -43,25 +43,31 @@ export class Issues {
     )
     const options = [Repositorio.Datasul, Repositorio.Ems2, Repositorio.Ambos]
     const selecionado = await this.selectStatus(nome_issue, options)
+
+
     switch (selecionado) {
       case Repositorio.Datasul:
-        let arquivo = await Diretorios.BuscaArquivosWar(`${config.data.compilado_datasul}${nome_issue}`)
-        if (!arquivo) { break };
-       arquivo.forEach(async name => {
-         await Diretorios.copiaArquivo(`${config.data.compilado_datasul}${nome_issue}\\${name}`, `${config.data.tomcat_datasul}\\webapps\\${name}`)
-        });
-        Servers.openTomcatDatasul(config.data.tomcat_datasul)
-
+        this.openTomcat(config, nome_issue);
         break
       case Repositorio.Ems2:
-        Utils.MostraMensagemErro(` ${Repositorio.Ems2}`)
+        Utils.MostraMensagemErro(`${Repositorio.Ems2}`)
+        //implementar
         break
       case Repositorio.Ambos:
-        Utils.MostraMensagemErro(` ${Repositorio.Ambos}`)
+        this.openTomcat(config, nome_issue);
         break
       default:
         break
     }
+  }
+  private static async openTomcat(config: ConfigModel, nome_issue: string) {
+    let arquivo = await Diretorios.BuscaArquivosWar(`${config.data.compilado_datasul}${nome_issue}`)
+    if (!arquivo) { return };
+    arquivo.forEach(async name => {
+      await Diretorios.copiaArquivo(`${config.data.compilado_datasul}${nome_issue}\\${name}`, `${config.data.tomcat_datasul}\\webapps\\${name}`)
+    });
+    Servers.openTomcatDatasul(config.data.tomcat_datasul)
+
   }
 
   private static async selectStatus(nome_issue: string, options: any[]) {

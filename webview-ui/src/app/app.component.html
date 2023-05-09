@@ -1,4 +1,279 @@
-<main>
-  <h1>Hello world!</h1>
-  <vscode-button (click)="handleHowdyClick()">Howdy!</vscode-button>
+<main class="container-sm">
+  <h1 class="header text-white-50 text-center mt-5">
+    Página para controle dos diretórios
+  </h1>
+
+  <vscode-panels aria-label="Default">
+    <vscode-panel-tab id="tab-1">Configurações Gerais</vscode-panel-tab>
+    <vscode-panel-tab id="tab-2">Configurações TSS</vscode-panel-tab>
+    <vscode-panel-tab id="tab-3">Configurações Logix</vscode-panel-tab>
+    <vscode-panel-tab id="tab-4">Configurações Datasul</vscode-panel-tab>
+    <vscode-panel-view id="view-1">
+      <section class="container-md">
+        <h2>Configurações Issues Logix</h2>
+        <vscode-form-group>
+          <div class="row mb-3">
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="codificacao"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar issues de codificação Logix
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="issue_tu"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar issues de Teste Unitário
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="issue_ti"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar issues de Teste Integrado Logix
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="evidencia"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar pasta de evidencia de testes Logix
+            </vscode-text-field>
+          </div>
+        </vscode-form-group>
+        <vscode-divider></vscode-divider>
+        <h2>Configurações Issues Datasul</h2>
+        <vscode-form-group>
+          <div class="row mb-3">
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar issues de codificação Datasul
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar issues de Teste Unitário Datasul
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar issues de Teste Integrado Datasul
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Caminho para criar pasta de evidencia de testes Datasul
+            </vscode-text-field>
+          </div>
+        </vscode-form-group>
+      </section>
+    </vscode-panel-view>
+    <vscode-panel-view id="view-2">
+      <section class="container-md">
+        <h2>Configurações Tss e DB Access</h2>
+        <vscode-form-group class="field-group">
+          <div class="row mb-3">
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="tss"
+              readonly
+              (click)="selectFile('this', ['exe', 'bat'])"
+            >
+              Arquivo de execução do tss 32 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="tss_64"
+              readonly
+              (click)="selectFile('this', ['exe', 'bat'])"
+            >
+              Arquivo de execução do tss 64 bits
+            </vscode-text-field>
+
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="dbacess_tss"
+              readonly
+              (click)="selectFile('this', ['exe', 'bat'])"
+            >
+              Arquivo de execução do dbacess_tss 32 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="dbacess_tss_64"
+              readonly
+              (click)="selectFile('this', ['exe', 'bat'])"
+            >
+              Arquivo de execução do dbacess_tss 64 bits
+            </vscode-text-field>
+          </div>
+        </vscode-form-group>
+      </section>
+    </vscode-panel-view>
+    <vscode-panel-view id="view-3">
+      <section class="container-md">
+        <h2>Configurações Logix</h2>
+        <vscode-form-group class="field-group">
+          <div class="row mb-3">
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="arquivos_romana"
+              readonly
+              (click)="selectFolder('this')"
+            >
+              Servidor com fontes atualizados
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="arquivo_log_appserver"
+              readonly
+              (click)="selectFile('this', ['log', 'txt'])"
+            >
+              Arquivo de Log do servidor 32 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="arquivo_log_appserver_64"
+              readonly
+              (click)="selectFile('this', ['log', 'txt'])"
+            >
+              Arquivo de Log do servidor 64 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="appserver"
+              readonly
+              (click)="selectFile('this', ['exe', 'bat'])"
+            >
+              Arquivo execução Appserver 32 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="appserver_64"
+              readonly
+              (click)="selectFile('this', ['exe', 'bat'])"
+            >
+              Arquivo execução Appserver 64 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="rpo_local"
+              readonly
+              (click)="selectFile('this', ['rpo'])"
+            >
+              Arquivo rpo servidor 32 bits
+            </vscode-text-field>
+            <vscode-text-field
+              placeholder="clique no campo para alterar"
+              class="mb-2"
+              id="rpo_local_64"
+              readonly
+              (click)="selectFile('this', ['rpo'])"
+            >
+              Arquivo rpo servidor 64 bits
+            </vscode-text-field>
+            <div class="row mb-2">
+              <div class="row">
+                <label for="rpo32List">
+                  RPO's disponíveis servidor da rede 32 bits
+                </label>
+              </div>
+              <div class="row ps-4">
+                <vscode-dropdown class="col-5 me-1"> </vscode-dropdown>
+                <div class="col-2">
+                  <vscode-button (click)="adicionaRpo('32')">
+                    Adicionar
+                  </vscode-button>
+                </div>
+                <div class="col-2">
+                  <vscode-button
+                    (click)="removeRpo('32')"
+                    appearance="secondary"
+                  >
+                    Remover
+                  </vscode-button>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="row">
+                <label for="rpo64List">
+                  RPO's disponíveis servidor da rede 64 bits
+                </label>
+              </div>
+              <div class="row ps-4">
+                <vscode-dropdown class="col-5 me-1"> </vscode-dropdown>
+                <div class="col-2 ">
+                  <vscode-button class="button" (click)="adicionaRpo('64')">
+                    Adicionar
+                  </vscode-button>
+                </div>
+                <div class="col-2">
+                  <vscode-button
+                    (click)="removeRpo('64')"
+                    appearance="secondary"
+                  >
+                    Remover
+                  </vscode-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </vscode-form-group>
+      </section>
+    </vscode-panel-view>
+    <vscode-panel-view id="view-4">
+      <section class="container-md">
+          <h2>Configurações Datasul</h2>
+      </section>
+    </vscode-panel-view>
+  </vscode-panels>
+  <vscode-divider></vscode-divider>
+  <div>
+    <div class="row  justify-content-center">
+      <vscode-button class="col-3 mt-3 me-0 p-0" (click)="submit(false)">
+        Salvar
+      </vscode-button>
+      <vscode-button
+        class="col-3 mt-3 ms-5 me-0 p-0"
+        (click)="submit(true)"
+        appearance="secondary"
+      >
+        Salvar e fechar
+      </vscode-button>
+    </div>
+  </div>
 </main>

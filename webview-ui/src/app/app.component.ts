@@ -1,38 +1,64 @@
-import { Component } from "@angular/core";
-import { provideVSCodeDesignSystem, vsCodeButton } from "@vscode/webview-ui-toolkit";
+import { Component, OnInit } from "@angular/core";
+import {
+  provideVSCodeDesignSystem,
+  allComponents
+} from "@vscode/webview-ui-toolkit";
 import { vscode } from "./utilities/vscode";
+import { IConfig } from "./utilities/interfaces/config";
 
-// In order to use the Webview UI Toolkit web components they
-// must be registered with the browser (i.e. webview) using the
-// syntax below.
-provideVSCodeDesignSystem().register(vsCodeButton());
 
-// To register more toolkit components, simply import the component
-// registration function and call it from within the register
-// function, like so:
-//
-// provideVSCodeDesignSystem().register(
-//   vsCodeButton(),
-//   vsCodeCheckbox()
-// );
-// 
-// Finally, if you would like to register all of the toolkit
-// components at once, there's a handy convenience function:
-//
-// provideVSCodeDesignSystem().register(allComponents);
+provideVSCodeDesignSystem().register(allComponents);
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent {
-  title = "hello-world";
+export class AppComponent implements OnInit {
 
-  handleHowdyClick() {
+  // config: IConfig;
+
+  ngOnInit(): void {
     vscode.postMessage({
-      command: "hello",
-      text: "Hey there partner! 🤠",
-    });
+      command: 'onload',
+    })
+
+    let config = vscode.getState();
   }
+
+  async selectFolder(elementName: string) {
+    await vscode.postMessage({
+      command: 'selectFolder',
+      elementName: elementName
+    })
+  }
+  async selectFile(elementName: string, type: Array<string>) {
+    await vscode.postMessage({
+      command: 'selectFile',
+      elementName: elementName,
+      type: type
+    })
+  }
+
+  removeRpo(version: string) {
+    vscode.postMessage({
+      command: 'removeRpo',
+      rpoVersion: version
+    })
+  }
+  adicionaRpo(version: string) {
+    vscode.postMessage({
+      command: 'addRpo',
+      rpoVersion: version
+    })
+  }
+
+  submit(close: boolean) {
+    vscode.postMessage({
+      command: 'save',
+      close: close,
+      data: null
+    })
+  }
+
 }

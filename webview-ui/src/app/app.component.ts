@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import {
   provideVSCodeDesignSystem,
   allComponents
@@ -14,19 +14,19 @@ provideVSCodeDesignSystem().register(allComponents);
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent implements OnInit {
+export class AppComponent   {
 
-  // config: IConfig;
+   config: IConfig;
 
-  ngOnInit(): void {
-    vscode.postMessage({
-      command: 'onload',
-    })
+   constructor() {
 
-    let config = vscode.getState();
-  }
+    this.config = <IConfig> vscode.getState();
+   }
+
+
 
   async selectFolder(elementName: string) {
+    console.log(elementName);
     await vscode.postMessage({
       command: 'selectFolder',
       elementName: elementName
@@ -59,6 +59,25 @@ export class AppComponent implements OnInit {
       close: close,
       data: null
     })
+  }
+
+  @HostListener('window:message', ['$event'])
+  onMessage(event: any) {
+    const command = event.data.command
+    switch (command) {
+        // case 'SelectedFolder':
+        //     document.querySelector(`#${event.data.elementId}`).value = event.data.folder
+        //     break;
+        case 'SelectedPath':
+            console.log(event.data.config);
+            this.config = event.data.config;
+            break;
+        // case 'SelectedFile':
+        //     document.querySelector(`#${event.data.elementId}`).value = event.data.file
+        //     break;
+        default:
+            break;
+    }
   }
 
 }

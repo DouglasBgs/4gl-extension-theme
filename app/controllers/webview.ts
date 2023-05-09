@@ -11,17 +11,23 @@ export class ConfigWebviewPanel {
   public static currentPanel: ConfigWebviewPanel | undefined;
   private readonly _panel: WebviewPanel;
   private _disposables: Disposable[] = [];
+  private configModel: ConfigModel;
+  public configData: IConfig;
+  public static webviewPanel: WebviewPanel;
 
-  public static webviewPanel: WebviewPanel
-
-  private constructor(panel: WebviewPanel, extensionUri: Uri) { 
+  private constructor(panel: WebviewPanel, extensionUri: Uri,  pathToConfig: string) { 
+    this.configModel =  new ConfigModel(pathToConfig)
+    this.configData = this.configModel.data;
+    console.log("construtor"+this.configData);
     this._panel = panel;
-    this._panel.webview.html = this.getWebviewContent(this._panel.webview, extensionUri);
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
-    this._setWebviewMessageListener(this._panel.webview, extensionUri.fsPath );
+    this._panel.webview.html = this.getWebviewContent(this._panel.webview, extensionUri);
+    this._setWebviewMessageListener(this._panel.webview );
+    this.Onload(this._panel.webview);
   }
 
   public static render(pathToConfig: string, extensionUri: Uri) { 
+   
     if(ConfigWebviewPanel.currentPanel) {
       ConfigWebviewPanel.currentPanel._panel.reveal(ViewColumn.One);
     }else {
@@ -32,7 +38,8 @@ export class ConfigWebviewPanel {
         enableScripts: true,
         localResourceRoots: [Uri.joinPath(extensionUri, 'dist'), Uri.joinPath(extensionUri, "webview-ui/build")]
       });
-      ConfigWebviewPanel.currentPanel = new ConfigWebviewPanel(panel, extensionUri);
+      ConfigWebviewPanel.currentPanel = new ConfigWebviewPanel(panel, extensionUri, pathToConfig);
+     
     }
   }
 
@@ -90,8 +97,8 @@ export class ConfigWebviewPanel {
   `;
   }
 
-  private _setWebviewMessageListener(webview: Webview, pathToConfig: string) { 
-    const config = new ConfigModel(pathToConfig)
+  private _setWebviewMessageListener(webview: Webview) { 
+  
     webview.onDidReceiveMessage((message: any) => {
       const command = message.command;
       switch (command) {
@@ -101,25 +108,24 @@ export class ConfigWebviewPanel {
         case 'selectFile':
           this.selecionarArquivo(message)
           break
-        case 'onload':
-          this.Onload(config)
-          break
-        case 'addRpo':
-          RpoModel.AdicionaRpo(config.data, message.rpoVersion, pathToConfig)
-          break
-        case 'removeRpo':
-          RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig)
-          break
+
+        // case 'addRpo':
+        //   RpoModel.AdicionaRpo(config.data, message.rpoVersion, this.pathToConfig)
+        //   break
+        // case 'removeRpo':
+        //   RpoModel.removeRpo(config.data, message.rpoVersion, this.pathToConfig)
+        //   break
         case 'save':
-          const dados = config.save(message.data)
-          this.Reload(dados)
+          const dados = message.data
+          this.Reload(dados, webview)
           Utils.MostraMensagemInfo(' Salvo com sucesso!')
           if (message.close) {
             this._panel.dispose()
           }
           break
       }
-    })
+    }, undefined, this._disposables)
+    
 
   }
   
@@ -129,17 +135,17 @@ export class ConfigWebviewPanel {
     
   }
 
-  public  Reload(config: IConfig) {
-    this._panel.webview.postMessage({
+  public  Reload(config: IConfig, webview: Webview) {
+    webview.postMessage({
       command: 'SelectedPath',
       config
     })
   }
 
-  public  Onload(config: ConfigModel) {
-    this._panel.webview.postMessage({
+  public  Onload( webview: Webview ) {
+    webview.postMessage({
       command: 'SelectedPath',
-      config: config.data
+      config: this.configData
     })
   }
 

@@ -1,106 +1,149 @@
 
-import { readFileSync } from 'fs'
 
-import { WebviewPanel, window, ViewColumn, Uri, OpenDialogOptions } from 'vscode'
+
+import { WebviewPanel, window, ViewColumn, Uri, OpenDialogOptions, Disposable, Webview } from 'vscode'
 import { IConfig, SelectFile } from '../interfaces/config'
 import { ConfigModel } from '../models/config'
 import { RpoModel } from '../models/rpo'
 import { Utils } from '../utils/utils'
 
-export class WebviewFile {
+export class ConfigWebviewPanel {
+  public static currentPanel: ConfigWebviewPanel | undefined;
+  private readonly _panel: WebviewPanel;
+  private _disposables: Disposable[] = [];
+
   public static webviewPanel: WebviewPanel
 
-  static async open(pathToConfig: string, context: any) {
-    if (this.webviewPanel) {
-      this.webviewPanel.reveal()
-    } else {
-      this.webviewPanel = window.createWebviewPanel(
+  private constructor(panel: WebviewPanel, extensionUri: Uri) { 
+    this._panel = panel;
+    this._panel.webview.html = this.getWebviewContent(this._panel.webview, extensionUri);
+    this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+    this._setWebviewMessageListener(this._panel.webview, extensionUri.fsPath );
+  }
+
+  public static render(pathToConfig: string, extensionUri: Uri) { 
+    if(ConfigWebviewPanel.currentPanel) {
+      ConfigWebviewPanel.currentPanel._panel.reveal(ViewColumn.One);
+    }else {
+      const panel = window.createWebviewPanel(
         'configDiretorios',
         'Configurar diretórios',
         ViewColumn.One, {
         enableScripts: true,
-        enableForms: true
-      })
-      this.webviewPanel.webview.html = await this.getWebviewContent(context.extensionPath)
-      this.webviewPanel.webview.onDidReceiveMessage((message) => { this.verifyMessage(message, pathToConfig) })
+        localResourceRoots: [Uri.joinPath(extensionUri, 'dist'), Uri.joinPath(extensionUri, "webview-ui/build")]
+      });
+      ConfigWebviewPanel.currentPanel = new ConfigWebviewPanel(panel, extensionUri);
     }
-    this.webviewPanel.onDidDispose(
-      () => {
-        this.webviewPanel = undefined
-      },
-      null,
-      context.subscriptions
-    )
   }
 
-  public static async getWebviewContent(extensionUri: Uri) {
-    const toolkitUri = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\node_modules\\@vscode\\webview-ui-toolkit\\dist\\toolkit.js`))
-    const scripts = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.js`))
-    const styles = this.webviewPanel.webview.asWebviewUri(Uri.file(`${extensionUri}\\public\\index.css`))
-    const body = readFileSync(`${extensionUri}\\public\\views\\index.html`).toString()
-
-    return /* html */ `
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <link href="${styles}" rel="stylesheet">
-            <script type="module" src="${toolkitUri}"></script>
-            <title>Hello World!</title>
-          </head>
-          <body>
-            ${body}
-            <script src="${scripts}"></script>
-          </body>
-        </html>
-      `
+  public dispose() {  
+   ConfigWebviewPanel.currentPanel = undefined;
+    this._panel.dispose();
+    while(this._disposables.length) { 
+      const disposable = this._disposables.pop();
+      if(disposable) {
+        disposable.dispose();
+      }
+    }
   }
 
-  public static verifyMessage(message: any, pathToConfig: string) {
+  private getUri(webview: Webview, extensionUri: Uri, pathList: string[]) {
+    return webview.asWebviewUri(Uri.joinPath(extensionUri, ...pathList));
+  }
+
+  private getNonce() {
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 0; i < 32; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+  
+
+  public getWebviewContent(webview: Webview, extensionUri: Uri) {
+    const stylesUri = this.getUri(webview, extensionUri, ["webview-ui", "build", "styles.css"]);
+    
+    const runtimeUri = this.getUri(webview, extensionUri, ["webview-ui", "build", "runtime.js"]);
+    const polyfillsUri = this.getUri(webview, extensionUri, ["webview-ui", "build", "polyfills.js"]);
+    const scriptUri = this.getUri(webview, extensionUri, ["webview-ui", "build", "main.js"]);
+
+    const nonce = this.getNonce();
+
+    return /*html*/ `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+        <link rel="stylesheet" type="text/css" href="${stylesUri}">
+        <title>Hello World</title>
+      </head>
+      <body>
+        <app-root></app-root>
+        <script type="module" nonce="${nonce}" src="${runtimeUri}"></script>
+        <script type="module" nonce="${nonce}" src="${polyfillsUri}"></script>
+        <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
+      </body>
+    </html>
+  `;
+  }
+
+  private _setWebviewMessageListener(webview: Webview, pathToConfig: string) { 
     const config = new ConfigModel(pathToConfig)
-    switch (message.command) {
-      case 'selectFolder':
-        this.selecionarPasta(message.elementName)
-        break
-      case 'selectFile':
-        this.selecionarArquivo(message)
-        break
-      case 'onload':
-        this.Onload(config)
-        break
-      case 'addRpo':
-        RpoModel.AdicionaRpo(config.data, message.rpoVersion, pathToConfig)
-        break
-      case 'removeRpo':
-        RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig)
-        break
-      case 'save':
-        const dados = config.save(message.data)
-        this.Reload(dados)
-        Utils.MostraMensagemInfo(' Salvo com sucesso!')
-        if (message.close) {
-          this.webviewPanel.dispose()
-        }
-        break
-    }
+    webview.onDidReceiveMessage((message: any) => {
+      const command = message.command;
+      switch (command) {
+        case 'selectFolder':
+          this.selecionarPasta(message.elementName)
+          break
+        case 'selectFile':
+          this.selecionarArquivo(message)
+          break
+        case 'onload':
+          this.Onload(config)
+          break
+        case 'addRpo':
+          RpoModel.AdicionaRpo(config.data, message.rpoVersion, pathToConfig)
+          break
+        case 'removeRpo':
+          RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig)
+          break
+        case 'save':
+          const dados = config.save(message.data)
+          this.Reload(dados)
+          Utils.MostraMensagemInfo(' Salvo com sucesso!')
+          if (message.close) {
+            this._panel.dispose()
+          }
+          break
+      }
+    })
+
+  }
+  
+
+  public  verifyMessage(message: any, pathToConfig: string) {
+    const config = new ConfigModel(pathToConfig)
+    
   }
 
-  public static Reload(config: IConfig) {
-    this.webviewPanel.webview.postMessage({
+  public  Reload(config: IConfig) {
+    this._panel.webview.postMessage({
       command: 'SelectedPath',
       config
     })
   }
 
-  public static Onload(config: ConfigModel) {
-    this.webviewPanel.webview.postMessage({
+  public  Onload(config: ConfigModel) {
+    this._panel.webview.postMessage({
       command: 'SelectedPath',
       config: config.data
     })
   }
 
-  public static selecionarPasta(elementId: string) {
+  public  selecionarPasta(elementId: string) {
     const options: OpenDialogOptions = {
       canSelectMany: false,
       canSelectFolders: true,
@@ -108,9 +151,9 @@ export class WebviewFile {
 
     }
 
-    window.showOpenDialog(options).then(fileUri => {
+    window.showOpenDialog(options).then((fileUri: any)=> {
       if (fileUri && fileUri[0]) {
-        this.webviewPanel.webview.postMessage({
+        this._panel.webview.postMessage({
           command: 'SelectedFolder',
           folder: `${fileUri[0].fsPath}\\`,
           elementId
@@ -119,7 +162,7 @@ export class WebviewFile {
     })
   }
 
-  public static selecionarArquivo(message: SelectFile) {
+  public  selecionarArquivo(message: SelectFile) {
     const options: OpenDialogOptions = {
       canSelectMany: false,
       canSelectFiles: true,
@@ -130,9 +173,9 @@ export class WebviewFile {
 
     }
 
-    window.showOpenDialog(options).then(fileUri => {
+    window.showOpenDialog(options).then((fileUri: any) => {
       if (fileUri && fileUri[0]) {
-        this.webviewPanel.webview.postMessage({
+        this._panel.webview.postMessage({
           command: 'SelectedFile',
           file: fileUri[0].fsPath,
           elementId: message.elementName

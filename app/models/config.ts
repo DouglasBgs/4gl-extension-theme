@@ -19,9 +19,7 @@ export class ConfigModel {
       return readFileSync(this.file, { encoding: 'utf-8' })
     }
     else {
-      this.data = this.configData()
-      this._saveFile(this.data)
-      return readFileSync(this.file, { encoding: 'utf-8', flag: 'r+' })
+     return this._seedData()
     }
   }
 
@@ -34,6 +32,8 @@ export class ConfigModel {
     file = JSON.parse(this._readFile())
     if (file) {
       this.data = file
+    } else {
+      this._seedData();
     }
   }
 
@@ -41,6 +41,12 @@ export class ConfigModel {
     this._saveFile(data)
     this.reloadValues()
     return this.data
+  }
+
+  private _seedData() { 
+    this.data = this.configData()
+    this._saveFile(this.data)
+    return readFileSync(this.file, { encoding: 'utf-8', flag: 'r+' })
   }
 
   private configData(): IConfig {

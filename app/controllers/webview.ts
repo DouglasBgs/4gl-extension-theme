@@ -6,6 +6,7 @@ import { IConfig, SelectFile } from '../interfaces/config'
 import { ConfigModel } from '../models/config'
 import { RpoModel } from '../models/rpo'
 import { Utils } from '../utils/utils'
+import { comamnds } from '../enums/comands.enum'
 
 export class WebviewFile {
   public static webviewPanel: WebviewPanel
@@ -60,22 +61,22 @@ export class WebviewFile {
   public static verifyMessage(message: any, pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     switch (message.command) {
-      case 'selectFolder':
+      case comamnds.selectFolder:
         this.selecionarPasta(message.elementName)
         break
-      case 'selectFile':
+      case comamnds.selectFile:
         this.selecionarArquivo(message)
         break
-      case 'onload':
+      case comamnds.onload:
         this.Onload(config)
         break
-      case 'addRpo':
+      case comamnds.addRpo:
         RpoModel.AdicionaRpo(config.data, message.rpoVersion, pathToConfig)
         break
-      case 'removeRpo':
+      case comamnds.removeRpo:
         RpoModel.removeRpo(config.data, message.rpoVersion, pathToConfig)
         break
-      case 'save':
+      case comamnds.save:
         const dados = config.save(message.data)
         this.Reload(dados)
         Utils.MostraMensagemInfo(' Salvo com sucesso!')
@@ -88,14 +89,14 @@ export class WebviewFile {
 
   public static Reload(config: IConfig) {
     this.webviewPanel.webview.postMessage({
-      command: 'SelectedPath',
+      command: comamnds.SelectedPath,
       config
     })
   }
 
   public static Onload(config: ConfigModel) {
     this.webviewPanel.webview.postMessage({
-      command: 'SelectedPath',
+      command: comamnds.SelectedPath,
       config: config.data
     })
   }
@@ -111,7 +112,7 @@ export class WebviewFile {
     window.showOpenDialog(options).then(fileUri => {
       if (fileUri && fileUri[0]) {
         this.webviewPanel.webview.postMessage({
-          command: 'SelectedFolder',
+          command: comamnds.SelectedFolder,
           folder: `${fileUri[0].fsPath}\\`,
           elementId
         })
@@ -133,7 +134,7 @@ export class WebviewFile {
     window.showOpenDialog(options).then(fileUri => {
       if (fileUri && fileUri[0]) {
         this.webviewPanel.webview.postMessage({
-          command: 'SelectedFile',
+          command: comamnds.SelectedFile,
           file: fileUri[0].fsPath,
           elementId: message.elementName
         })

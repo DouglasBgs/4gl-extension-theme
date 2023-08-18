@@ -20,7 +20,7 @@ export class RpoController {
       rpoRede = config.data.rpo_rede
       rpoLocal = config.data.rpo_local
     }
-    rpoRede.map(option => {
+    rpoRede.forEach(option => {
       options.push(option.name)
     })
     const selecionado = await Utils.selecionaDados(options, 'Selecione a versão do Rpo que deseja fazer o download')

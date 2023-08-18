@@ -11,7 +11,7 @@
     "url": "https://github.com/DouglasBgs/4gl-extension-theme"
   },
   "engines": {
-    "vscode": "^1.73.1"
+    "vscode": "^1.77.0"
   },
   "activationEvents": [
     "onCommand:extension.open.appserver",
@@ -24,9 +24,8 @@
   ],
   "main": "./dist/js/app.js",
   "scripts": {
-    "build": "vsce package",
+    "build": "npm run esbuild-base -- --minify && vsce package",
     "compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -w -p ./",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild ./app/app.ts --bundle --outfile=dist/js/app.js --external:vscode --format=cjs --platform=node",
@@ -35,22 +34,14 @@
     "test-compile": "tsc -p ./"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@types/glob": "^8.0.0",
-    "@types/mocha": "^10.0.0",
-    "@types/node": "18.x",
-    "@types/vscode": "^1.73.1",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@vscode/test-electron": "^2.2.0",
-    "esbuild": "^0.15.14",
-    "fs-extra": "^10.1.0",
-    "glob": "^8.0.3",
-    "vsce": "~2.14.0",
-    "vscode": "~1.1.36",
-    "lite-server": "^2.6.1",
-    "mocha": "^10.1.0",
-    "prettier": "2.7.1",
-    "typescript": "^4.9.3"
+    "@types/fs-extra": "^11.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.80.0",
+    "esbuild": "^0.18.17",
+    "fs-extra": "^11.1.1",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
   },
   "categories": [
     "Themes",
@@ -95,7 +86,7 @@
       },
       {
         "view": "datasul",
-        "contents": "\n[$(markers-view-icon) Em desenvolvimento](command:extension.messagedev \"Não implementado\")"
+        "contents": "\n[$(file-directory-create) Criar Nova issue](command:extension.messagedev \"Não implementado\")"
       }
     ],
     "views": {
@@ -163,9 +154,7 @@
     ]
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@vscode/webview-ui-toolkit": "^1.1.0",
-    "vscode-extension-telemetry": "~0.1.2",
-    "react": "^18.2.0"
+    "@types/fs-extra": "^11.0.1",
+    "@vscode/webview-ui-toolkit": "^1.2.2"
   }
 }

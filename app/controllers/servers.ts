@@ -29,22 +29,30 @@ export class Servers {
     let nameTss: string
     let nameDbAccess: string
     if (build == Build.b64) {
-      tss = config.data.tss
+      tss = `${config.data.tss} -console`
       nameTss = 'TSS 64'
       nameDbAccess = 'DBAcess TSS 64'
-
-      dbAcessTss = config.data.dbacess_tss
+      dbAcessTss = `${config.data.dbacess_tss} -console`
     } else {
-      tss = config.data.tss_64
+      tss =  `${config.data.tss_64} -console`
       nameTss = 'TSS'
       nameDbAccess = 'DBAcess TSS'
-      dbAcessTss = config.data.dbacess_tss_64
+      dbAcessTss =`${config.data.dbacess_tss_64} -console`
     }
     this.startCommand(tss, nameTss)
     this.startCommand(dbAcessTss, nameDbAccess)
   }
 
-  public static async selectBuild() {
+  public static async openTomcatDatasul(pathToTomcat: string) {
+    let tomcat: string =`
+    cd ${pathToTomcat}
+    ${pathToTomcat}\\bin\\catalina.bat run Using CATALINA_BASE:"${pathToTomcat}" Using CATALINA_HOME:   "${pathToTomcat}" Using CATALINA_TMPDIR: "${pathToTomcat}temp"`
+    let nameTomcat: string = 'Tomcat Datasul'
+    this.startCommand(tomcat, nameTomcat)
+    
+  }
+
+  public static async selectBuild () {
     const options = [Build.b32, Build.b64]
     const build: any = await Utils.selecionaDados(
       options,
@@ -61,7 +69,7 @@ export class Servers {
       window.createTerminal(name, 'C:\\Windows\\system32\\cmd.exe')
       window.terminals.findIndex((terminal) => {
         if (terminal.name == name) {
-          terminal.sendText(`${command} -console`)
+          terminal.sendText(`${command} `)
         }
       })
       Utils.MostraMensagemInfo(`${name} aberto com sucesso`)
@@ -71,7 +79,7 @@ export class Servers {
     }
   }
 
-  public static async openLogFile(pathToLogFile: string) {
+  public static async openLogFile (pathToLogFile: string) {
     const repositorio = new ConfigModel(pathToLogFile)
     const build: string = await this.selectBuild()
     if (!build) { return }

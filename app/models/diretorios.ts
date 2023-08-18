@@ -1,11 +1,11 @@
-import { mkdir, existsSync, createReadStream, createWriteStream, statSync, copy } from 'fs-extra'
+import { mkdir, existsSync, createReadStream, createWriteStream, statSync, copy, readdirSync } from 'fs-extra'
 import { Utils } from '../utils/utils'
 import { ConfigModel } from './config'
 
 export class Diretorios {
-  public static criar(nome: string, path: string, type: string) {
+  public static async criar(nome: string, path: string, type: string) {
     const novoNome = `${path}${nome}`
-    if (this.verificaExistencia(novoNome)) {
+    if (await this.verificaExistencia(novoNome)) {
       Utils.MostraMensagemInfo('Diretório já existe')
     } else {
       mkdir(`${novoNome}`, { recursive: true }, (err) => {
@@ -28,13 +28,33 @@ export class Diretorios {
       }
     })
   }
+  public static async BuscaArquivosWar(folder: string) {
+    let war: string[];
+    let exists = await this.verificaExistencia(folder).then(value => {
+      return value
+    })
 
-  public static copiaArquivo(copiar: string, destino: string) {
+    if (!exists) {
+      Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${folder}`)
+      return false;
+    } else {
+    let war  = readdirSync(folder)
+      if (!war) {
+        Utils.MostraMensagemInfo('Não foi encontrado nenhum arquivo .war no diretório informado')
+        return false;
+      } else{
+        return war;
+      }
+      
+    }
+  }
+
+  public static async copiaArquivo(copiar: string, destino: string) {
     const fileSize = statSync(copiar).size
     const write = createWriteStream(destino)
     const read = createReadStream(copiar)
     let bytesCopiados = 0
-    if (this.verificaExistencia(copiar)) {
+    if (await this.verificaExistencia(copiar)) {
       new Promise(function (resolve, reject) {
         read.on('data', function (buffer) {
           bytesCopiados += buffer.length
@@ -59,8 +79,9 @@ export class Diretorios {
     }
   }
 
-  private static verificaExistencia(nomeDiretorio: string) {
-    if (existsSync(nomeDiretorio)) {
+  private static async verificaExistencia(nomeDiretorio: string) {
+    let exists = await existsSync(nomeDiretorio);
+    if (exists) {
       return true
     } else {
       return false

@@ -59,11 +59,12 @@ export class Issues {
     }
   }
   private static async openTomcat(config: ConfigModel, nome_issue: string) {
-    let arquivo = await Diretorios.BuscaArquivosWar(`${config.data.compilado_datasul}${nome_issue}`)
-    if (!arquivo) { return };
-    arquivo.forEach(async name => {
-      await Diretorios.copiaArquivo(`${config.data.compilado_datasul}${nome_issue}\\${name}`, `${config.data.tomcat_datasul}\\webapps\\${name}`)
-    });
+   let exists = await Diretorios.BuscaArquivosWar(`${config.data.compilado_datasul}${nome_issue}`)
+    if (!exists) {
+      Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${config.data.compilado_datasul}${nome_issue}`)
+      return ;
+    } 
+    await Diretorios.copiaPasta(`${config.data.compilado_datasul}${nome_issue}`, `${config.data.tomcat_datasul}\\webapps\\`)
     Servers.openTomcatDatasul(config.data.tomcat_datasul)
 
   }

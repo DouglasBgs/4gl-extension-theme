@@ -1,6 +1,6 @@
-import { mkdir, existsSync, createReadStream, createWriteStream, statSync, copy, readdirSync } from 'fs-extra'
+import { mkdir, createReadStream, createWriteStream, statSync } from 'fs-extra'
 import { Utils } from '../utils/utils'
-import { ConfigModel } from './config'
+import  { exec, execSync }from 'child_process';
 
 export class Diretorios {
   public static async criar(nome: string, path: string, type: string) {
@@ -20,7 +20,8 @@ export class Diretorios {
 
   public static async copiaPasta(copiar: string, destino: string) {
     Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
-    copy(copiar, destino, async (err) => {
+    
+    exec(`xcopy /E /I "${copiar}" "${destino}"`,  (err) => {
       if (err) {
         Utils.MostraMensagemErro(`erro ao copiar o diretório: Arquivo não encontrado no servidor - ${err}`)
       } else {
@@ -29,24 +30,10 @@ export class Diretorios {
     })
   }
   public static async BuscaArquivosWar(folder: string) {
-    let war: string[];
     let exists = await this.verificaExistencia(folder).then(value => {
       return value
     })
-
-    if (!exists) {
-      Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${folder}`)
-      return false;
-    } else {
-    let war  = readdirSync(folder)
-      if (!war) {
-        Utils.MostraMensagemInfo('Não foi encontrado nenhum arquivo .war no diretório informado')
-        return false;
-      } else{
-        return war;
-      }
-      
-    }
+    return exists;
   }
 
   public static async copiaArquivo(copiar: string, destino: string) {
@@ -80,16 +67,10 @@ export class Diretorios {
   }
 
   private static async verificaExistencia(nomeDiretorio: string) {
-    let exists = await existsSync(nomeDiretorio);
-    if (exists) {
-      return true
-    } else {
-      return false
-    }
+
+    let exists = await execSync(`IF exist ${nomeDiretorio} (echo true) ELSE (echo false)`).toLocaleString();
+    let result = JSON.parse(exists)
+    return result;
   }
 
-  public salvarArquivo(rpo: any, values: ConfigModel) {
-    // writeFile('myjsonfile.json', json, 'utf8');
-
-  }
 }

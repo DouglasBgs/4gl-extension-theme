@@ -1,0 +1,22 @@
+{
+  "issue_codificacao": "",
+  "issue_tu": "",
+  "issue_ti": "",
+  "evidencia": "",
+  "arquivos_romana": "",
+  "arquivo_log_appserver": "",
+  "appserver": "",
+  "tss": "",
+  "dbacess_tss": "",
+  "rpo_local": "",
+  "rpo_rede": [],
+  "arquivo_log_appserver_64": "",
+  "appserver_64": "",
+  "tss_64": "",
+  "dbacess_tss_64": "",
+  "rpo_local_64": "",
+  "rpo_rede_64": [],
+  "tomcat_datasul": "C:\\Datasul\\tomcat_datasul\\apache-tomcat-9.0.67-CL-8280\\",
+  "compilado_ems": "\\\\taipu\\GIT\\EMS2\\",
+  "compilado_datasul": "C:\\Users\\douglas.barbosa\\Desktop\\extensaov2\\arquivos teste\\"
+}

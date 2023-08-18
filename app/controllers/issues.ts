@@ -2,7 +2,6 @@ import { Etapa } from '../enums/etapa.enum.js'
 import { Utils } from '../utils/utils.js'
 import { Diretorios } from '../models/diretorios.js'
 import { ConfigModel } from '../models/config.js'
-import { utils } from 'mocha'
 import { Repositorio } from '../enums/repositorio.enum.js'
 import { Servers } from './servers.js'
 
@@ -43,7 +42,6 @@ export class Issues {
     )
     const options = [Repositorio.Datasul, Repositorio.Ems2, Repositorio.Ambos]
     const selecionado = await this.selectStatus(nome_issue, options)
-
 
     switch (selecionado) {
       case Repositorio.Datasul:

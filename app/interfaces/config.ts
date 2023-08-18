@@ -23,6 +23,9 @@ export interface IConfig {
   dbacess_tss_64: string
   rpo_local_64: string
   rpo_rede_64: any[]
+  tomcat_datasul: string
+  compilado_ems: string
+  compilado_datasul: string
 
 }
 

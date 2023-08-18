@@ -37,7 +37,7 @@ export class RpoModel {
     const options: string[] = []
     let selecionado: string
     const placeHolder: string = 'Selecione o RPO 32 bits para remover'
-    dados.rpo_rede.map((element) => {
+    dados.rpo_rede.forEach((element) => {
       options.push(element.name)
     })
 
@@ -54,7 +54,7 @@ export class RpoModel {
     const options: string[] = []
     let selecionado: string
     const placeHolder: string = 'Selecione o RPO 64 bits para remover'
-    dados.rpo_rede_64.map((element) => {
+    dados.rpo_rede_64.forEach((element) => {
       options.push(element.name)
     })
 

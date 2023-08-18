@@ -19,9 +19,7 @@ export class ConfigModel {
       return readFileSync(this.file, { encoding: 'utf-8' })
     }
     else {
-      this.data = null
-      this._saveFile(this.data)
-      return readFileSync(this.file, { encoding: 'utf-8', flag: 'r+' })
+     return this._seedData()
     }
   }
 
@@ -34,6 +32,8 @@ export class ConfigModel {
     file = JSON.parse(this._readFile())
     if (file) {
       this.data = file
+    } else {
+      this._seedData();
     }
   }
 
@@ -42,4 +42,35 @@ export class ConfigModel {
     this.reloadValues()
     return this.data
   }
+
+  private _seedData() { 
+    this.data = this.configData()
+    this._saveFile(this.data)
+    return readFileSync(this.file, { encoding: 'utf-8', flag: 'r+' })
+  }
+
+  private configData(): IConfig {
+    return {
+      issue_codificacao: '',
+      issue_tu: '',
+      issue_ti: '',
+      evidencia: '',
+      arquivos_romana: '',
+      arquivo_log_appserver: '',
+      appserver: '',
+      tss: '',
+      dbacess_tss: '',
+      rpo_local: '',
+      rpo_rede: [],
+      arquivo_log_appserver_64: '',
+      appserver_64: '',
+      tss_64: '',
+      dbacess_tss_64: '',
+      rpo_local_64: '',
+      rpo_rede_64: [],
+      tomcat_datasul: '',
+      compilado_ems: '',
+      compilado_datasul: '',
+    }
+  } 
 }

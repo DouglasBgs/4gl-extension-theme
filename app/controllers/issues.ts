@@ -2,18 +2,21 @@ import { Etapa } from '../enums/etapa.enum.js'
 import { Utils } from '../utils/utils.js'
 import { Diretorios } from '../models/diretorios.js'
 import { ConfigModel } from '../models/config.js'
+import { Repositorio } from '../enums/repositorio.enum.js'
+import { Servers } from './servers.js'
 
 export class Issues {
-  public static async create(pathToConfig: string) {
+  public static async createLogix(pathToConfig: string) {
     const config = new ConfigModel(pathToConfig)
     const nome_issue: string = await Utils.selecionaNomes(
-      'Insira o nome da issue ',
+      'Logix: Insira o nome da issue ',
       'Nome issue (exemplo: TSS-1234)'
     )
     if (!nome_issue || !await Utils.validaDadosInformados(nome_issue)) {
       Utils.MostraMensagemErro(` ${nome_issue}, Não é um nome válido`)
     } else {
-      const selecionado = await this.selectStatus(nome_issue)
+      const options = [Etapa.Codificacao, Etapa.TesteUnitario, Etapa.TesteIntegrado]
+      const selecionado = await this.selectStatus(nome_issue, options)
       switch (selecionado) {
         case Etapa.Codificacao:
           Diretorios.criar(nome_issue, config.data.issue_codificacao, Etapa.Codificacao)
@@ -31,9 +34,41 @@ export class Issues {
       }
     }
   }
+  public static async createDatasul(pathToConfig: string) {
+    const config = new ConfigModel(pathToConfig)
+    const nome_issue: string = await Utils.selecionaNomes(
+      'Datasul: Insira o nome da issue ',
+      'Nome issue (exemplo: TSS-1234)'
+    )
+    const options = [Repositorio.Datasul, Repositorio.Ems2, Repositorio.Ambos]
+    const selecionado = await this.selectStatus(nome_issue, options)
 
-  private static async selectStatus(nome_issue: string) {
-    const options = [Etapa.Codificacao, Etapa.TesteUnitario, Etapa.TesteIntegrado]
+    switch (selecionado) {
+      case Repositorio.Datasul:
+        this.openTomcat(config, nome_issue);
+        break
+      case Repositorio.Ems2:
+        Utils.MostraMensagemErro(`${Repositorio.Ems2}`)
+        //implementar
+        break
+      case Repositorio.Ambos:
+        this.openTomcat(config, nome_issue);
+        break
+      default:
+        break
+    }
+  }
+  private static async openTomcat(config: ConfigModel, nome_issue: string) {
+    let arquivo = await Diretorios.BuscaArquivosWar(`${config.data.compilado_datasul}${nome_issue}`)
+    if (!arquivo) { return };
+    arquivo.forEach(async name => {
+      await Diretorios.copiaArquivo(`${config.data.compilado_datasul}${nome_issue}\\${name}`, `${config.data.tomcat_datasul}\\webapps\\${name}`)
+    });
+    Servers.openTomcatDatasul(config.data.tomcat_datasul)
+
+  }
+
+  private static async selectStatus(nome_issue: string, options: any[]) {
     const placeHolder = `selecione a etapa atual do desenvolvimento da issue ${nome_issue}`
     const selecionado = await Utils.selecionaDados(options, placeHolder)
     return selecionado

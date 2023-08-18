@@ -17,7 +17,7 @@ function activate(context: any) {
     Servers.openTss(pathToConfig)
   })
   commands.registerCommand('extension.create.issue', function () {
-    Issues.create(pathToConfig)
+    Issues.createLogix(pathToConfig)
   })
   commands.registerCommand('extension.open.arquivo_log', function () {
     Servers.openLogFile(pathToConfig)
@@ -29,7 +29,7 @@ function activate(context: any) {
     WebviewFile.open(pathToConfig, context)
   })
   commands.registerCommand('extension.messagedev', function () {
-    Utils.MostraMensagemInfo('Infelizmente essa opção ainda não está disponível')
+    Issues.createDatasul(pathToConfig)
   })
 }
 

@@ -4,9 +4,9 @@ import { Servers } from './controllers/servers'
 import { Issues } from './controllers/issues'
 import { RpoController } from './controllers/rpo'
 import { WebviewFile } from './controllers/webview'
-import { Utils } from './utils/utils'
+import {ExtensionContext}  from 'vscode'
 
-function activate(context: any) {
+function activate(context: ExtensionContext) {
   const pathToDist = join(context.extensionPath)
   const pathToConfig = join(pathToDist, '.config.json')
 

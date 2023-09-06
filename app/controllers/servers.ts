@@ -2,6 +2,7 @@ import { Uri, commands, window } from 'vscode'
 import { ConfigModel } from '../models/config'
 import { Utils } from '../utils/utils.js'
 import { Build } from '../enums/build.enum'
+import { Terminals } from '../utils/terminals'
 
 export class Servers {
   public static async openAppServer(pathToAppServer: string) {
@@ -17,7 +18,7 @@ export class Servers {
       appserver = config.data.appserver
       nameAppServer = 'AppServer'
     }
-    this.startCommand(appserver, nameAppServer)
+    Terminals.executaComando(nameAppServer, appserver)
   }
 
   public static async openTss(pathToTss: string) {
@@ -39,8 +40,8 @@ export class Servers {
       nameDbAccess = 'DBAcess TSS'
       dbAcessTss =`${config.data.dbacess_tss_64} -console`
     }
-    this.startCommand(tss, nameTss)
-    this.startCommand(dbAcessTss, nameDbAccess)
+    Terminals.executaComando(nameTss, tss)
+    Terminals.executaComando(nameDbAccess, dbAcessTss)
   }
 
   public static async openTomcatDatasul(pathToTomcat: string) {
@@ -48,7 +49,7 @@ export class Servers {
     cd ${pathToTomcat}
     ${pathToTomcat}\\bin\\catalina.bat run Using CATALINA_BASE:"${pathToTomcat}" Using CATALINA_HOME:   "${pathToTomcat}" Using CATALINA_TMPDIR: "${pathToTomcat}temp"`
     let nameTomcat: string = 'Tomcat Datasul'
-    this.startCommand(tomcat, nameTomcat)
+    Terminals.executaComando(nameTomcat, tomcat, )
     
   }
 
@@ -60,23 +61,6 @@ export class Servers {
     )
 
     return build
-  }
-
-  private static async startCommand(command: string, name: string) {
-    let terminals = window.terminals
-    let terminal = terminals.findIndex((terminal) => terminal.name == name)
-    if (terminal < 0) {
-      window.createTerminal(name, 'C:\\Windows\\system32\\cmd.exe')
-      window.terminals.findIndex((terminal) => {
-        if (terminal.name == name) {
-          terminal.sendText(`${command} `)
-        }
-      })
-      Utils.MostraMensagemInfo(`${name} aberto com sucesso`)
-    } else {
-      terminals.findIndex((terminal) => terminal.show())
-      Utils.MostraMensagemInfo(`${name} Já está aberto no terminal`)
-    }
   }
 
   public static async openLogFile (pathToLogFile: string) {

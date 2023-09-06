@@ -1,6 +1,8 @@
-import { mkdir, createReadStream, createWriteStream, statSync } from 'fs-extra'
+import { mkdir} from 'fs-extra'
 import { Utils } from '../utils/utils'
-import  { exec, execSync }from 'child_process';
+import { execSync } from 'child_process';
+import { Terminals } from '../utils/terminals';
+import { parse } from 'path';
 
 export class Diretorios {
   public static async criar(nome: string, path: string, type: string) {
@@ -18,18 +20,13 @@ export class Diretorios {
     }
   }
 
-  public static async copiaPasta(copiar: string, destino: string) {
+  public static async copiaPasta(copiar: string, destino: string, fechar = false) {
     Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
-    
-    exec(`xcopy /E /I "${copiar}" "${destino}"`,  (err) => {
-      if (err) {
-        Utils.MostraMensagemErro(`erro ao copiar o diretório: Arquivo não encontrado no servidor - ${err}`)
-      } else {
-        Utils.MostraMensagemInfo('arquivos copiados com sucesso')
-      }
-    })
+    let commands = `robocopy "${copiar}" "${destino}" /E /COPYALL `
+    Terminals.executaComando('Copiando Pasta', commands, fechar)
+     
   }
-  public static async BuscaArquivosWar(folder: string) {
+  public static async BuscaArquivos(folder: string) {
     let exists = await this.verificaExistencia(folder).then(value => {
       return value
     })
@@ -37,40 +34,19 @@ export class Diretorios {
   }
 
   public static async copiaArquivo(copiar: string, destino: string) {
-    const fileSize = statSync(copiar).size
-    const write = createWriteStream(destino)
-    const read = createReadStream(copiar)
-    let bytesCopiados = 0
-    if (await this.verificaExistencia(copiar)) {
-      new Promise(function (resolve, reject) {
-        read.on('data', function (buffer) {
-          bytesCopiados += buffer.length
-          const porcentagem = ((bytesCopiados / fileSize) * 100).toFixed(2)
-          Utils.MostraMensagemStatusBar(`$(desktop-download) Copiando arquivos ${porcentagem}%`)
-        })
+    let copiarFile = parse(copiar).base
+    let destinoFile = parse(destino).base
+    let destinoDir = parse(destino).dir
+    
+    Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
+    let commands = [`robocopy "${parse(copiar).dir}" "${destinoDir}" /is ${copiarFile}`, `cd ${destinoDir}`, `rename ${copiarFile} ${destinoFile}`]
 
-        read.on('error', reject)
-
-        write.on('error', reject)
-
-        write.on('finish', resolve)
-
-        read.pipe(write)
-      }).then(() => {
-        Utils.MostraMensagemInfo('Arquivos copiados com sucesso', true)
-      }).catch((err) => {
-        Utils.MostraMensagemErro(err)
-        read.destroy()
-        write.end()
-      })
-    }
+    Terminals.executaComando('Copiando arquivos', commands, true)
   }
 
   private static async verificaExistencia(nomeDiretorio: string) {
-
-    let exists = await execSync(`IF exist ${nomeDiretorio} (echo true) ELSE (echo false)`).toLocaleString();
-    let result = JSON.parse(exists)
-    return result;
+    let exists = JSON.parse(await execSync(`IF exist ${nomeDiretorio} (echo true) ELSE (echo false)`).toLocaleString());
+    return exists;
   }
 
 }

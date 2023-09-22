@@ -5,6 +5,7 @@ import { Issues } from './controllers/issues'
 import { RpoController } from './controllers/rpo'
 import { WebviewFile } from './controllers/webview'
 import {ExtensionContext}  from 'vscode'
+import { buildManual } from './controllers/buildManual'
 
 function activate(context: ExtensionContext) {
   const pathToDist = join(context.extensionPath)
@@ -28,8 +29,12 @@ function activate(context: ExtensionContext) {
   commands.registerCommand('extension.open.Webview', function () {
     WebviewFile.open(pathToConfig, context)
   })
-  commands.registerCommand('extension.messagedev', function () {
+  commands.registerCommand('extension.issue.datasul', function () {
     Issues.createDatasul(pathToConfig)
+  })
+
+  commands.registerCommand('extension.buildManual', function () {
+    buildManual.novo(pathToConfig)
   })
 }
 

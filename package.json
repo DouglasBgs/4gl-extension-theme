@@ -20,7 +20,7 @@
     "onCommand:extension.create.issue",
     "onCommand:extension.download.rpo",
     "onCommand:extension.open.Webview",
-    "onCommand:extension.messagedev"
+    "onCommand:extension.issue.datasul"
   ],
   "main": "./dist/js/app.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "esbuild": "^0.19.2",
     "fs-extra": "^11.1.1",
     "mocha": "^10.2.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "categories": [
     "Themes",
@@ -86,7 +86,11 @@
       },
       {
         "view": "datasul",
-        "contents": "\n[$(file-directory-create) Criar Nova issue](command:extension.messagedev \"Não implementado\")"
+        "contents": "\n[$(file-directory-create) Criar Nova issue](command:extension.issue.datasul \"Não implementado\")"
+      },
+      {
+        "view": "datasul",
+        "contents": "\n[$(file-directory-create) Build Manual](command:extension.buildManual \"Não implementado\")"
       }
     ],
     "views": {

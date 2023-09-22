@@ -8,4 +8,5 @@ export enum comamnds {
   SelectedPath = 'SelectedPath',
   SelectedFolder = 'SelectedFolder',
   SelectedFile = 'SelectedFile',
+  VerifyURL = 'verifyURL',
 }

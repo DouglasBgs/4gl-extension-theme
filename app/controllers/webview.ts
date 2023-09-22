@@ -7,6 +7,7 @@ import { ConfigModel } from '../models/config'
 import { RpoModel } from '../models/rpo'
 import { Utils } from '../utils/utils'
 import { comamnds } from '../enums/comands.enum'
+import { buildManual } from './buildManual'
 
 export class WebviewFile {
   public static webviewPanel: WebviewPanel
@@ -64,6 +65,9 @@ export class WebviewFile {
       case comamnds.selectFolder:
         this.selecionarPasta(message.elementName)
         break
+      case comamnds.VerifyURL:
+          this.verificarUrl(message.url)
+          break
       case comamnds.selectFile:
         this.selecionarArquivo(message)
         break
@@ -108,7 +112,6 @@ export class WebviewFile {
       openLabel: 'Selecionar'
 
     }
-
     window.showOpenDialog(options).then(fileUri => {
       if (fileUri && fileUri[0]) {
         this.webviewPanel.webview.postMessage({
@@ -118,6 +121,11 @@ export class WebviewFile {
         })
       }
     })
+  }
+
+  
+  public static verificarUrl( url: string) {
+    buildManual.selectBuilds(url);
   }
 
   public static selecionarArquivo(message: SelectFile) {

@@ -2,31 +2,51 @@
   <div class="title">
     <h1>Página para controle dos diretórios</h1>
   </div>
-  <vscode-panels aria-label="Default">
+  <vscode-panels aria-label="Default" activeid="tab-4">
     <vscode-panel-tab id="tab-1">Configurações Gerais</vscode-panel-tab>
     <vscode-panel-tab id="tab-2">Configurações TSS</vscode-panel-tab>
     <vscode-panel-tab id="tab-3">Configurações Logix</vscode-panel-tab>
-    <vscode-panel-tab id="tab-4">Configurações Datasul</vscode-panel-tab>
+    <vscode-panel-tab id="tab-4" a>Configurações Datasul</vscode-panel-tab>
     <vscode-panel-view id="view-1">
       <section class="geral">
         <div class="title-left">
           <h2>Configurações Issues Logix</h2>
         </div>
         <vscode-form-group class="field-group">
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="codificacao" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="codificacao"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar issues de codificação Logix
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_tu" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="issue_tu"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar issues de Teste Unitário
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="issue_ti" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="issue_ti"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar issues de Teste Integrado Logix
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="evidencia" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="evidencia"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar pasta de evidencia de testes Logix
           </vscode-text-field>
         </vscode-form-group>
@@ -35,20 +55,36 @@
           <h2>Configurações Issues Datasul</h2>
         </div>
         <vscode-form-group class="field-group">
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar issues de codificação Datasul
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar issues de Teste Unitário Datasul
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar issues de Teste Integrado Datasul
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Caminho para criar pasta de evidencia de testes Datasul
           </vscode-text-field>
         </vscode-form-group>
@@ -60,20 +96,40 @@
           <h2>Configurações Tss e DB Access</h2>
         </div>
         <vscode-form-group class="field-group">
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss" readonly
-            onclick="selectFile(this.id, ['exe', 'bat'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="tss"
+            readonly
+            onclick="selectFile(this.id, ['exe', 'bat'])"
+          >
             Arquivo de execução do tss 32 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="tss_64" readonly
-            onclick="selectFile(this.id, ['exe', 'bat'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="tss_64"
+            readonly
+            onclick="selectFile(this.id, ['exe', 'bat'])"
+          >
             Arquivo de execução do tss 64 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss" readonly
-            onclick="selectFile(this.id, ['exe', 'bat'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="dbacess_tss"
+            readonly
+            onclick="selectFile(this.id, ['exe', 'bat'])"
+          >
             Arquivo de execução do dbacess_tss 32 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="dbacess_tss_64" readonly
-            onclick="selectFile(this.id, ['exe', 'bat'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="dbacess_tss_64"
+            readonly
+            onclick="selectFile(this.id, ['exe', 'bat'])"
+          >
             Arquivo de execução do dbacess_tss 64 bits
           </vscode-text-field>
         </vscode-form-group>
@@ -85,32 +141,67 @@
           <h2>Configurações Logix</h2>
         </div>
         <vscode-form-group class="field-group">
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivos_romana" readonly
-            onclick="selectFolder(this.id)">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="arquivos_romana"
+            readonly
+            onclick="selectFolder(this.id)"
+          >
             Servidor com fontes atualizados
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver"
-            readonly onclick="selectFile(this.id, ['log','txt'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="arquivo_log_appserver"
+            readonly
+            onclick="selectFile(this.id, ['log','txt'])"
+          >
             Arquivo de Log do servidor 32 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="arquivo_log_appserver_64"
-            readonly onclick="selectFile(this.id, ['log','txt'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="arquivo_log_appserver_64"
+            readonly
+            onclick="selectFile(this.id, ['log','txt'])"
+          >
             Arquivo de Log do servidor 64 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver" readonly
-            onclick="selectFile(this.id, ['exe', 'bat'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="appserver"
+            readonly
+            onclick="selectFile(this.id, ['exe', 'bat'])"
+          >
             Arquivo execução Appserver 32 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="appserver_64" readonly
-            onclick="selectFile(this.id, ['exe', 'bat'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="appserver_64"
+            readonly
+            onclick="selectFile(this.id, ['exe', 'bat'])"
+          >
             Arquivo execução Appserver 64 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local" readonly
-            onclick="selectFile(this.id, ['rpo'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="rpo_local"
+            readonly
+            onclick="selectFile(this.id, ['rpo'])"
+          >
             Arquivo rpo servidor 32 bits
           </vscode-text-field>
-          <vscode-text-field class="field" placeholder="clique no campo para alterar" id="rpo_local_64" readonly
-            onclick="selectFile(this.id, ['rpo'])">
+          <vscode-text-field
+            class="field"
+            placeholder="clique no campo para alterar"
+            id="rpo_local_64"
+            readonly
+            onclick="selectFile(this.id, ['rpo'])"
+          >
             Arquivo rpo servidor 64 bits
           </vscode-text-field>
           <div class="field">
@@ -146,6 +237,48 @@
       <section class="datasul">
         <div class="title-left">
           <h2>Configurações Datasul</h2>
+          <vscode-form-group class="field-group">
+            <vscode-text-field
+              class="field"
+              placeholder="clique no campo para alterar"
+              id="tomcat_datasul"
+              readonly
+              onclick="selectFolder(this.id)"
+            >
+              Tomcat Datasul Local
+            </vscode-text-field>
+            <vscode-text-field
+              class="field"
+              placeholder="clique no campo para alterar"
+              id="compilado_ems"
+              readonly
+              onclick="selectFolder(this.id)"
+            >
+              Servidor com arquivos compilaods EMS2
+            </vscode-text-field>
+            <vscode-text-field
+              class="field"
+              placeholder="clique no campo para alterar"
+              id="compilado_datasul"
+              readonly
+              onclick="selectFolder(this.id)"
+            >
+              Servidor com arquivos .war Datasul
+            </vscode-text-field>
+            <div class="section flex">
+              <vscode-text-field
+                class="fieldUrl"
+                placeholder="clique no campo para alterar"
+                id="jenkins_url"
+                type="url"
+              >
+                Servidor Jenkins para compilação manual
+              </vscode-text-field>
+              <vscode-button class="buttondUrl" onclick="verifyURL()">
+                Verificar Url
+              </vscode-button>
+            </div>
+          </vscode-form-group>
         </div>
       </section>
     </vscode-panel-view>
@@ -156,12 +289,13 @@
       <vscode-button class="button" onclick="submit(false)">
         Salvar
       </vscode-button>
-      <vscode-button class="button" onclick="submit(true)" appearance="secondary">
+      <vscode-button
+        class="button"
+        onclick="submit(true)"
+        appearance="secondary"
+      >
         Salvar e fechar
       </vscode-button>
     </div>
   </div>
-
-
-
 </container>

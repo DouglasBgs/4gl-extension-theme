@@ -1,3 +1,5 @@
+import { URL } from "url"
+
 export interface rpo {
 
   folder: string
@@ -25,7 +27,8 @@ export interface IConfig {
   rpo_rede_64: any[]
   tomcat_datasul: string
   compilado_ems: string
-  compilado_datasul: string
+  compilado_datasul: string,
+  jenkins_url: URL,
 
 }
 

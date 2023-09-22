@@ -13,10 +13,12 @@ export class Utils {
     window.setStatusBarMessage(message, time)
   }
 
-  public static async selecionaDados (options: any, placeholder: string) {
+  public static async selecionaDados (options: any, placeholder: string, multi: boolean = false) {
     const dadoSelecionado = await window.showQuickPick(options, {
       placeHolder: placeholder,
-      ignoreFocusOut: true
+      title: placeholder,
+      ignoreFocusOut: true,
+      canPickMany: multi
     })
     return dadoSelecionado
   }

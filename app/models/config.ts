@@ -71,6 +71,7 @@ export class ConfigModel {
       tomcat_datasul: '',
       compilado_ems: '',
       compilado_datasul: '',
+      jenkins_url: new URL('')
     }
   } 
 }

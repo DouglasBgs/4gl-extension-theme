@@ -62,7 +62,7 @@ export class Issues {
     }
   }
   private static async openTomcat(config: ConfigModel, nome_issue: string) {
-   let exists = await Diretorios.BuscaArquivos(`${config.data.compilado_datasul}${nome_issue}`)
+   const exists = await Diretorios.BuscaArquivos(`${config.data.compilado_datasul}${nome_issue}`)
     if (!exists) {
       Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${config.data.compilado_datasul}${nome_issue}`)
       return ;
@@ -82,14 +82,14 @@ export class Issues {
 
 
   private static async selectServerDatasul(config: ConfigModel, nome_issue: string) { 
-    let pathToEms = `${config.data.compilado_ems}${nome_issue}`;
-    let exists = await Diretorios.BuscaArquivos(pathToEms)
+    const pathToEms = `${config.data.compilado_ems}${nome_issue}`;
+    const exists = await Diretorios.BuscaArquivos(pathToEms)
     if (!exists) {
       Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${pathToEms}`)
       return ;
     }
     const placeHolder = `selecione o servidor para deploy da issue ${nome_issue}`
-    let banco = parse(pathToEms).base
+    const banco = parse(pathToEms).base
    
     
   }

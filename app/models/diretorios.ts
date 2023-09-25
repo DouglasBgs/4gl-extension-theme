@@ -22,30 +22,30 @@ export class Diretorios {
 
   public static async copiaPasta(copiar: string, destino: string, fechar = false) {
     Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
-    let commands = `robocopy "${copiar}" "${destino}" /E /COPYALL `
+      const commands = `robocopy "${copiar}" "${destino}" /E /COPYALL `
     Terminals.executaComando('Copiando Pasta', commands, fechar)
      
   }
   public static async BuscaArquivos(folder: string) {
-    let exists = await this.verificaExistencia(folder).then(value => {
+      const exists = await this.verificaExistencia(folder).then(value => {
       return value
     })
     return exists;
   }
 
   public static async copiaArquivo(copiar: string, destino: string) {
-    let copiarFile = parse(copiar).base
-    let destinoFile = parse(destino).base
-    let destinoDir = parse(destino).dir
+      const copiarFile = parse(copiar).base
+      const destinoFile = parse(destino).base
+      const destinoDir = parse(destino).dir
     
     Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
-    let commands = [`robocopy "${parse(copiar).dir}" "${destinoDir}" /is ${copiarFile}`, `cd ${destinoDir}`, `rename ${copiarFile} ${destinoFile}`]
+      const commands = [`robocopy "${parse(copiar).dir}" "${destinoDir}" /is ${copiarFile}`, `cd ${destinoDir}`, `rename ${copiarFile} ${destinoFile}`]
 
     Terminals.executaComando('Copiando arquivos', commands, true)
   }
 
   private static async verificaExistencia(nomeDiretorio: string) {
-    let exists = JSON.parse(await execSync(`IF exist ${nomeDiretorio} (echo true) ELSE (echo false)`).toLocaleString());
+      const exists = JSON.parse(await execSync(`IF exist ${nomeDiretorio} (echo true) ELSE (echo false)`).toLocaleString());
     return exists;
   }
 

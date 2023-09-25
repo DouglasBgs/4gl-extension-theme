@@ -13,7 +13,7 @@ export class Utils {
     window.setStatusBarMessage(message, time)
   }
 
-  public static async selecionaDados (options: any, placeholder: string, multi: boolean = false) {
+  public static async selecionaDados (options: string[], placeholder: string, multi: boolean = false) {
     const dadoSelecionado = await window.showQuickPick(options, {
       placeHolder: placeholder,
       title: placeholder,
@@ -35,6 +35,6 @@ export class Utils {
   }
 
   public static async validaDadosInformados (texto: string) {
-    return !!texto.match(/[A-Za-z].+\-.+[0-9]/)
+    return !!texto.match(/[A-Za-z].+-.+[0-9]/)
   }
 }

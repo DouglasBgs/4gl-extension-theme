@@ -1,6 +1,6 @@
-import {  Terminal, window } from 'vscode'
+import {  window } from 'vscode'
 import { Utils } from './utils';
-import { fail } from 'assert';
+
 
 
 
@@ -14,8 +14,8 @@ export class Terminals {
   }
 
   public static verificaTerminal(name: string) {
-    let terminals = window.terminals
-    let terminal = terminals.find((terminal) => terminal.name == name)
+    const terminals = window.terminals
+    const terminal = terminals.find((terminal) => terminal.name == name)
     return terminal
   }
 

@@ -31,14 +31,18 @@
     "esbuild-base": "esbuild ./app/app.ts --bundle --outfile=dist/js/app.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./"
+    "test-compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "20.x",
     "@types/vscode": "^1.77.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
     "esbuild": "^0.19.2",
+    "eslint": "^8.50.0",
     "fs-extra": "^11.1.1",
     "mocha": "^10.2.0",
     "typescript": "^5.2.2"

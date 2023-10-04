@@ -36,6 +36,10 @@ function activate(context: ExtensionContext) {
     commands.registerCommand("extension.buildManual", function () {
         buildManual.novo(pathToConfig);
     });
+
+    commands.registerCommand("extension.tomcat", function () {
+        Servers.openTomcat(pathToConfig);
+    });
 }
 
 function deactivate() { }

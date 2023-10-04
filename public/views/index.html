@@ -6,7 +6,7 @@
     <vscode-panel-tab id="tab-1">Configurações Gerais</vscode-panel-tab>
     <vscode-panel-tab id="tab-2">Configurações TSS</vscode-panel-tab>
     <vscode-panel-tab id="tab-3">Configurações Logix</vscode-panel-tab>
-    <vscode-panel-tab id="tab-4" a>Configurações Datasul</vscode-panel-tab>
+    <vscode-panel-tab id="tab-4" >Configurações Datasul</vscode-panel-tab>
     <vscode-panel-view id="view-1">
       <section class="geral">
         <div class="title-left">
@@ -278,6 +278,19 @@
                 Verificar Url
               </vscode-button>
             </div>
+            <div class="field">
+                <label for="ambiente_datasul">
+                 Servidor de testes Datasul 
+                </label>
+                <vscode-dropdown class="field" id="ambiente_datasul" name="ambiente_datasul">
+                </vscode-dropdown>
+                <vscode-button class="button" onclick="adicionaAmbiente()">
+                  Adicionar
+                </vscode-button>
+                <vscode-button onclick="removeAmbiente()" appearance="secondary">
+                  Remover
+                </vscode-button>
+              </div>
           </vscode-form-group>
         </div>
       </section>

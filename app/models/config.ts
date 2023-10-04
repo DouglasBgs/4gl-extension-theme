@@ -80,6 +80,13 @@ export class ConfigModel {
             compilado_ems: "",
             compilado_datasul: "",
             jenkins_url: new URL(""),
+            ambiente_datasul: [
+                {
+                    name: "",
+                    folder: "",
+                    banco_version: "",
+                },
+            ],
         };
     }
 }

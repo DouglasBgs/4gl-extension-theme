@@ -3,14 +3,14 @@
     flex-direction: column;
 
     justify-content: flex-start;
-    margin: 5rem 18rem;
+    margin: 5rem 8rem;
     padding: 1rem;
 
 }
 
 @media screen and (max-width: 1024px) {
     .container {
-    margin: 3rem 6rem;
+    margin: 3rem 3rem;
     }
   }
 
@@ -85,3 +85,6 @@ section {
     width: 100%;
 }
 
+.teste {
+    justify-content: center;
+}

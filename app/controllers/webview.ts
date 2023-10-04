@@ -1,13 +1,19 @@
+import { readFileSync } from "fs";
 
-import { readFileSync } from 'fs'
-
-import { WebviewPanel, window, ViewColumn, Uri, OpenDialogOptions } from 'vscode'
-import { IConfig, SelectFile } from '../interfaces/config'
-import { ConfigModel } from '../models/config'
-import { RpoModel } from '../models/rpo'
-import { Utils } from '../utils/utils'
-import { comamnds } from '../enums/comands.enum'
-import { buildManual } from './buildManual'
+import {
+    WebviewPanel,
+    window,
+    ViewColumn,
+    Uri,
+    OpenDialogOptions,
+} from "vscode";
+import { IConfig, SelectFile } from "../interfaces/config";
+import { ConfigModel } from "../models/config";
+import { RpoModel } from "../models/rpo";
+import { Utils } from "../utils/utils";
+import { comamnds } from "../enums/comands.enum";
+import { buildManual } from "./buildManual";
+import { AmbienteModel } from "../models/ambiente";
 
 export class WebviewFile {
     public static webviewPanel: WebviewPanel;
@@ -106,6 +112,12 @@ export class WebviewFile {
                 break;
             case comamnds.save:
                 this.save(config, message);
+                break;
+            case comamnds.addAmbiente:
+                AmbienteModel.addAmbiente(config.data, pathToConfig);
+                break;
+            case comamnds.rmAmbiente:
+                AmbienteModel.removeAmbiente(config.data, pathToConfig);
                 break;
         }
     }

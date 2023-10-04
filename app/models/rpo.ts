@@ -1,6 +1,6 @@
 import { OpenDialogOptions, window } from "vscode";
 import { WebviewFile } from "../controllers/webview";
-import { IConfig, rpo } from "../interfaces/config";
+import { IConfig, Rpo } from "../interfaces/config";
 import { Utils } from "../utils/utils";
 import { ConfigModel } from "./config";
 
@@ -78,7 +78,7 @@ export class RpoModel {
         WebviewFile.Reload(dados);
     }
 
-    public static searchRpo(selecionado: string, rpo: rpo[]): rpo[] {
+    public static searchRpo(selecionado: string, rpo: Rpo[]): Rpo[] {
         const index = rpo.findIndex((rpo) => rpo.name == selecionado);
         const rpos = rpo.splice(index);
         return rpos;

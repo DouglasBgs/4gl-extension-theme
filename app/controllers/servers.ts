@@ -48,6 +48,11 @@ export class Servers {
         Terminals.executaComando(nameDbAccess, dbAcessTss);
     }
 
+    public static async openTomcat(pathToTomcat: string) {
+        const config = new ConfigModel(pathToTomcat);
+        this.openTomcatDatasul(config.data.tomcat_datasul);
+    }
+
     public static async openTomcatDatasul(pathToTomcat: string) {
         const tomcat: string = `
     cd ${pathToTomcat}

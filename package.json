@@ -99,6 +99,10 @@
             {
                 "view": "datasul",
                 "contents": "\n[$(github-action) Abrir Tomcat](command:extension.tomcat \"Não implementado\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(github-action) Copiar fontes para Ambiente](command:extension.server.ems2 \"Não implementado\")"
             }
         ],
         "views": {

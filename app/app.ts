@@ -6,6 +6,7 @@ import { RpoController } from './controllers/rpo'
 import { WebviewFile } from './controllers/webview'
 import {ExtensionContext}  from 'vscode'
 import { buildManual } from './controllers/buildManual'
+import { Repositorio } from "./enums/repositorio.enum";
 
 function activate(context: ExtensionContext) {
     const pathToDist = join(context.extensionPath);
@@ -39,6 +40,9 @@ function activate(context: ExtensionContext) {
 
     commands.registerCommand("extension.tomcat", function () {
         Servers.openTomcat(pathToConfig);
+    });
+    commands.registerCommand("extension.server.ems2", function () {
+        Issues.createDatasul(pathToConfig, Repositorio.Ems2);
     });
 }
 

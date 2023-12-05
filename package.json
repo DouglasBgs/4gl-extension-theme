@@ -8,7 +8,7 @@
     "icon": "media/icon.png",
     "license": "MIT",
     "repository": {
-        "url": "https://github.com/DouglasBgs/4gl-extension-theme"
+        "url": "git+https://github.com/DouglasBgs/4gl-extension-theme.git"
     },
     "engines": {
         "vscode": "^1.77.0"
@@ -66,43 +66,47 @@
         "viewsWelcome": [
             {
                 "view": "logix",
-                "contents": "\n[$(file-directory-create) Criar Nova Issue ](command:extension.create.issue \"Criar nova issue na pasta de desenvolvimento do logix, nas issues de TU e TI, a extensão faz o download dos fontes commitados na issue\")"
+                "contents": "\n[$(file-directory-create) Criar Nova Issue ](command:MTAux.create.issue \"Criar nova issue na pasta de desenvolvimento do logix, nas issues de TU e TI, a extensão faz o download dos fontes commitados na issue\")"
             },
             {
                 "view": "logix",
-                "contents": "\n[ $(debug-console) Abrir Arquivo de Log](command:extension.open.arquivo_log \"Abre o arquivo de log do appserver do build selecionado\")"
+                "contents": "\n[ $(debug-console) Abrir Arquivo de Log](command:MTAux.open.arquivo_log \"Abre o arquivo de log do appserver do build selecionado\")"
             },
             {
                 "view": "logix",
-                "contents": "\n[$(cloud-download) Atualiza RPO](command:extension.download.rpo \"Atualiza o rpo de acordo com a pasta e build indicado, utilizando os rpos cadastrados na página de configuração\")"
+                "contents": "\n[$(cloud-download) Atualiza RPO](command:MTAux.download.rpo \"Atualiza o rpo de acordo com a pasta e build indicado, utilizando os rpos cadastrados na página de configuração\")"
             },
             {
                 "view": "logix",
-                "contents": "\n[$(server) Abrir Appserver](command:extension.open.appserver \"Inicia uma nova instancia de appserver para o build selecionado\")"
+                "contents": "\n[$(server) Abrir Appserver](command:MTAux.open.appserver \"Inicia uma nova instancia de appserver para o build selecionado\")"
             },
             {
                 "view": "logix",
-                "contents": "\n[$(debug-disconnect) Abrir Tss](command:extension.open.tss \"Inicia uma nova instancia do TSS e DB Access para o build selecionado\")"
+                "contents": "\n[$(debug-disconnect) Abrir Tss](command:MTAux.open.tss \"Inicia uma nova instancia do TSS e DB Access para o build selecionado\")"
             },
             {
                 "view": "config",
-                "contents": "\n[$(root-folder-opened) Configurar diretórios](command:extension.open.Webview \"Configurar os parâmetros para o funcionamento da extensão\")"
+                "contents": "\n[$(root-folder-opened) Configurar diretórios](command:MTAux.open.Webview \"Configurar os parâmetros para o funcionamento da extensão\")"
             },
             {
                 "view": "datasul",
-                "contents": "\n[$(file-directory-create) Criar Nova issue](command:extension.issue.datasul \"Não implementado\")"
+                "contents": "\n[$(file-directory-create) Criar Nova issue](command:MTAux.issue.datasul \"Não implementado\")"
             },
             {
                 "view": "datasul",
-                "contents": "\n[$(server-process) Build Manual](command:extension.buildManual \"Não implementado\")"
+                "contents": "\n[$(server-process) Build Manual](command:MTAux.buildManual \"Não implementado\")"
             },
             {
                 "view": "datasul",
-                "contents": "\n[$(github-action) Abrir Tomcat](command:extension.tomcat \"Não implementado\")"
+                "contents": "\n[$(github-action) Abrir Tomcat](command:MTAux.tomcat \"Não implementado\")"
             },
             {
                 "view": "datasul",
-                "contents": "\n[$(github-action) Copiar fontes para Ambiente](command:extension.server.ems2 \"Não implementado\")"
+                "contents": "\n[$(github-action) Copiar fontes para Ambiente](command:MTAux.server.ems2 \"Não implementado\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(run-view-icon) Compilar Fontes](command:MTAux.compiler \"Não implementado\")"
             }
         ],
         "views": {
@@ -173,6 +177,14 @@
     },
     "dependencies": {
         "@types/fs-extra": "^11.0.1",
-        "@vscode/webview-ui-toolkit": "^1.2.2"
-    }
+        "@vscode/webview-ui-toolkit": "^1.2.2",
+        "fs": "^0.0.1-security"
+    },
+    "bugs": {
+        "url": "https://github.com/DouglasBgs/4gl-extension-theme/issues"
+    },
+    "homepage": "https://github.com/DouglasBgs/4gl-extension-theme#readme",
+    "keywords": [],
+    "author": ""
 }
+

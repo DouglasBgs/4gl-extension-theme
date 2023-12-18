@@ -9,6 +9,7 @@ dist/
 /tmp
 /out-tsc
 /bazel-out
+/server
 
 # Node
 /node_modules

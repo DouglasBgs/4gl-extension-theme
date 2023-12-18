@@ -1,95 +1,67 @@
-import { mkdir, existsSync, createReadStream, createWriteStream, statSync, copy, readdirSync } from 'fs-extra'
+import { mkdir} from 'fs-extra'
 import { Utils } from '../utils/utils'
-import { ConfigModel } from './config'
+import { execSync } from 'child_process';
+import { Terminals } from '../utils/terminals';
+import { parse } from 'path';
 
 export class Diretorios {
-  public static async criar(nome: string, path: string, type: string) {
-    const novoNome = `${path}${nome}`
-    if (await this.verificaExistencia(novoNome)) {
-      Utils.MostraMensagemInfo('Diretório já existe')
-    } else {
-      mkdir(`${novoNome}`, { recursive: true }, (err) => {
-        if (err) {
-          Utils.MostraMensagemErro(`Não foi possível criar o diretório ${novoNome}. motivo: ${err}`)
-          return
+    public static async criar(nome: string, path: string, type: string) {
+        const novoNome = `${path}${nome}`;
+        if (await this.verificaExistencia(novoNome)) {
+            Utils.MostraMensagemInfo("Diretório já existe");
+        } else {
+            mkdir(`${novoNome}`, { recursive: true }, (err) => {
+                if (err) {
+                    Utils.MostraMensagemErro(
+                        `Não foi possível criar o diretório ${novoNome}. motivo: ${err}`
+                    );
+                    return;
+                }
+                Utils.MostraMensagemInfo(
+                    `diretório de ${type}: ${nome} criado com sucesso`
+                );
+            });
         }
-        Utils.MostraMensagemInfo(`diretório de ${type}: ${nome} criado com sucesso`)
-      })
     }
-  }
 
-  public static async copiaPasta(copiar: string, destino: string) {
-    Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`)
-    copy(copiar, destino, async (err) => {
-      if (err) {
-        Utils.MostraMensagemErro(`erro ao copiar o diretório: Arquivo não encontrado no servidor - ${err}`)
-      } else {
-        Utils.MostraMensagemInfo('arquivos copiados com sucesso')
-      }
-    })
-  }
-  public static async BuscaArquivosWar(folder: string) {
-    let war: string[];
-    let exists = await this.verificaExistencia(folder).then(value => {
-      return value
-    })
-
-    if (!exists) {
-      Utils.MostraMensagemInfo(`Diretório informado é inexistente: ${folder}`)
-      return false;
-    } else {
-    let war  = readdirSync(folder)
-      if (!war) {
-        Utils.MostraMensagemInfo('Não foi encontrado nenhum arquivo .war no diretório informado')
-        return false;
-      } else{
-        return war;
-      }
-      
+    public static async copiaPasta(
+        copiar: string,
+        destino: string,
+        fechar = false,
+        extraCommands = ""
+    ) {
+        Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`);
+        const commands = `robocopy "${copiar}" "${destino}" /E /COPYALL ${extraCommands}`;
+        Terminals.executaComando("Copiando Pasta", commands, fechar);
     }
-  }
-
-  public static async copiaArquivo(copiar: string, destino: string) {
-    const fileSize = statSync(copiar).size
-    const write = createWriteStream(destino)
-    const read = createReadStream(copiar)
-    let bytesCopiados = 0
-    if (await this.verificaExistencia(copiar)) {
-      new Promise(function (resolve, reject) {
-        read.on('data', function (buffer) {
-          bytesCopiados += buffer.length
-          const porcentagem = ((bytesCopiados / fileSize) * 100).toFixed(2)
-          Utils.MostraMensagemStatusBar(`$(desktop-download) Copiando arquivos ${porcentagem}%`)
-        })
-
-        read.on('error', reject)
-
-        write.on('error', reject)
-
-        write.on('finish', resolve)
-
-        read.pipe(write)
-      }).then(() => {
-        Utils.MostraMensagemInfo('Arquivos copiados com sucesso', true)
-      }).catch((err) => {
-        Utils.MostraMensagemErro(err)
-        read.destroy()
-        write.end()
-      })
+    public static async BuscaArquivos(folder: string) {
+        const exists = await this.verificaExistencia(folder).then((value) => {
+            return value;
+        });
+        return exists;
     }
-  }
 
-  private static async verificaExistencia(nomeDiretorio: string) {
-    let exists = await existsSync(nomeDiretorio);
-    if (exists) {
-      return true
-    } else {
-      return false
+    public static async copiaArquivo(copiar: string, destino: string) {
+        const copiarFile = parse(copiar).base;
+        const destinoFile = parse(destino).base;
+        const destinoDir = parse(destino).dir;
+
+        Utils.MostraMensagemInfo(`Aguarde: Copiando arquivos de - ${copiar}`);
+        const commands = [
+            `robocopy "${parse(copiar).dir}" "${destinoDir}" /is ${copiarFile}`,
+            `cd ${destinoDir}`,
+            `rename ${copiarFile} ${destinoFile}`,
+        ];
+
+        Terminals.executaComando("Copiando arquivos", commands, true);
     }
-  }
 
-  public salvarArquivo(rpo: any, values: ConfigModel) {
-    // writeFile('myjsonfile.json', json, 'utf8');
-
-  }
+    private static async verificaExistencia(nomeDiretorio: string) {
+        const exists = JSON.parse(
+            await execSync(
+                `IF exist ${nomeDiretorio} (echo true) ELSE (echo false)`
+            ).toLocaleString()
+        );
+        return exists;
+    }
 }

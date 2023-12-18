@@ -3,14 +3,14 @@
     flex-direction: column;
 
     justify-content: flex-start;
-    margin: 5rem 18rem;
+    margin: 5rem 8rem;
     padding: 1rem;
 
 }
 
 @media screen and (max-width: 1024px) {
     .container {
-    margin: 3rem 6rem;
+    margin: 3rem 3rem;
     }
   }
 
@@ -46,11 +46,26 @@
     padding: 0.3rem 0rem;
 }
 
+
+.fieldUrl {
+  width: 80%;
+  padding: 0.3rem 0rem;
+}
+
+.buttondUrl {
+  width: 20%;
+  margin-top: 19px;
+  align-self: center;
+  border-radius: 0%;
+}
+
 .button {
  margin-top: 0.3rem;
  margin-right: 2rem;
 }
-
+.flex {
+  display: flex;
+}
 .buttonsSave {
     display: flex;
     justify-content: center;
@@ -70,3 +85,6 @@ section {
     width: 100%;
 }
 
+.teste {
+    justify-content: center;
+}

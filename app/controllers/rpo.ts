@@ -1,5 +1,5 @@
 import { Build } from '../enums/build.enum'
-import { rpo } from '../interfaces/config'
+import { Rpo } from "../interfaces/config";
 import { ConfigModel } from '../models/config'
 import { Diretorios } from '../models/diretorios'
 import { Utils } from '../utils/utils'
@@ -10,7 +10,7 @@ export class RpoController {
     const config = new ConfigModel(pathToRpo)
     const build: string = await Servers.selectBuild()
     if (!build) { return }
-    let rpoRede: rpo[]
+    let rpoRede: Rpo[];
     let rpoLocal: string
     const options: string[] = []
     if (build == Build.b64) {

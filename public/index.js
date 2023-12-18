@@ -1,34 +1,41 @@
-
 const vscode = acquireVsCodeApi();
 window.addEventListener("load", main);
-let codificacao = document.getElementById('codificacao');
-let issue_tu = document.getElementById('issue_tu');
-let issue_ti = document.getElementById('issue_ti');
-let evidencia = document.getElementById('evidencia');
-let arquivos_romana = document.getElementById('arquivos_romana');
-let arquivo_log_appserver = document.getElementById('arquivo_log_appserver');
-let arquivo_log_appserver_64 = document.getElementById('arquivo_log_appserver_64');
-let appserver = document.getElementById('appserver');
-let appserver_64 = document.getElementById('appserver_64');
-let tss = document.getElementById('tss');
-let tss_64 = document.getElementById('tss_64');
-let dbacess_tss = document.getElementById('dbacess_tss');
-let dbacess_tss_64 = document.getElementById('dbacess_tss_64');
-let rpo_local = document.getElementById('rpo_local');
-let rpo_local_64 = document.getElementById('rpo_local_64');
+let codificacao = document.getElementById("codificacao");
+let issue_tu = document.getElementById("issue_tu");
+let issue_ti = document.getElementById("issue_ti");
+let evidencia = document.getElementById("evidencia");
+//Logix
+let arquivos_romana = document.getElementById("arquivos_romana");
+let arquivo_log_appserver = document.getElementById("arquivo_log_appserver");
+let arquivo_log_appserver_64 = document.getElementById(
+    "arquivo_log_appserver_64"
+);
+let appserver = document.getElementById("appserver");
+let appserver_64 = document.getElementById("appserver_64");
+let tss = document.getElementById("tss");
+let tss_64 = document.getElementById("tss_64");
+let dbacess_tss = document.getElementById("dbacess_tss");
+let dbacess_tss_64 = document.getElementById("dbacess_tss_64");
+let rpo_local = document.getElementById("rpo_local");
+let rpo_local_64 = document.getElementById("rpo_local_64");
 let rpo_rede = [];
 let rpo_rede_64 = [];
 
+//datasul
+let tomcat_datasul = document.getElementById("tomcat_datasul");
+let compilado_ems = document.getElementById("compilado_ems");
+let compilado_datasul = document.getElementById("compilado_datasul");
+let jenkins_url = document.getElementById("jenkins_url");
+let ambiente_datasul = document.getElementById("ambiente_datasul");
+
 function main() {
     vscode.postMessage({
-        command: 'onload',
-    })
+        command: "onload",
+    });
 }
 function submit(close) {
-
-
     vscode.postMessage({
-        command: 'save',
+        command: "save",
         close: close,
         data: {
             issue_codificacao: codificacao.value,
@@ -48,41 +55,56 @@ function submit(close) {
             rpo_local_64: rpo_local_64.value,
             rpo_rede: rpo_rede,
             rpo_rede_64: rpo_rede_64,
-        }
-    })
+            tomcat_datasul: tomcat_datasul.value,
+            compilado_ems: compilado_ems.value,
+            compilado_datasul: compilado_datasul.value,
+            jenkins_url: jenkins_url.value,
+            ambiente_datasul: ambiente_datasul.value,
+        },
+    });
 }
 
 async function selectFolder(elementName) {
     await vscode.postMessage({
-        command: 'selectFolder',
-        elementName: elementName
-    })
+        command: "selectFolder",
+        elementName: elementName,
+    });
 }
 async function selectFile(elementName, type) {
     await vscode.postMessage({
-        command: 'selectFile',
+        command: "selectFile",
         elementName: elementName,
-        type: type
-    })
+        type: type,
+    });
 }
 
-window.addEventListener('message', event => {
+async function verifyURL() {
+    await vscode.postMessage({
+        command: "verifyURL",
+        elementName: jenkins_url.id,
+        url: jenkins_url.value,
+    });
+}
+
+window.addEventListener("message", (event) => {
     const command = event.data.command;
     switch (command) {
-        case 'SelectedFolder':
-            document.querySelector(`#${event.data.elementId}`).value = event.data.folder
+        case "SelectedFolder":
+            document.querySelector(`#${event.data.elementId}`).value =
+                event.data.folder;
             break;
-        case 'SelectedPath':
+        case "SelectedPath":
+            console.log(event.data.config);
             LoadFieldsValue(event.data.config);
+
             break;
-        case 'SelectedFile':
-            document.querySelector(`#${event.data.elementId}`).value = event.data.file
+        case "SelectedFile":
+            document.querySelector(`#${event.data.elementId}`).value =
+                event.data.file;
             break;
         default:
             break;
     }
-
-
 });
 
 function LoadFieldsValue(data) {
@@ -102,45 +124,63 @@ function LoadFieldsValue(data) {
         dbacess_tss_64.value = data.dbacess_tss_64;
         rpo_local.value = data.rpo_local;
         rpo_local_64.value = data.rpo_local_64;
-        rpo_rede = data.rpo_rede
-        rpo_rede_64 = data.rpo_rede_64
-        loadDropDown(data.rpo_rede, data.rpo_rede_64);
+        rpo_rede = data.rpo_rede;
+        rpo_rede_64 = data.rpo_rede_64;
+        loadDropDown(data.rpo_rede, data.rpo_rede_64, data.ambiente_datasul);
+        tomcat_datasul.value = data.tomcat_datasul;
+        compilado_ems.value = data.compilado_ems;
+        compilado_datasul.value = data.compilado_datasul;
+        jenkins_url.value = data.jenkins_url;
     }
 }
 
-
-function loadDropDown(rpo32, rpo64) {
+function loadDropDown(rpo32, rpo64, ambiente_datasul) {
     let rpo32list = document.querySelector("#rpo32List");
     rpo32list.replaceChildren(...[]);
     insertValues(rpo32, rpo32list);
     let rpo64list = document.querySelector("#rpo64List");
     rpo64list.replaceChildren(...[]);
     insertValues(rpo64, rpo64list);
+    let ambiente_datasul_list = document.querySelector("#ambiente_datasul");
+    ambiente_datasul_list.replaceChildren(...[]);
+    insertValues(ambiente_datasul, ambiente_datasul_list);
 }
 
 function insertValues(rpo, list) {
+    if (rpo.length == 0) {
+        list.disabled = true;
+        return;
+    }
     for (let i = 0; i < rpo.length; i++) {
-        let option = document.createElement('vscode-option');
+        let option = document.createElement("vscode-option");
         option.textContent = rpo[i].name;
         list.appendChild(option);
     }
-
-
+    list.disabled = false;
 }
-
-
 
 function adicionaRpo(version) {
     vscode.postMessage({
-        command: 'addRpo',
-        rpoVersion: version
-    })
+        command: "addRpo",
+        rpoVersion: version,
+    });
 }
-
 
 function removeRpo(version) {
     vscode.postMessage({
-        command: 'removeRpo',
-        rpoVersion: version
-    })
+        command: "removeRpo",
+        rpoVersion: version,
+    });
+}
+
+function adicionaAmbiente() {
+    vscode.postMessage({
+        command: "addAmbiente",
+    });
+}
+
+function removeAmbiente() {
+    vscode.postMessage({
+        command: "rmAmbiente",
+    });
 }

@@ -1,160 +1,190 @@
 {
-  "name": "mtauxtools",
-  "displayName": "MT Aux Tools",
-  "description": "4gl languages themes auxiling, syntaxes and tools",
-  "version": "1.0.0",
-  "private": true,
-  "publisher": "DouglasBgs",
-  "icon": "media/icon.png",
-  "license": "MIT",
-  "repository": {
-    "url": "https://github.com/DouglasBgs/4gl-extension-theme"
-  },
-  "engines": {
-    "vscode": "^1.77.0"
-  },
-  "activationEvents": [
-    "onCommand:extension.open.appserver",
-    "onCommand:extension.open.tss",
-    "onCommand:extension.open.arquivo_log",
-    "onCommand:extension.create.issue",
-    "onCommand:extension.download.rpo",
-    "onCommand:extension.open.Webview",
-    "onCommand:extension.messagedev"
-  ],
-  "main": "./dist/js/app.js",
-  "scripts": {
-    "build": "npm run esbuild-base -- --minify && vsce package",
-    "compile": "tsc -p ./",
-    "watch": "tsc -w -p ./",
-    "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./app/app.ts --bundle --outfile=dist/js/app.js --external:vscode --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "20.x",
-    "@types/vscode": "^1.80.0",
-    "esbuild": "^0.18.17",
-    "fs-extra": "^11.1.1",
-    "mocha": "^10.2.0",
-    "typescript": "^5.1.6"
-  },
-  "categories": [
-    "Themes",
-    "Language Packs",
-    "Snippets",
-    "Other"
-  ],
-  "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "MTAux",
-          "title": "MT Aux Tools",
-          "icon": "./media/dep.svg"
-        }
-      ]
+    "name": "mtauxtools",
+    "displayName": "MT Aux Tools",
+    "description": "4gl languages themes auxiling, syntaxes and tools",
+    "version": "1.0.0",
+    "private": true,
+    "publisher": "DouglasBgs",
+    "icon": "media/icon.png",
+    "license": "MIT",
+    "repository": {
+        "url": "git+https://github.com/DouglasBgs/4gl-extension-theme.git"
     },
-    "viewsWelcome": [
-      {
-        "view": "logix",
-        "contents": "\n[$(file-directory-create) Criar Nova Issue ](command:extension.create.issue \"Criar nova issue na pasta de desenvolvimento do logix, nas issues de TU e TI, a extensão faz o download dos fontes commitados na issue\")"
-      },
-      {
-        "view": "logix",
-        "contents": "\n[ $(debug-console) Abrir Arquivo de Log](command:extension.open.arquivo_log \"Abre o arquivo de log do appserver do build selecionado\")"
-      },
-      {
-        "view": "logix",
-        "contents": "\n[$(cloud-download) Atualiza RPO](command:extension.download.rpo \"Atualiza o rpo de acordo com a pasta e build indicado, utilizando os rpos cadastrados na página de configuração\")"
-      },
-      {
-        "view": "logix",
-        "contents": "\n[$(server) Abrir Appserver](command:extension.open.appserver \"Inicia uma nova instancia de appserver para o build selecionado\")"
-      },
-      {
-        "view": "logix",
-        "contents": "\n[$(debug-disconnect) Abrir Tss](command:extension.open.tss \"Inicia uma nova instancia do TSS e DB Access para o build selecionado\")"
-      },
-      {
-        "view": "config",
-        "contents": "\n[$(root-folder-opened) Configurar diretórios](command:extension.open.Webview \"Configurar os parâmetros para o funcionamento da extensão\")"
-      },
-      {
-        "view": "datasul",
-        "contents": "\n[$(file-directory-create) Criar Nova issue](command:extension.messagedev \"Não implementado\")"
-      }
+    "engines": {
+        "vscode": "^1.77.0"
+    },
+    "activationEvents": [
+        "onCommand:extension.open.appserver",
+        "onCommand:extension.open.tss",
+        "onCommand:extension.open.arquivo_log",
+        "onCommand:extension.create.issue",
+        "onCommand:extension.download.rpo",
+        "onCommand:extension.open.Webview",
+        "onCommand:extension.issue.datasul"
     ],
-    "views": {
-      "MTAux": [
-        {
-          "name": "Logix",
-          "id": "logix",
-          "icon": "media/dep.svg"
+    "main": "./dist/js/app.js",
+    "scripts": {
+        "build": "npm run esbuild-base -- --minify && vsce package",
+        "compile": "tsc -p ./",
+        "watch": "tsc -w -p ./",
+        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./app/app.ts --bundle --outfile=dist/js/app.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+        "test-compile": "tsc -p ./",
+        "lint": "eslint . --ext .ts"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.1",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.77.0",
+        "@typescript-eslint/eslint-plugin": "^6.7.2",
+        "@typescript-eslint/parser": "^6.7.2",
+        "esbuild": "^0.19.2",
+        "eslint": "^8.50.0",
+        "fs-extra": "^11.1.1",
+        "mocha": "^10.2.0",
+        "typescript": "^5.2.2"
+    },
+    "categories": [
+        "Themes",
+        "Language Packs",
+        "Snippets",
+        "Other"
+    ],
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "MTAux",
+                    "title": "MT Aux Tools",
+                    "icon": "./media/dep.svg"
+                }
+            ]
         },
-        {
-          "name": "Datasul",
-          "id": "datasul"
+        "viewsWelcome": [
+            {
+                "view": "logix",
+                "contents": "\n[$(file-directory-create) Criar Nova Issue ](command:MTAux.create.issue \"Criar nova issue na pasta de desenvolvimento do logix, nas issues de TU e TI, a extensão faz o download dos fontes commitados na issue\")"
+            },
+            {
+                "view": "logix",
+                "contents": "\n[ $(debug-console) Abrir Arquivo de Log](command:MTAux.open.arquivo_log \"Abre o arquivo de log do appserver do build selecionado\")"
+            },
+            {
+                "view": "logix",
+                "contents": "\n[$(cloud-download) Atualiza RPO](command:MTAux.download.rpo \"Atualiza o rpo de acordo com a pasta e build indicado, utilizando os rpos cadastrados na página de configuração\")"
+            },
+            {
+                "view": "logix",
+                "contents": "\n[$(server) Abrir Appserver](command:MTAux.open.appserver \"Inicia uma nova instancia de appserver para o build selecionado\")"
+            },
+            {
+                "view": "logix",
+                "contents": "\n[$(debug-disconnect) Abrir Tss](command:MTAux.open.tss \"Inicia uma nova instancia do TSS e DB Access para o build selecionado\")"
+            },
+            {
+                "view": "config",
+                "contents": "\n[$(root-folder-opened) Configurar diretórios](command:MTAux.open.Webview \"Configurar os parâmetros para o funcionamento da extensão\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(file-directory-create) Criar Nova issue](command:MTAux.issue.datasul \"Não implementado\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(server-process) Build Manual](command:MTAux.buildManual \"Não implementado\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(github-action) Abrir Tomcat](command:MTAux.tomcat \"Não implementado\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(github-action) Copiar fontes para Ambiente](command:MTAux.server.ems2 \"Não implementado\")"
+            },
+            {
+                "view": "datasul",
+                "contents": "\n[$(run-view-icon) Compilar Fontes](command:MTAux.compiler \"Não implementado\")"
+            }
+        ],
+        "views": {
+            "MTAux": [
+                {
+                    "name": "Logix",
+                    "id": "logix",
+                    "icon": "media/dep.svg",
+                    "initialSize": 4
+                },
+                {
+                    "name": "Datasul",
+                    "id": "datasul",
+                    "initialSize": 5
+                },
+                {
+                    "name": "Configurações",
+                    "id": "config",
+                    "initialSize": 1
+                }
+            ]
         },
-        {
-          "name": "Configurações",
-          "id": "config",
-          "initialSize": 1
-        }
-      ]
-    },
-    "themes": [
-      {
-        "label": "4gl theme color",
-        "uiTheme": "vs-dark",
-        "path": "./themes/4gl-color-theme.json",
-        "languages": "4gl"
-      }
-    ],
-    "languages": [
-      {
-        "id": "4gl",
-        "aliases": [
-          "4GL"
+        "themes": [
+            {
+                "label": "4gl theme color",
+                "uiTheme": "vs-dark",
+                "path": "./themes/4gl-color-theme.json",
+                "languages": "4gl"
+            }
         ],
-        "extensions": [
-          ".4gl",
-          ".per"
+        "languages": [
+            {
+                "id": "4gl",
+                "aliases": [
+                    "4GL"
+                ],
+                "extensions": [
+                    ".4gl",
+                    ".per"
+                ],
+                "configuration": "./config/4gl-language-configuration.json"
+            }
         ],
-        "configuration": "./config/4gl-language-configuration.json"
-      }
-    ],
-    "configurationDefaults": {
-      "[4gl]": {
-        "files.encoding": "windows1252",
-        "files.insertFinalNewline": true,
-        "files.eol": "\r\n",
-        "editor.formatOnType": false,
-        "editor.formatOnPaste": false,
-        "editor.formatOnSave": false,
-        "editor.formatOnSaveMode": "file"
-      }
+        "configurationDefaults": {
+            "[4gl]": {
+                "files.encoding": "windows1252",
+                "files.insertFinalNewline": true,
+                "files.eol": "\r\n",
+                "editor.formatOnType": false,
+                "editor.formatOnPaste": false,
+                "editor.formatOnSave": false,
+                "editor.formatOnSaveMode": "file"
+            }
+        },
+        "grammars": [
+            {
+                "language": "4gl",
+                "scopeName": "source.4gl",
+                "path": "./syntaxes/4gl_language.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "4gl",
+                "path": "./snippets/snippets.json"
+            }
+        ]
     },
-    "grammars": [
-      {
-        "language": "4gl",
-        "scopeName": "source.4gl",
-        "path": "./syntaxes/4gl_language.tmLanguage.json"
-      }
-    ],
-    "snippets": [
-      {
-        "language": "4gl",
-        "path": "./snippets/snippets.json"
-      }
-    ]
-  },
-  "dependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@vscode/webview-ui-toolkit": "^1.2.2"
-  }
+    "dependencies": {
+        "@types/fs-extra": "^11.0.1",
+        "@vscode/webview-ui-toolkit": "^1.2.2",
+        "fs": "^0.0.1-security"
+    },
+    "bugs": {
+        "url": "https://github.com/DouglasBgs/4gl-extension-theme/issues"
+    },
+    "homepage": "https://github.com/DouglasBgs/4gl-extension-theme#readme",
+    "keywords": [],
+    "author": ""
 }
+

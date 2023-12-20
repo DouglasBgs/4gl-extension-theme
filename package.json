@@ -2,7 +2,7 @@
     "name": "mtauxtools",
     "displayName": "MT Aux Tools",
     "description": "4gl languages themes auxiling, syntaxes and tools",
-    "version": "1.0.0",
+    "version": "2.1.0",
     "private": true,
     "publisher": "DouglasBgs",
     "icon": "media/icon.png",
@@ -35,9 +35,10 @@
         "lint": "eslint . --ext .ts"
     },
     "devDependencies": {
+        "@types/adm-zip": "^0.5.5",
         "@types/fs-extra": "^11.0.1",
         "@types/mocha": "^10.0.1",
-        "@types/node": "20.x",
+        "@types/node": "^20.10.5",
         "@types/vscode": "^1.77.0",
         "@typescript-eslint/eslint-plugin": "^6.7.2",
         "@typescript-eslint/parser": "^6.7.2",
@@ -178,6 +179,7 @@
     "dependencies": {
         "@types/fs-extra": "^11.0.1",
         "@vscode/webview-ui-toolkit": "^1.2.2",
+        "adm-zip": "^0.5.10",
         "fs": "^0.0.1-security"
     },
     "bugs": {
@@ -187,4 +189,3 @@
     "keywords": [],
     "author": ""
 }
-
